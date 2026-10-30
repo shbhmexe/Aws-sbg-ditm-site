@@ -1,0 +1,258 @@
+/* ============================================================
+   about.css — ABOUT page (Neon Grid / Cyber)
+   Scoped under .about-page. Page/section backgrounds stay
+   transparent so the global neon-grid shows through.
+   Tokens only (no hardcoded colors) so the light theme holds.
+   ============================================================ */
+
+/* ---------- PAGE SHELL ---------- */
+.about-page{
+  position:relative;
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:0 clamp(1rem,3vw,2rem) clamp(3rem,7vw,5.5rem);
+  background:transparent;
+}
+
+/* ---------- HERO ---------- */
+.about-page .about-hero{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:1.4rem;
+  padding:clamp(2.5rem,6vw,4.75rem) 0 clamp(2rem,5vw,3.5rem);
+  animation:fade-in .6s ease both;
+}
+/* eyebrow: globally styled pill — only placed (centered via flex) */
+.about-page .about-eyebrow{
+  margin:0 auto;
+}
+.about-page .about-hero__title{
+  font-size:clamp(2.3rem,6vw,4.2rem);
+  font-weight:800;
+  letter-spacing:-.03em;
+  line-height:1.04;
+  color:var(--ink);
+  max-width:18ch;
+}
+.about-page .about-hero__title::after{
+  content:"";
+  display:block;
+  width:64px;
+  height:3px;
+  margin:1.3rem auto 0;
+  border-radius:3px;
+  background:linear-gradient(90deg,transparent,var(--neon),transparent);
+  box-shadow:var(--glow-sm);
+}
+.about-page .about-hero__line1{
+  display:block;
+  color:var(--ink);
+}
+.about-page .about-hero__subtitle{
+  max-width:62ch;
+  margin:0 auto;
+  color:var(--ink-soft);
+  font-size:clamp(1rem,1.6vw,1.2rem);
+  line-height:1.7;
+}
+/* green gradient span is globally styled — only clone box decoration
+   so it renders cleanly when it wraps (no color/core-look change) */
+.about-page .text-green{
+  -webkit-box-decoration-break:clone;
+  box-decoration-break:clone;
+}
+
+/* ---------- PILLARS (alternating split timeline) ---------- */
+.about-page .about-pillar{
+  display:grid;
+  grid-template-columns:minmax(130px,210px) 1fr;
+  gap:clamp(1.5rem,5vw,4rem);
+  align-items:start;
+  padding:clamp(2.8rem,6vw,4.5rem) 0;
+  border-top:1px solid var(--line-soft);
+}
+/* default (--right): number left, content right */
+.about-page .about-pillar--right .about-pillar__number{grid-column:1;grid-row:1;text-align:left}
+.about-page .about-pillar--right .about-pillar__content{grid-column:2;grid-row:1}
+/* (--left): content left, number right */
+.about-page .about-pillar--left{grid-template-columns:1fr minmax(130px,210px)}
+.about-page .about-pillar--left .about-pillar__number{grid-column:2;grid-row:1;text-align:right}
+.about-page .about-pillar--left .about-pillar__content{grid-column:1;grid-row:1}
+
+.about-page .about-pillar__number{
+  font-family:var(--mono);
+  font-size:clamp(3.5rem,9vw,7rem);
+  font-weight:800;
+  line-height:.9;
+  letter-spacing:-.03em;
+  color:var(--faint);
+  -webkit-text-stroke:1px var(--line-bright);
+  user-select:none;
+}
+.about-page .about-pillar__content{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:1rem;
+  max-width:64ch;
+  animation:fade-in .5s ease both;
+}
+.about-page .about-pillar__label{
+  display:inline-flex;
+  align-items:center;
+  gap:.7ch;
+  font-family:var(--mono);
+  font-size:.75rem;
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--neon);
+}
+.about-page .about-pillar__label::before{
+  content:"";
+  width:26px;
+  height:1px;
+  background:var(--neon);
+  box-shadow:var(--glow-sm);
+}
+.about-page .about-pillar__heading{
+  font-size:clamp(1.55rem,3.6vw,2.5rem);
+  font-weight:800;
+  letter-spacing:-.02em;
+  line-height:1.14;
+  color:var(--ink);
+}
+.about-page .about-pillar__heading::after{
+  content:"";
+  display:block;
+  width:56px;
+  height:2px;
+  margin-top:.9rem;
+  border-radius:2px;
+  background:linear-gradient(90deg,var(--neon),transparent);
+  box-shadow:var(--glow-sm);
+}
+.about-page .about-pillar__body{
+  color:var(--ink-soft);
+  font-size:clamp(1rem,1.4vw,1.12rem);
+  line-height:1.7;
+  max-width:60ch;
+}
+/* ---------- QUOTE PILL ---------- */
+.about-page .about-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:.6ch;
+  width:fit-content;
+  max-width:100%;
+  margin-top:.4rem;
+  padding:.6em 1.15em;
+  font-family:var(--mono);
+  font-size:.82rem;
+  letter-spacing:.02em;
+  color:var(--neon-2);
+  border:1px solid var(--line-bright);
+  border-radius:var(--r-pill);
+  background:linear-gradient(180deg,var(--panel-3),transparent);
+  box-shadow:var(--glow-sm);
+}
+
+/* ---------- VISION TAGS (row of mono neon pills) ---------- */
+.about-page .about-vision-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.7rem;
+  margin-top:.5rem;
+}
+/* about-tag is globally styled — only placed/sized within the row */
+.about-page .about-tag{
+  flex:0 0 auto;
+}
+
+/* ---------- STAT GRID ---------- */
+.about-page .about-stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1rem;
+  width:100%;
+  margin-top:1.4rem;
+}
+.about-page .about-stat{
+  display:flex;
+  flex-direction:column;
+  gap:.55rem;
+  padding:1.35rem;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  box-shadow:var(--shadow);
+  transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease;
+}
+.about-page .about-stat:hover{
+  border-color:var(--line-bright);
+  box-shadow:var(--glow-md),var(--shadow);
+  transform:translateY(-3px);
+}
+.about-page .about-stat__value{
+  font-family:var(--mono);
+  font-size:clamp(1.9rem,4vw,2.7rem);
+  font-weight:700;
+  line-height:1;
+  color:var(--neon);
+  text-shadow:var(--text-glow);
+}
+.about-page .about-stat__label{
+  font-family:var(--mono);
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.about-page .about-stat__desc{
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.6;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:960px){
+  .about-page .about-pillar,
+  .about-page .about-pillar--left,
+  .about-page .about-pillar--right{
+    gap:clamp(1rem,3vw,2rem);
+  }
+  .about-page .about-pillar{grid-template-columns:minmax(90px,150px) 1fr}
+  .about-page .about-pillar--left{grid-template-columns:1fr minmax(90px,150px)}
+}
+@media (max-width:760px){
+  .about-page .about-pillar,
+  .about-page .about-pillar--left,
+  .about-page .about-pillar--right{
+    grid-template-columns:1fr;
+    gap:.6rem;
+  }
+  .about-page .about-pillar--left .about-pillar__number,
+  .about-page .about-pillar--right .about-pillar__number{
+    grid-column:1;
+    grid-row:auto;
+    text-align:left;
+    font-size:clamp(3rem,13vw,4.5rem);
+  }
+  .about-page .about-pillar--left .about-pillar__content,
+  .about-page .about-pillar--right .about-pillar__content{
+    grid-column:1;
+    grid-row:auto;
+    max-width:100%;
+  }
+}
+@media (max-width:600px){
+  .about-page{padding-left:1rem;padding-right:1rem}
+  .about-page .about-hero{gap:1.1rem}
+  .about-page .about-stats{grid-template-columns:1fr}
+  .about-page .about-pillar__body{max-width:100%}
+}
+
+/* PLACEHOLDER_ABOUT */

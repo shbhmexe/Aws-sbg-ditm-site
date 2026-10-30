@@ -1,0 +1,167 @@
+/* ============================================================
+   contact.css — CONTACT page layout (Neon Grid / Cyber)
+   Every selector is scoped under .contact-page.
+   NOTE: .contact-item / .contact-svg-icon / .contact-link are ALSO
+   used by the site FOOTER (styled in chrome.css); keeping them scoped
+   under .contact-page stops this file leaking into the footer.
+   base.css already owns the core look of .contact-eyebrow,
+   .contact-form-card, .contact-map-card and .contact-submit — here we
+   only add page layout + form/interactive specifics.
+   ============================================================ */
+
+/* ---------- page shell (bg is global — keep transparent) ---------- */
+.contact-page{
+  max-width:var(--maxw);margin:0 auto;
+  padding:clamp(2rem,5vw,3.5rem) clamp(1rem,3vw,2rem) clamp(3rem,7vw,5rem);
+  display:flex;flex-direction:column;gap:clamp(2.4rem,6vw,4rem);
+}
+
+/* ---------- hero ---------- */
+.contact-page .contact-hero{
+  display:flex;flex-direction:column;align-items:center;gap:1.1rem;text-align:center;
+  animation:fade-in .6s ease both;
+}
+.contact-page .contact-eyebrow{margin-inline:auto}
+.contact-page .contact-hero h1{
+  position:relative;padding-bottom:.8rem;
+  font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:800;letter-spacing:-.02em;color:var(--ink);
+}
+.contact-page .contact-hero h1::after{
+  content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+  width:56px;height:2px;border-radius:2px;background:var(--neon);box-shadow:var(--glow-sm);
+}
+.contact-page .contact-hero-copy{
+  max-width:58ch;color:var(--ink-soft);font-size:clamp(1rem,1.6vw,1.15rem);
+}
+
+/* ---------- two-column content ---------- */
+.contact-page .contact-content{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,3vw,2.4rem);align-items:start;
+}
+
+/* ---------- info side ---------- */
+.contact-page .contact-info{display:flex;flex-direction:column;gap:1.7rem}
+.contact-page .contact-info h2,
+.contact-page .contact-form-card h2{
+  position:relative;padding-bottom:.7rem;margin-bottom:1.4rem;
+  font-size:clamp(1.3rem,2.6vw,1.7rem);font-weight:800;letter-spacing:-.01em;color:var(--ink);
+}
+.contact-page .contact-info h2::after,
+.contact-page .contact-form-card h2::after{
+  content:"";position:absolute;left:0;bottom:0;width:44px;height:2px;border-radius:2px;
+  background:var(--neon);box-shadow:var(--glow-sm);
+}
+
+/* ---- info list + items (SCOPED: these are footer classes too) ---- */
+.contact-page .contact-info-list{display:flex;flex-direction:column;gap:.6rem}
+.contact-page .contact-item{display:flex;align-items:flex-start;gap:.9rem;padding:.45rem 0}
+.contact-page .contact-icon{
+  display:grid;place-items:center;flex-shrink:0;width:40px;height:40px;
+  border:1px solid var(--line);border-radius:var(--r-sm);background:var(--panel-2);color:var(--neon);
+  transition:border-color .2s ease,box-shadow .2s ease,color .2s ease;
+}
+.contact-page .contact-item:hover .contact-icon{
+  border-color:var(--line-bright);box-shadow:var(--glow-sm);color:var(--neon-2);
+}
+/* svg stroke uses currentColor; the JSX inline var(--aws-green) is
+   undefined so colour falls back to the inherited .contact-icon colour */
+.contact-page .contact-svg-icon{flex-shrink:0;filter:drop-shadow(0 0 4px var(--neon-dim))}
+.contact-page .contact-label{
+  display:block;margin-bottom:.15rem;
+  font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);
+}
+.contact-page .contact-item p{margin:0;color:var(--ink-soft);font-size:.92rem;line-height:1.5}
+.contact-page .contact-link{color:var(--ink-soft);transition:color .2s ease}
+.contact-page .contact-link:hover{color:var(--neon)}
+
+/* ---------- socials ---------- */
+.contact-page .contact-socials h3{
+  display:flex;align-items:center;gap:.5ch;margin-bottom:.9rem;
+  font-family:var(--mono);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);
+}
+.contact-page .contact-socials h3::before{content:"//";color:var(--neon);opacity:.8}
+.contact-page .social-links{display:flex;flex-wrap:wrap;gap:.6rem}
+.contact-page .social-links a{
+  display:inline-flex;align-items:center;padding:.5em .95em;
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);
+  border:1px solid var(--line);border-radius:var(--r-sm);background:var(--panel-2);
+  transition:color .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+.contact-page .social-links a:hover{
+  color:var(--neon);border-color:var(--line-bright);box-shadow:var(--glow-sm);transform:translateY(-2px);
+}
+
+/* ---------- embedded map (base.css frames the card) ---------- */
+.contact-page .contact-map-card{overflow:hidden;padding:0;height:300px}
+.contact-page .contact-map-card iframe{display:block;width:100%;height:100%;min-height:300px;border:0}
+/* subtle dark tint for the embed — skip in light theme so it stays legible */
+:root:not([data-theme="light"]) .contact-page .contact-map-card iframe{
+  filter:grayscale(.35) contrast(1.02) brightness(.82) saturate(1.15);
+}
+
+/* ---------- form (base.css frames the card + styles the button) ---------- */
+.contact-page .contact-form-card{
+  display:flex;flex-direction:column;padding:clamp(1.4rem,3vw,2.2rem);
+}
+.contact-page .contact-form-card:focus-within{
+  border-color:var(--line-bright);box-shadow:var(--glow-sm),var(--shadow);
+}
+.contact-page .contact-form{display:flex;flex-direction:column;gap:1.1rem}
+.contact-page .contact-form label{
+  display:flex;flex-direction:column;gap:.5rem;
+  font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);
+}
+.contact-page .contact-form input,
+.contact-page .contact-form textarea{
+  width:100%;padding:.75rem .9rem;
+  font-family:var(--sans);font-size:.95rem;letter-spacing:normal;text-transform:none;color:var(--ink);
+  background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-sm);
+  transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.contact-page .contact-form textarea{min-height:140px;line-height:1.5;resize:vertical}
+.contact-page .contact-form input::placeholder,
+.contact-page .contact-form textarea::placeholder{
+  font-family:var(--mono);color:var(--muted);opacity:1;letter-spacing:.02em;
+}
+.contact-page .contact-form input:hover,
+.contact-page .contact-form textarea:hover{border-color:var(--line-bright)}
+.contact-page .contact-form input:focus,
+.contact-page .contact-form textarea:focus{
+  outline:none;border-color:var(--neon);background:var(--panel-3);box-shadow:var(--glow-sm);
+}
+
+/* ---------- submit (base.css styles the button; layout only) ---------- */
+.contact-page .contact-submit{align-self:flex-start;margin-top:.3rem}
+
+/* ---------- success confirmation (neon-outlined readout) ---------- */
+/* !important overrides an inline style on the <p> pointing at an
+   undefined legacy var (--aws-green), keeping the text neon-green. */
+.contact-page .contact-success{
+  display:flex;align-items:center;gap:.6ch;padding:.85rem 1rem;
+  font-family:var(--mono);font-size:.85rem;letter-spacing:.02em;color:var(--neon)!important;
+  border:1px solid var(--line-bright);border-radius:var(--r-sm);
+  background:var(--panel-3);box-shadow:var(--glow-sm);animation:fade-in .5s ease both;
+}
+.contact-page .contact-success::before{
+  content:"[OK]";font-weight:700;color:var(--neon-2);letter-spacing:.08em;
+}
+
+/* ============================================================
+   RESPONSIVE (~960 / 760 / 600)
+   ============================================================ */
+@media (max-width:960px){
+  .contact-page .contact-content{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .contact-page{gap:2rem}
+  .contact-page .contact-map-card,
+  .contact-page .contact-map-card iframe{height:260px;min-height:260px}
+}
+@media (max-width:600px){
+  .contact-page{padding:1.5rem 1rem 3rem}
+  .contact-page .contact-form-card{padding:1.2rem}
+  .contact-page .contact-item{gap:.7rem}
+  .contact-page .social-links a{font-size:.7rem;padding:.45em .8em}
+}

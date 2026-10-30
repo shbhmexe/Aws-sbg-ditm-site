@@ -1,0 +1,140 @@
+/* ============================================================
+   base.css — background layers, keyframes, shared primitives
+   ============================================================ */
+
+.app-container{position:relative;min-height:100vh;display:flex;flex-direction:column;isolation:isolate}
+.main-content{flex:1;position:relative;z-index:1;padding-top:var(--nav-h)}
+
+/* ---- fixed background: neon grid + glow pools + vignette ---- */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    linear-gradient(var(--grid-line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+  background-size:var(--grid-cell) var(--grid-cell);
+  -webkit-mask-image:radial-gradient(circle at 50% 40%,#000 55%,transparent 100%);
+          mask-image:radial-gradient(circle at 50% 40%,#000 55%,transparent 100%);
+  animation:breathe 12s ease-in-out infinite;
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(60vw 60vw at 12% 0%,rgba(57,255,20,.10),transparent 60%),
+    radial-gradient(55vw 55vw at 92% 22%,rgba(0,255,163,.08),transparent 60%),
+    radial-gradient(70vw 50vw at 50% 108%,rgba(0,210,106,.10),transparent 60%),
+    linear-gradient(180deg,var(--bg-3),var(--bg) 30%,var(--bg-2));
+}
+/* scanline sheen overlay (very subtle) */
+.app-container::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+  background:repeating-linear-gradient(0deg,transparent 0 2px,var(--scan) 2px 3px);
+  animation:scanline 8s linear infinite;
+}
+
+@keyframes breathe{0%,100%{opacity:.7}50%{opacity:1}}
+@keyframes scanline{0%{background-position:0 0}100%{background-position:0 -300px}}
+@keyframes fade-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes pulse-glow{0%,100%{box-shadow:var(--glow-sm)}50%{box-shadow:var(--glow-md)}}
+@keyframes beacon{0%{box-shadow:0 0 0 0 rgba(57,255,20,.6)}70%{box-shadow:0 0 0 8px rgba(57,255,20,0)}100%{box-shadow:0 0 0 0 rgba(57,255,20,0)}}
+@keyframes flicker{0%,100%{opacity:1}92%{opacity:1}93%{opacity:.6}94%{opacity:1}97%{opacity:.8}98%{opacity:1}}
+
+.animate-fade-in{animation:fade-in .5s ease both}
+
+/* ---- section rhythm ---- */
+section{position:relative}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ============================================================
+   SHARED PRIMITIVES — cohesion layer (pages inherit these)
+   ============================================================ */
+
+/* ---- eyebrow / tag: mono neon terminal label with blinking caret ---- */
+.featured-tag,.articles-tag,.contact-tag,.team-tag,.events-tag,.about-tag,
+.about-eyebrow,.articles-eyebrow,.contact-eyebrow,.directors-eyebrow,
+.founding-eyebrow,.leaders-eyebrow,.team-eyebrow,.recap-brand-tag,.events-tag,.hero-tag{
+  display:inline-flex;align-items:center;gap:.5ch;
+  font-family:var(--mono);font-size:.72rem;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--neon);
+  padding:.4em .9em;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:linear-gradient(180deg,rgba(57,255,20,.06),transparent);
+  box-shadow:inset 0 0 12px rgba(57,255,20,.06);
+  width:fit-content;
+}
+.featured-tag::before,.articles-tag::before,.contact-tag::before,.team-tag::before,
+.events-tag::before,.about-tag::before,.about-eyebrow::before,.articles-eyebrow::before,
+.contact-eyebrow::before,.directors-eyebrow::before,.founding-eyebrow::before,
+.leaders-eyebrow::before,.team-eyebrow::before{content:">";opacity:.8}
+.featured-tag::after,.articles-tag::after,.contact-tag::after,.team-tag::after,
+.events-tag::after,.about-tag::after,.about-eyebrow::after,.articles-eyebrow::after,
+.contact-eyebrow::after,.directors-eyebrow::after,.founding-eyebrow::after,
+.leaders-eyebrow::after,.team-eyebrow::after,.hero-tag::after{
+  content:"_";margin-left:-.2ch;color:var(--neon);animation:blink 1.1s step-end infinite}
+
+/* ---- big section titles: near-white with subtle glow ---- */
+.featured-title,.articles-title,.contact-title,.team-title,.milestone-title,
+.directors-title,.founding-title,.leaders-title{
+  font-size:clamp(1.7rem,3.6vw,2.6rem);font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+
+/* ---- green text utilities ---- */
+.text-green,.text-green-highlight,.milestone-gradient-text{
+  color:var(--neon);
+  background:linear-gradient(90deg,var(--neon),var(--neon-2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  text-shadow:none;filter:drop-shadow(0 0 14px rgba(57,255,20,.35));
+}
+
+/* ---- shared card frame (page files add layout/specifics) ---- */
+.neon-card,
+.fe-event-card,.article-card,.event-card,.featured-card,.founding-card,
+.leader-featured-card,.team-detail-panel,.contact-form-card,.contact-map-card,
+.metrics-card,.feature-item-box,.bg-card{
+  position:relative;background:var(--panel);
+  border:1px solid var(--line);border-radius:var(--r);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  box-shadow:var(--shadow);
+  transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease;
+}
+.fe-event-card:hover,.article-card:hover,.event-card:hover,.featured-card:hover,
+.founding-card:hover,.leader-featured-card:hover,.feature-item-box:hover,.neon-card:hover{
+  border-color:var(--line-bright);box-shadow:var(--glow-md),var(--shadow);transform:translateY(-3px)}
+
+/* ---- primary buttons / CTA links ---- */
+.hero-cta,.btn-link,.btn-meetup,.btn-proposal,.widget-btn-action,.email-link,
+.rsvp-btn,.rsvp-btn-link,.contact-submit,.article-read-button,.founding-linkedin-btn,
+.meetup-banner,.founding-action{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6ch;
+  font-family:var(--mono);font-weight:600;letter-spacing:.04em;
+  padding:.7em 1.25em;border-radius:var(--r-pill);
+  border:1px solid var(--line-bright);color:var(--neon);
+  background:linear-gradient(180deg,rgba(57,255,20,.10),rgba(57,255,20,.02));
+  box-shadow:inset 0 0 16px rgba(57,255,20,.08);
+  transition:box-shadow .25s ease,transform .2s ease,background .25s ease,color .2s ease;
+}
+.hero-cta:hover,.btn-link:hover,.btn-meetup:hover,.btn-proposal:hover,.widget-btn-action:hover,
+.email-link:hover,.rsvp-btn:hover,.rsvp-btn-link:hover,.contact-submit:hover,
+.article-read-button:hover,.founding-linkedin-btn:hover,.meetup-banner:hover,.founding-action:hover{
+  box-shadow:var(--glow-sm);transform:translateY(-2px);
+  background:linear-gradient(180deg,rgba(57,255,20,.18),rgba(57,255,20,.05));color:var(--neon-2)}
+
+/* ---- "all X" links + chevrons/arrows inherit neon ---- */
+.all-events-link,.all-articles-link{
+  display:inline-flex;align-items:center;gap:.4ch;font-family:var(--mono);
+  font-size:.85rem;letter-spacing:.05em;color:var(--neon);transition:gap .2s ease,color .2s ease}
+.all-events-link:hover,.all-articles-link:hover{gap:.9ch;color:var(--neon-2)}
+.chevron-icon,.fe-event-arrow-icon,.read-arrow-icon,.founding-arrow-icon{color:var(--neon)}
+
+/* ---- custom scrollbar ---- */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bg-3)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--emerald),var(--neon));border-radius:8px;border:2px solid var(--bg-3)}
+::-webkit-scrollbar-thumb:hover{background:var(--neon)}
+
+/* ---- reduced motion ---- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+
+/* PLACEHOLDER_BASE */

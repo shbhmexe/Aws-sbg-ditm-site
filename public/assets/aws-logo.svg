@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="title">
+  <title id="title">AWS</title>
+  <text x="50" y="56" fill="#111827" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700" letter-spacing="-2" text-anchor="middle">aws</text>
+  <path d="M19 66c19 16 47 16 67-1" fill="none" stroke="#ff9900" stroke-linecap="round" stroke-width="6"/>
+  <path d="m77 61 9 4-7 8" fill="none" stroke="#ff9900" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+</svg>
