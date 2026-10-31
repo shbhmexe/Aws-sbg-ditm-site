@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "./ThemeProvider";
@@ -24,21 +24,48 @@ export default function Navbar() {
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY.current;
+
+      setScrolled(currentY > 20);
+
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? Math.min(currentY / max, 1) : 0);
+
+      if (menuOpen) {
+        setHidden(false);
+      } else if (currentY <= 80) {
+        setHidden(false);
+      } else if (delta > 5) {
+        setHidden(true);
+      } else if (delta < -5) {
+        setHidden(false);
+      }
+
+      lastScrollY.current = currentY;
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [menuOpen]);
 
   useEffect(() => {
     setMenuOpen(false);
+    setHidden(false);
   }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+    if (menuOpen) setHidden(false);
+
     return () => {
       document.body.style.overflow = "";
     };
@@ -48,7 +75,11 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`navbar${scrolled ? " scrolled" : ""}`}>
+      <nav
+        className={`navbar${scrolled ? " scrolled" : ""}${hidden ? " navbar-hidden" : ""}`}
+        onFocusCapture={() => setHidden(false)}
+      >
+        <div className="nav-progress" style={{ transform: `scaleX(${progress})` }} aria-hidden="true"></div>
         <div className="navbar-container">
           <Link className="navbar-logo" href="/">
             <img alt="AWS SBG Program Icon" className="navbar-logo-icon" src="/assets/program-icon-BAvjs2YY.png" />

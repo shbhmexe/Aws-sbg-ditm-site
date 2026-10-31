@@ -4,29 +4,28 @@ import { useEffect, useState } from "react";
 
 const PHOTOS = [
   {
-    url: "/events/inauguration/awssbgteam.png",
-    tag: "AWS SBG Team",
-    title: "Steering chapter operations & community vision",
-    caption: "The founding leadership and board of directors of the AWS Student Builder Group chapter at DITM.",
+    url: "/events/cloud-launch/cloud-launch-team.png",
+    tag: "AWS SBG Builders",
+    title: "The core team at Cloud Launch",
+    caption: "AWS Student Builder Group leads the 'Cloud Launch — AWS Builder Center + Hands-On Workshop' at DITM.",
     isSpeaker: false,
   },
   {
-    url: "/events/inauguration/speaker-session.png",
-    tag: "Chief Guest",
+    url: "/events/cloud-launch/cloud-launch-crowd.png",
+    tag: "Workshop Crowd",
+    title: "Full house of hands-on builders",
+    caption: "Students packed the room to get hands-on with the AWS Builder Center and live cloud workshops.",
+    isSpeaker: false,
+  },
+  {
+    url: "/events/cloud-launch/cloud-launch-speaker.png",
+    tag: "Speaker",
     speakerCard: true,
-    speakerName: "Ms. Prajakta Kale",
-    designation: "Data Engineering Consultant @ AWS",
-    title: "Starting Your Cloud Career",
-    caption:
-      'Interactive session on "Starting Your Cloud Career: 3 Things Every Student Should Focus On" by Chief Guest Ms. Prajakta Kale, Data Engineering Consultant at AWS.',
+    speakerName: "Shubham Shukla",
+    designation: "Chapter Leader · AWS SBG DITM",
+    title: "Launching the cloud journey",
+    caption: "Chapter Leader Shubham Shukla leads the Cloud Launch session, guiding students through AWS Builder Center and hands-on cloud learning.",
     isSpeaker: true,
-  },
-  {
-    url: "/events/inauguration/awssbgteam-pose.png",
-    tag: "AWS SBG Team",
-    title: "United to learn, build & grow together",
-    caption: "Student organizers, core team members, and volunteers celebrating the official kickoff.",
-    isSpeaker: false,
   },
 ];
 
@@ -64,23 +63,25 @@ export default function MilestoneSection() {
   return (
     <section className="milestone-section" id="inauguration-recap">
       <div className="milestone-container">
-        <div className="milestone-header">
+        <div className="milestone-header" data-reveal>
           <div className="milestone-header-top">
             <div className="milestone-tag">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="milestone-sparkle-icon">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
               </svg>
-              <span>CHAPTER MILESTONE • 03 SEP 2026</span>
+              <span>CHAPTER MILESTONE • CLOUD LAUNCH</span>
             </div>
           </div>
           <h2 className="milestone-title">
-            Grand <span className="milestone-gradient-text">Inauguration &apos;26</span> Highlights
+            Cloud <span className="milestone-gradient-text">Launch &apos;26</span> Highlights
           </h2>
           <p className="milestone-desc">
-            On September 3, 2026, students and faculty gathered at the DITM Seminar Hall to officially launch the AWS Student Builder Group chapter with an inspiring session by Chief Guest Ms. Prajakta Kale and the unveiling of our 2026-27 roadmap.
+            The AWS Student Builder Group at DITM hosted &ldquo;Cloud Launch — AWS Builder Center + Hands-On
+            Workshop&rdquo;, where Chapter Leader Shubham Shukla guided students through live cloud sessions and
+            hands-on AWS learning.
           </p>
         </div>
-        <div className="milestone-photos-grid">
+        <div className="milestone-photos-grid" data-reveal style={{ "--reveal-delay": ".08s" }}>
           {PHOTOS.map((p, i) => (
             <div
               key={i}

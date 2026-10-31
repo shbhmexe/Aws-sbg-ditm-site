@@ -23,7 +23,7 @@ export default function Footer() {
               <a href="https://www.meetup.com/aws-sbgl-at-ditm/" target="_blank" rel="noopener noreferrer" className="social-link-btn" aria-label="Meetup">
                 <img alt="Meetup" className="social-favicon" src="https://www.google.com/s2/favicons?domain=meetup.com&sz=40" />
               </a>
-              <a href="https://www.instagram.com/awssbgl_ditm/" target="_blank" rel="noopener noreferrer" className="social-link-btn" aria-label="Instagram">
+              <a href="https://www.instagram.com/awssbg.ditm?mdxt=dGVubWNxd3Y2OHE3" target="_blank" rel="noopener noreferrer" className="social-link-btn" aria-label="Instagram">
                 <img alt="Instagram" className="social-favicon" src="https://www.google.com/s2/favicons?domain=instagram.com&sz=40" />
               </a>
             </div>

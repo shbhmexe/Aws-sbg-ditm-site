@@ -94,16 +94,15 @@ const FEATURED_EVENTS = [
 ];
 
 const LEADERS = [
-  { name: "Abid Ahmed Shaikh", role: "AWS SBGL DITM Leader", img: "/team/core/ABID_CORE.png", gh: "https://github.com/InfX2243", li: "https://www.linkedin.com/in/abid-ahmed-shaikh/" },
-  { name: "Prem Pagar", role: "AWS SBGL DITM Leader", img: "/team/core/PREM_CORE.png", gh: "https://github.com", li: "https://www.linkedin.com/in/prempagar/" },
+  { name: "Shubham Shukla", role: "Chapter Leader", initials: "SS", img: "/team/core/SHUBHAM_CORE.png", gradient: "linear-gradient(135deg, #FF9900 0%, #00A4E4 100%)", gh: "https://github.com/shbhmexe", li: "https://www.linkedin.com/in/shubham-shukla-62095032a/" },
 ];
 
 const CORE = [
-  { name: "Mohammed Umar Ansari", role: "Director of Operations", img: "/team/core/UMAR_CORE.png", gh: "https://github.com/C0dEr8627", li: "https://www.linkedin.com/in/mohammed-umar-ansari-ab4269353/" },
-  { name: "Tabish Siddiqui", role: "Director of Events", img: "/team/core/Tabish_CORE.jpg", gh: "https://github.com", li: "https://www.linkedin.com/in/tabish-javed-siddiqui-00945736a/" },
-  { name: "Yashfeen Raavi", role: "Director of Cloud Technology", img: "/team/core/YASHFEEN_CORE.jpg", gh: "https://github.com/yashfeenraavi09", li: "https://www.linkedin.com/in/yashfeen-r-7720982a2/" },
-  { name: "Mohammed Kadiwal", role: "Director of Community & Public", img: "/team/core/MOHAMMAD_CORE.png", gh: "https://github.com/umer241419it-hue", li: "https://www.linkedin.com/in/mohammad-kadiwal-7856b927b/" },
-  { name: "Shifa Shaikh", role: "Director of Marketing & Branding", img: "/team/core/SHIFA_CORE.png", gh: "https://github.com/shaikhshifa11", li: "https://www.linkedin.com/in/shaikhshifa11/" },
+  { name: "Aakash Rana", role: "IT Support and Management", initials: "AR", img: "/team/core/AAKASH_CORE.png", gradient: "linear-gradient(135deg, #FF9900 0%, #ff5e62 100%)", gh: "https://github.com/aakashrana7422-tech", li: "https://www.linkedin.com/in/aakash-rana-98054b342" },
+  { name: "Anjali Kumari", role: "Photography and Graphics Manager", initials: "AK", img: "/team/core/ANJALI_CORE.png", gradient: "linear-gradient(135deg, #ea6297 0%, #a050ff 100%)", gh: "https://github.com/anjalisah4823", li: "https://www.linkedin.com/in/anjali-kumari-71a39b385" },
+  { name: "Farman Khan", role: "Student Engagement Manager", initials: "FK", img: "/team/core/FARMAN_CORE.jpeg", gradient: "linear-gradient(135deg, #00f2fe 0%, #4facfe 100%)", gh: "https://github.com/farmanfk0404", li: "https://www.linkedin.com/in/farman-khan-73b63a380" },
+  { name: "Vansh Verma", role: "Social Media Manager", initials: "VV", img: "/team/core/VANSH_CORE.png", gradient: "linear-gradient(135deg, #3f51b5 0%, #00bcd4 100%)", gh: "https://github.com/vanshverma20", li: "https://www.linkedin.com/in/vansh-verma-510b3b364/" },
+  { name: "Tarashankar Hazra", role: "Marketing Director", initials: "TH", img: "/team/core/TARASHANKAR_CORE.png", gradient: "linear-gradient(135deg, #ff9966 0%, #ff5e62 100%)", gh: "https://github.com/TarashankarHazra", li: "https://www.linkedin.com/in/tarashankar-hazra-522a8a398" },
 ];
 
 const ARTICLES = [
@@ -113,20 +112,38 @@ const ARTICLES = [
 ];
 
 function MemberCard({ m, variant }) {
+  const hasSocials = Boolean(m.gh || m.li);
+
   return (
     <div className={`team-card ${variant}-card`}>
-      <img alt={m.name} className={`team-avatar ${variant}-avatar`} src={m.img} />
+      {m.img ? (
+        <img alt={m.name} className={`team-avatar ${variant}-avatar`} src={m.img} />
+      ) : (
+        <div
+          className={`team-avatar team-avatar-initials ${variant}-avatar`}
+          style={{ background: m.gradient }}
+          aria-hidden="true"
+        >
+          {m.initials}
+        </div>
+      )}
       <div className="team-info">
         <h4 className="member-name">{m.name}</h4>
         <p className="member-role">{m.role}</p>
-        <div className="team-socials">
-          <a href={m.gh} target="_blank" rel="noopener noreferrer" className="social-link" aria-label={`${m.name} Github`}>
-            <GithubIcon />
-          </a>
-          <a href={m.li} target="_blank" rel="noopener noreferrer" className="social-link" aria-label={`${m.name} LinkedIn`}>
-            <LinkedinIcon />
-          </a>
-        </div>
+        {hasSocials && (
+          <div className="team-socials">
+            {m.gh && (
+              <a href={m.gh} target="_blank" rel="noopener noreferrer" className="social-link" aria-label={`${m.name} Github`}>
+                <GithubIcon />
+              </a>
+            )}
+            {m.li && (
+              <a href={m.li} target="_blank" rel="noopener noreferrer" className="social-link" aria-label={`${m.name} LinkedIn`}>
+                <LinkedinIcon />
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -201,30 +218,59 @@ export default function Home() {
     <>
       <section className="home-page-wrapper">
         <div className="home-page-container">
-          <HeroGrid />
-          <div className="mobile-bg-glow"></div>
           <div className="hero-content">
             <div className="hero-tag" aria-label="Official AWS-affiliated student community at DITM, Sonipat">
               <span className="hero-tag-status">
                 <span className="hero-tag-status-dot" aria-hidden="true"></span>
                 Official
               </span>
-              <span className="hero-tag-text">AWS-affiliated student community</span>
-              <span className="hero-tag-location">DITM <span aria-hidden="true">·</span> Sonipat</span>
+              <span className="hero-tag-text">AWS Student Community</span>
+              <span className="hero-tag-location">DITM · Sonipat</span>
             </div>
+            
             <h1 className="hero-title">
               AWS Student<br />
-              <span className="text-green-highlight">Builder Group</span><br />
-              <span className="text-green-highlight">DITM</span>
+              <span className="hero-title-highlight">Builder Group</span><br />
+              <span className="hero-title-sub">DITM Chapter</span>
             </h1>
+            
             <div className="hero-description">
-              <p>Fostering future cloud leaders through learning, collaboration, and innovation.</p>
+              <p>
+                Fostering future cloud leaders through deep hands-on AWS architecture,
+                serverless workshops, hackathons, and generative AI innovation.
+              </p>
             </div>
-            <a href="https://www.meetup.com/aws-sbgl-at-ditm/" target="_blank" rel="noopener noreferrer" className="hero-cta">
-              Browse events
-              <img alt="Meetup" src="/assets/meetupicon-C5hscCD3.png" style={{ width: "20px", height: "20px", marginLeft: "4px" }} />
-            </a>
+            
+            <div className="hero-cta-group">
+              <a href="https://www.meetup.com/aws-sbgl-at-ditm/" target="_blank" rel="noopener noreferrer" className="hero-cta-primary">
+                <span>Browse Events</span>
+                <img alt="Meetup" src="/assets/meetupicon-C5hscCD3.png" style={{ width: "18px", height: "18px" }} />
+              </a>
+              <Link href="/events" className="hero-cta-secondary">
+                <span>Explore Workshops</span>
+                <ArrowIcon className="hero-cta-arrow" />
+              </Link>
+            </div>
+
+            <div className="hero-stats-row">
+              <div className="hero-stat-box">
+                <span className="stat-value">500+</span>
+                <span className="stat-desc">Active Builders</span>
+              </div>
+              <div className="stat-separator"></div>
+              <div className="hero-stat-box">
+                <span className="stat-value">15+</span>
+                <span className="stat-desc">Hands-on Labs</span>
+              </div>
+              <div className="stat-separator"></div>
+              <div className="hero-stat-box">
+                <span className="stat-value">100%</span>
+                <span className="stat-desc">Student-Driven</span>
+              </div>
+            </div>
           </div>
+
+          <HeroGrid />
         </div>
       </section>
 
@@ -232,7 +278,7 @@ export default function Home() {
 
       <section className="featured-events-section" id="featured-events">
         <div className="featured-events-container">
-          <div className="featured-events-header">
+          <div className="featured-events-header" data-reveal>
             <div className="header-titles">
               <span className="featured-tag">FEATURED EVENTS</span>
               <h2 className="featured-title">Upcoming Highlights</h2>
@@ -241,7 +287,7 @@ export default function Home() {
               All events<ChevronIcon />
             </Link>
           </div>
-          <div className="featured-events-grid">
+          <div className="featured-events-grid" data-reveal style={{ "--reveal-delay": ".08s" }}>
             {FEATURED_EVENTS.map((ev, i) => (
               <EventCard key={i} ev={ev} />
             ))}
@@ -250,19 +296,22 @@ export default function Home() {
       </section>
       <section className="team-section" id="team">
         <div className="team-container">
-          <div className="team-header">
+          <div className="team-header" data-reveal>
             <span className="team-tag">LEADERSHIP</span>
             <h2 className="team-title">Meet the Builders</h2>
+            <Link href="/team" className="team-view-all">
+              View full team <ChevronIcon />
+            </Link>
           </div>
-          <div className="team-subsection">
-            <h3 className="subsection-title">Co-Leaders</h3>
+          <div className="team-subsection" data-reveal>
+            <h3 className="subsection-title">Leader</h3>
             <div className="leaders-grid">
               {LEADERS.map((m, i) => (
                 <MemberCard key={i} m={m} variant="leader" />
               ))}
             </div>
           </div>
-          <div className="team-subsection">
+          <div className="team-subsection" data-reveal>
             <h3 className="subsection-title">Core Team</h3>
             <div className="core-grid">
               {CORE.map((m, i) => (
@@ -275,7 +324,7 @@ export default function Home() {
 
       <section className="featured-articles-section" id="featured-articles">
         <div className="featured-articles-container">
-          <div className="featured-articles-header">
+          <div className="featured-articles-header" data-reveal>
             <div className="header-titles">
               <span className="articles-tag">KNOWLEDGE HUB</span>
               <h2 className="articles-title">Latest Insights</h2>
@@ -284,7 +333,7 @@ export default function Home() {
               All articles<ChevronIcon />
             </Link>
           </div>
-          <div className="featured-articles-grid">
+          <div className="featured-articles-grid" data-reveal style={{ "--reveal-delay": ".08s" }}>
             {ARTICLES.map((a, i) => (
               <ArticleCard key={i} a={a} />
             ))}

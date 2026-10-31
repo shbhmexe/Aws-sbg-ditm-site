@@ -261,7 +261,7 @@ export default function ArticlesPage() {
       </header>
       <div ref={contentRef} className="articles-content-container">
         {filtered.length > 0 ? (
-          <section className="articles-section" aria-labelledby="articles-title">
+          <section className="articles-section" data-reveal aria-labelledby="articles-title">
             <div className="articles-section-heading">
               <span className="articles-section-icon" aria-hidden="true" />
               <h2 id="articles-title">

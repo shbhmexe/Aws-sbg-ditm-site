@@ -42,11 +42,11 @@ export default function ContactConsole() {
   return (
     <section className="contact-hub-section" id="contact-hub">
       <div className="contact-hub-container">
-        <div className="contact-hub-header">
+        <div className="contact-hub-header" data-reveal>
           <span className="contact-tag">COLLABORATION</span>
           <h2 className="contact-title">Connect &amp; Build</h2>
         </div>
-        <div className="console-wrapper">
+        <div className="console-wrapper" data-reveal style={{ "--reveal-delay": ".08s" }}>
           <div className="console-tabs">
             {TABS.map((t) => (
               <button key={t.id} className={`tab-btn ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)} type="button">
