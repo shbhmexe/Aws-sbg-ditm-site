@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata = {
   metadataBase: new URL("https://awssbgl-ditm.in"),
@@ -42,11 +43,14 @@ export const viewport = {
 
 const noFlashTheme = `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();`;
 
+const revealBootstrap = `if('IntersectionObserver' in window){document.documentElement.classList.add('reveal-ready')}`;
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="dark">
       <head>
         <script dangerouslySetInnerHTML={{ __html: noFlashTheme }} />
+        <script dangerouslySetInnerHTML={{ __html: revealBootstrap }} />
       </head>
       <body>
         <ThemeProvider>
@@ -55,6 +59,7 @@ export default function RootLayout({ children }) {
             <main className="main-content">{children}</main>
             <Footer />
             <ScrollToTop />
+            <ScrollReveal />
           </div>
         </ThemeProvider>
       </body>

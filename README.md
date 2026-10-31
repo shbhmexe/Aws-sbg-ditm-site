@@ -22,9 +22,11 @@ An immersive, dark-mode community website for the AWS Student Builder Group at D
 
 </div>
 
+> 📘 **Looking for the design prompt, architecture, and customization guide?** Check out the [Frontend Prompt & Architecture Guide](file:///c:/Users/ranaa/Desktop/AWS%20PROJECT/Aws-sbg-ditm-site/FRONTEND_PROMPT_AND_GUIDE.md).
+
 ## About the project
 
-This is the public-facing home for a student-led AWS community. It is designed to make the chapter feel active, approachable, and credible from the first visit—using a restrained neon-green visual system, real event content, responsive layouts, and small interactive details that reward exploration.
+This is the public-facing home for the AWS Student Builder Group chapter at DITM. It is designed to make the community feel mature, credible, and inspiring from the first visit—using an enterprise AWS cloud visual system, real event content, responsive layouts, and rich interactive details.
 
 The site brings together the chapter’s events, articles, leadership, launch story, contact channels, and community calls to action in one focused experience.
 
@@ -32,7 +34,7 @@ The site brings together the chapter’s events, articles, leadership, launch st
 
 | Area | Experience |
 | --- | --- |
-| **Home** | Hero introduction, animated snake-grid visual, featured events, leadership preview, articles, milestone recap, and contact console |
+| **Home** | Hero introduction, 3D interactive cloud architecture showcase, featured events, leadership preview, articles, milestone recap, and contact console |
 | **About** | Chapter story, purpose, and community positioning |
 | **Events** | Upcoming and past events with detail cards and recap modal content |
 | **Articles** | Curated AWS, cloud, AI, and builder-focused reading |
@@ -42,12 +44,13 @@ The site brings together the chapter’s events, articles, leadership, launch st
 
 ## Visual direction
 
-The interface is intentionally built around a focused visual language:
+The interface is built around a modern enterprise cloud visual language:
 
-- deep green-black surfaces with a quiet grid background;
-- neon green accents for actions, active states, and community energy;
-- Amazon Ember fonts for a familiar AWS-adjacent tone;
-- responsive cards, pills, modals, and console-like information panels;
+- **Midnight space & slate navy surfaces** (`#090e17`, `#0f172a`) with subtle ambient volumetric glow;
+- **AWS Signature Amber (`#FF9900`) & Cloud Cyan (`#00A4E4`)** accents for brand hierarchy and telemetry;
+- **3D Cloud Architecture Hero Visual** with live telemetry chips (`EC2`, `Lambda`, `S3`, `Bedrock AI`);
+- **Amazon Ember typography** for an authentic AWS feel;
+- **Glassmorphic cards & pills** with smooth hover micro-animations;
 - animation that adds life without becoming the main content.
 
 ```text

@@ -26,14 +26,14 @@ export default function ContactPage() {
 
   return (
     <div className="contact-page">
-      <section className="contact-hero">
+      <section className="contact-hero" data-reveal="fade">
         <p className="contact-eyebrow">CONTACT</p>
         <h1>Get in Touch</h1>
         <p className="contact-hero-copy">
           Have questions about SBG? Want to collaborate? We&apos;d love to hear from you.
         </p>
       </section>
-      <section className="contact-content">
+      <section className="contact-content" data-reveal>
         <div className="contact-info">
           <h2>Contact Information</h2>
           <div className="contact-info-list">
@@ -113,7 +113,7 @@ export default function ContactPage() {
             <div className="social-links">
               <a href="https://www.linkedin.com/company/aws-sbgl-at-ditm/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
               <a href="https://www.meetup.com/aws-sbgl-at-ditm/" target="_blank" rel="noopener noreferrer">Meetup</a>
-              <a href="https://www.instagram.com/awssbgl_ditm/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://www.instagram.com/awssbg.ditm?mdxt=dGVubWNxd3Y2OHE3" target="_blank" rel="noopener noreferrer">Instagram</a>
             </div>
           </div>
           <div className="contact-map-card">

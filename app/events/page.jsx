@@ -156,7 +156,7 @@ export default function EventsPage() {
 
   return (
     <div className="events-page">
-      <section className="events-hero">
+      <section className="events-hero" data-reveal="fade">
         <div className="events-tag">WORKSHOPS • CONFERENCES • PANELS</div>
         <h1>
           Where the community<br />
@@ -164,7 +164,7 @@ export default function EventsPage() {
         </h1>
         <p>From hands-on labs and certification bootcamps to industry panels and hackathons every SBG event is designed to move you forward.</p>
       </section>
-      <section className="events-section">
+      <section className="events-section" data-reveal>
         <div className="events-toggle">
           <div className="toggle-buttons">
             <button className={tab === "upcoming" ? "active" : ""} onClick={() => setTab("upcoming")}>Upcoming</button>

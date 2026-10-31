@@ -1,0 +1,166 @@
+/* ============================================================
+   polish.css — engagement & motion layer (loaded last)
+   scroll reveal, shine sweeps, ambient drift, micro-details
+   ============================================================ */
+
+/* ---- scroll reveal engine ----
+   html gets .reveal-ready only when JS is available (inline bootstrap in layout).
+   Without it everything stays fully visible. */
+.reveal-ready [data-reveal]{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);
+  transition-delay:var(--reveal-delay,0s);
+  will-change:opacity,transform;
+}
+.reveal-ready [data-reveal="left"]{transform:translateX(-40px)}
+.reveal-ready [data-reveal="right"]{transform:translateX(40px)}
+.reveal-ready [data-reveal="zoom"]{transform:scale(.93)}
+.reveal-ready [data-reveal="fade"]{transform:none}
+.reveal-ready [data-reveal].revealed{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal-ready [data-reveal]{transition:none;opacity:1;transform:none}
+}
+
+/* ---- navbar scroll progress bar ---- */
+.nav-progress{
+  position:absolute;top:0;left:0;height:2px;width:100%;z-index:3;
+  background:linear-gradient(90deg,var(--aws-orange) 0%,var(--neon-2) 40%,var(--aws-cyan) 100%);
+  transform:scaleX(0);transform-origin:0 50%;
+  box-shadow:0 1px 8px rgba(255,153,0,.45);
+  pointer-events:none;
+}
+
+/* ---- shine sweep on primary buttons ---- */
+.hero-cta-primary,.hero-cta-secondary,.hero-cta,.btn-link,.btn-meetup,.btn-proposal,
+.widget-btn-action,.email-link,.rsvp-btn,.rsvp-btn-link,.contact-submit,
+.article-read-button,.founding-linkedin-btn,.meetup-banner,.founding-action{
+  position:relative;overflow:hidden;
+}
+.hero-cta-primary::before,.hero-cta-secondary::before,.hero-cta::before,.btn-link::before,
+.btn-meetup::before,.btn-proposal::before,.widget-btn-action::before,.email-link::before,
+.rsvp-btn::before,.rsvp-btn-link::before,.contact-submit::before,.article-read-button::before,
+.founding-linkedin-btn::before,.meetup-banner::before,.founding-action::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.14) 50%,transparent 58%);
+  transform:translateX(-130%);
+  transition:transform .8s cubic-bezier(.22,1,.36,1);
+}
+.hero-cta-primary:hover::before,.hero-cta-secondary:hover::before,.hero-cta:hover::before,
+.btn-link:hover::before,.btn-meetup:hover::before,.btn-proposal:hover::before,
+.widget-btn-action:hover::before,.email-link:hover::before,.rsvp-btn:hover::before,
+.rsvp-btn-link:hover::before,.contact-submit:hover::before,.article-read-button:hover::before,
+.founding-linkedin-btn:hover::before,.meetup-banner:hover::before,.founding-action:hover::before{
+  transform:translateX(130%);
+}
+
+/* ---- shine sweep + accent frame on featured cards ---- */
+.fe-event-card,.article-card{
+  overflow:hidden;
+}
+.fe-event-card::after,.article-card::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.05) 50%,transparent 58%);
+  transform:translateX(-130%);
+  transition:transform .9s cubic-bezier(.22,1,.36,1);
+}
+.fe-event-card:hover::after,.article-card:hover::after{transform:translateX(130%)}
+.fe-event-card::before,.article-card::before{
+  content:"";position:absolute;inset:0 0 auto;height:2px;z-index:2;
+  background:linear-gradient(90deg,transparent,var(--neon),var(--aws-cyan),transparent);
+  opacity:0;transition:opacity .3s ease;
+}
+.fe-event-card:hover::before,.article-card:hover::before{opacity:.9}
+
+/* ---- ambient drift orbs (hero backdrop) ---- */
+.home-page-wrapper::before,.home-page-wrapper::after{
+  content:"";position:absolute;border-radius:50%;
+  filter:blur(70px);pointer-events:none;z-index:0;
+  will-change:transform;
+}
+.home-page-wrapper::before{
+  width:520px;height:520px;left:-160px;top:-140px;
+  background:radial-gradient(circle at 35% 35%,rgba(255,153,0,.14),transparent 65%);
+  animation:drift-a 16s ease-in-out infinite alternate;
+}
+.home-page-wrapper::after{
+  width:560px;height:560px;right:-180px;bottom:-120px;
+  background:radial-gradient(circle at 60% 60%,rgba(0,164,228,.13),transparent 65%);
+  animation:drift-b 20s ease-in-out infinite alternate;
+}
+@keyframes drift-a{
+  from{transform:translate(0,0) scale(1)}
+  to{transform:translate(70px,45px) scale(1.12)}
+}
+@keyframes drift-b{
+  from{transform:translate(0,0) scale(1.08)}
+  to{transform:translate(-80px,-55px) scale(.96)}
+}
+:root[data-theme="light"] .home-page-wrapper::before,
+:root[data-theme="light"] .home-page-wrapper::after{filter:blur(90px);opacity:.6}
+
+/* ---- refined avatars: face-framing + hover glow + settle ---- */
+.leader-avatar-img,.team-detail-avatar-img,.team-list-avatar,.team-card .team-avatar,
+.leader-avatar,.founding-avatar-img{
+  object-position:center 22%;
+  filter:saturate(1.06) contrast(1.03);
+}
+.leader-avatar-img,.team-detail-avatar-img,.team-list-avatar,.team-card .team-avatar{
+  transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease,filter .35s ease;
+}
+.leader-featured-card:hover .leader-avatar-img,
+.team-list-item:hover .team-list-avatar,
+.team-detail-panel .team-detail-avatar-img,
+.team-card:hover .team-avatar,
+.founding-card:hover .founding-avatar-img{
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--neon) 45%,transparent),0 8px 26px rgba(0,0,0,.45);
+  filter:saturate(1.15) contrast(1.05);
+}
+
+/* ---- align social icons in one straight row across team cards ---- */
+.team-card .team-info{flex:1}
+.team-card .team-socials{margin-top:auto;padding-top:.55rem}
+
+/* ---- micro: keyboard accessibility ---- */
+:focus-visible{outline:2px solid var(--neon);outline-offset:2px}
+:focus:not(:focus-visible){outline:none}
+
+/* ---- micro: link underline polish for footer/misc ---- */
+.footer-links-list a,.contact-link{position:relative}
+.footer-links-list a::after,.contact-link::after{
+  content:"";position:absolute;left:0;bottom:-2px;height:1px;width:100%;
+  background:var(--neon);transform:scaleX(0);transform-origin:left;transition:transform .25s ease;
+}
+.footer-links-list a:hover::after,.contact-link:hover::after{transform:scaleX(1)}
+
+/* ---- micro: smooth image hover on article/event covers ---- */
+.article-card .article-cover,.articles-page .article-card-image-wrap{
+  overflow:hidden;
+}
+.article-card .article-cover:hover,.articles-page .article-card-image-wrap:hover{
+  filter:saturate(1.15);
+}
+
+/* ---- micro: stat counters pop ---- */
+.stat-value,.team-metric-value,.founding-index,.team-list-index{
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---- micro: dropdown-ish chevron bounce on hover for "all" links ---- */
+.all-events-link,.all-articles-link,.team-view-all{
+  position:relative;
+}
+.chevron-icon,.team-view-all svg{transition:transform .25s ease}
+.all-events-link:hover .chevron-icon,
+.all-articles-link:hover .chevron-icon,
+.team-view-all:hover svg{transform:translateX(4px)}
+
+/* ---- team page CTA gradient border on hover ---- */
+.team-cta-card{
+  transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease,border-color .35s ease;
+}
+.team-cta-card:hover{
+  border-color:var(--line-bright);
+  box-shadow:var(--glow-md),0 0 60px -18px rgba(255,153,0,.35);
+  transform:translateY(-4px);
+}
