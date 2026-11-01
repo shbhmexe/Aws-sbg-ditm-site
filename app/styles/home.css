@@ -699,3 +699,15 @@
   .console-title{display:none}
   .hero-visual-footer-meta{font-size:.56rem}
 }
+
+/* Final hero stability pass: keep the accent word as text, never as a painted block. */
+.home-page-wrapper{padding-top:clamp(5.9rem,9vw,7.5rem);padding-bottom:clamp(3rem,5vw,5rem)}
+.hero-content{gap:1.18rem}
+.hero-title{max-width:none;font-size:clamp(2.9rem,5.8vw,5.15rem);line-height:.98}
+.hero-title-highlight{display:inline;color:var(--aws-orange);background:none!important;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:var(--aws-orange);filter:none;text-shadow:0 10px 28px color-mix(in srgb,var(--aws-orange) 18%,transparent);position:relative}
+.hero-title-highlight::after{content:"";position:absolute;left:0;right:.04em;bottom:-.08em;height:.08em;border-radius:999px;background:linear-gradient(90deg,var(--aws-orange),var(--aws-cyan));opacity:.9}
+.hero-description p{max-width:49ch}
+.hero-proof-row{padding-top:.05rem}
+.hero-visual-wrapper{max-width:545px}
+@media (max-width:980px){.hero-title{max-width:12ch}.hero-content{gap:1.3rem}}
+@media (max-width:680px){.hero-title{max-width:10ch;font-size:clamp(2.75rem,13vw,4.45rem)}.hero-title-highlight::after{height:.06em}}
