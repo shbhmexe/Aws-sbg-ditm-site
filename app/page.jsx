@@ -111,6 +111,20 @@ const ARTICLES = [
   { title: "Building a Knowledge-Driven AI Agent Using Amazon Bedrock and Strands Agents on AWS", badge: "AI & Bedrock", date: "Feb 2025", read: "7 min read", excerpt: "Leverage Amazon Bedrock and Strands Agents framework to construct intelligent, knowledge-powered conversational agents.", href: "https://builder.aws.com/content/37FuqPKbTyeDEviALJjHzbmMbQ8/building-a-knowledge-driven-ai-agent-using-amazon-bedrock-and-strands-agents-on-aws", gradient: "linear-gradient(135deg, rgb(160, 80, 255) 0%, rgb(0, 210, 106) 100%)" },
 ];
 
+const LEARNING_PATHS = [
+  { number: "01", label: "Learn", title: "Start with the cloud", description: "Build a clear foundation through guided AWS sessions, peer study groups, and practical explainers.", href: "/articles", accent: "cyan" },
+  { number: "02", label: "Build", title: "Ship something real", description: "Turn concepts into working systems with labs, architecture challenges, and community-led workshops.", href: "/events", accent: "amber" },
+  { number: "03", label: "Lead", title: "Grow with your people", description: "Share your work, support another builder, and find the confidence to take your next technical step.", href: "/team", accent: "emerald" },
+];
+
+const PathIcon = ({ accent }) => (
+  <span className={`path-icon path-icon-${accent}`} aria-hidden="true">
+    {accent === "cyan" && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18M3 12h18" /><circle cx="12" cy="12" r="8" /></svg>}
+    {accent === "amber" && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z" /></svg>}
+    {accent === "emerald" && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20V4M6 10l6-6 6 6M5 20h14" /></svg>}
+  </span>
+);
+
 function MemberCard({ m, variant }) {
   const hasSocials = Boolean(m.gh || m.li);
 
@@ -268,9 +282,48 @@ export default function Home() {
                 <span className="stat-desc">Student-Driven</span>
               </div>
             </div>
+
+            <div className="hero-proof-row">
+              <div className="hero-proof-avatars" aria-hidden="true">
+                <img src="/team/core/SHUBHAM_CORE.png" alt="" />
+                <img src="/team/core/AAKASH_CORE.png" alt="" />
+                <img src="/team/core/ANJALI_CORE.png" alt="" />
+                <span>+</span>
+              </div>
+              <div className="hero-proof-copy">
+                <strong>Built by students, for students.</strong>
+                <span>Meet the people moving cloud learning forward at DITM.</span>
+              </div>
+            </div>
           </div>
 
           <HeroGrid />
+        </div>
+      </section>
+
+      <section className="home-pathways-section" aria-labelledby="home-pathways-title">
+        <div className="home-pathways-shell">
+          <div className="home-pathways-heading" data-reveal>
+            <div>
+              <span className="home-section-kicker">YOUR NEXT MOVE</span>
+              <h2 id="home-pathways-title">A practical path into cloud.</h2>
+            </div>
+            <p>One community, three ways to keep moving—from your first AWS concept to your next shipped project.</p>
+          </div>
+          <div className="home-pathways-grid" data-reveal style={{ "--reveal-delay": ".08s" }}>
+            {LEARNING_PATHS.map((path) => (
+              <Link href={path.href} className={`home-path-card home-path-card-${path.accent}`} key={path.number}>
+                <div className="home-path-card-top">
+                  <span className="home-path-number">{path.number}</span>
+                  <PathIcon accent={path.accent} />
+                </div>
+                <span className="home-path-label">{path.label}</span>
+                <h3>{path.title}</h3>
+                <p>{path.description}</p>
+                <span className="home-path-link">Explore <ArrowIcon /></span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -10,6 +10,7 @@ export default function HeroGrid() {
     { id: "ai", name: "GenAI & Bedrock", icon: "🧠" },
     { id: "storage", name: "S3 & Databases", icon: "🗄️" },
   ];
+  const activeChipName = chips.find((chip) => chip.id === activeChip)?.name || "All systems";
 
   return (
     <div className="hero-visual-wrapper">
@@ -32,7 +33,7 @@ export default function HeroGrid() {
         </div>
 
         {/* Hero Architecture Graphic */}
-        <div className="hero-image-stage">
+        <div className="hero-image-stage" data-active={activeChip}>
           <img
             src="/assets/aws-hero-architecture.jpg"
             alt="AWS Cloud Architecture & Student Builder Community"
@@ -90,12 +91,18 @@ export default function HeroGrid() {
                 key={chip.id}
                 type="button"
                 className={`tech-chip ${activeChip === chip.id ? "active" : ""}`}
+                aria-pressed={activeChip === chip.id}
                 onClick={() => setActiveChip(chip.id)}
               >
                 <span className="tech-chip-icon">{chip.icon}</span>
                 <span>{chip.name}</span>
               </button>
             ))}
+          </div>
+          <div className="hero-visual-footer-meta">
+            <span>Focus area</span>
+            <strong>{activeChipName}</strong>
+            <span className="hero-footer-status"><span className="live-pulse"></span> Learning live</span>
           </div>
         </div>
       </div>
