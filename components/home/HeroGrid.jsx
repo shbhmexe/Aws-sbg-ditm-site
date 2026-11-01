@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function HeroGrid() {
   const [activeChip, setActiveChip] = useState("all");
+  const [activityIndex, setActivityIndex] = useState(0);
 
   const chips = [
     { id: "compute", name: "Compute (EC2 / Lambda)", icon: "⚡" },
@@ -11,6 +12,39 @@ export default function HeroGrid() {
     { id: "storage", name: "S3 & Databases", icon: "🗄️" },
   ];
   const activeChipName = chips.find((chip) => chip.id === activeChip)?.name || "All systems";
+  const liveStreams = {
+    all: [
+      { glyph: "EC2", title: "Compute node scaled", detail: "ap-south-1 / instance healthy", value: "98.4%", progress: 84 },
+      { glyph: "AI", title: "Bedrock inference complete", detail: "community-lab / response ready", value: "42ms", progress: 72 },
+      { glyph: "S3", title: "Learning assets synced", detail: "ditm-workshops / 128 objects", value: "100%", progress: 96 },
+    ],
+    compute: [
+      { glyph: "EC2", title: "EC2 lab environment ready", detail: "sandbox / 2 instances online", value: "2/2", progress: 92 },
+      { glyph: "λ", title: "Lambda function invoked", detail: "event-router / 14ms runtime", value: "14ms", progress: 78 },
+      { glyph: "EC2", title: "Auto Scaling policy checked", detail: "target utilization stable", value: "64%", progress: 64 },
+    ],
+    ai: [
+      { glyph: "AI", title: "Prompt lab is running", detail: "Bedrock / student sandbox", value: "07", progress: 58 },
+      { glyph: "AI", title: "Model response evaluated", detail: "quality gate / passed", value: "PASS", progress: 88 },
+      { glyph: "AI", title: "Knowledge base refreshed", detail: "embeddings / 240 chunks", value: "240", progress: 76 },
+    ],
+    storage: [
+      { glyph: "S3", title: "Workshop assets synced", detail: "S3 / 128 objects checked", value: "100%", progress: 96 },
+      { glyph: "DB", title: "DynamoDB read capacity stable", detail: "community-data / low latency", value: "12ms", progress: 81 },
+      { glyph: "S3", title: "Archive lifecycle completed", detail: "event-media / policy applied", value: "DONE", progress: 100 },
+    ],
+  };
+  const activeStream = liveStreams[activeChip] || liveStreams.all;
+  const currentActivity = activeStream[activityIndex % activeStream.length];
+
+  useEffect(() => {
+    const id = window.setInterval(() => setActivityIndex((index) => index + 1), 2600);
+    return () => window.clearInterval(id);
+  }, [activeChip]);
+
+  useEffect(() => {
+    setActivityIndex(0);
+  }, [activeChip]);
 
   return (
     <div className="hero-visual-wrapper">
@@ -80,6 +114,35 @@ export default function HeroGrid() {
               <span className="metric-label">AWS Certified</span>
               <span className="metric-value">Study Groups Ready</span>
             </div>
+          </div>
+        </div>
+
+        <div className="hero-live-console" aria-live="polite">
+          <div className="hero-live-console-header">
+            <div className="hero-live-console-title">
+              <span className="hero-live-status-dot" aria-hidden="true"></span>
+              <span>Cloud Ops Live</span>
+              <span className="hero-live-running">RUNNING</span>
+            </div>
+            <span className="hero-live-mission">MISSION 04 / 12</span>
+          </div>
+          <div className="hero-live-console-body" key={`${activeChip}-${activityIndex}`}>
+            <span className="hero-live-glyph">{currentActivity.glyph}</span>
+            <div className="hero-live-copy">
+              <strong>{currentActivity.title}</strong>
+              <span>{currentActivity.detail}</span>
+            </div>
+            <div className="hero-live-value">
+              <strong>{currentActivity.value}</strong>
+              <span>HEALTH</span>
+            </div>
+          </div>
+          <div className="hero-live-progress" aria-label={`${currentActivity.progress}% complete`}>
+            <span style={{ width: `${currentActivity.progress}%` }}></span>
+          </div>
+          <div className="hero-live-console-footer">
+            <span><i></i> STREAMING EVENTS</span>
+            <span>{activeChipName.toUpperCase()}</span>
           </div>
         </div>
 
