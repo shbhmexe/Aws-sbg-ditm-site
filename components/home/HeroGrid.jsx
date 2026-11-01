@@ -2,62 +2,65 @@
 
 import { useEffect, useState } from "react";
 
+const CHIPS = [
+  { id: "compute", name: "Compute (EC2 / Lambda)", icon: "EC2" },
+  { id: "ai", name: "GenAI & Bedrock", icon: "AI" },
+  { id: "storage", name: "S3 & Databases", icon: "S3" },
+];
+
+const SERVICES = [
+  { id: "ec2", glyph: "EC2", name: "Compute", detail: "2 nodes online", color: "amber" },
+  { id: "lambda", glyph: "λ", name: "Serverless", detail: "14ms runtime", color: "cyan" },
+  { id: "bedrock", glyph: "AI", name: "Bedrock", detail: "Model ready", color: "violet" },
+  { id: "s3", glyph: "S3", name: "Storage", detail: "128 objects", color: "emerald" },
+];
+
+function FloatingMetric({ className, tone, icon, label, value }) {
+  return (
+    <div className={`floating-metric-pill ${className}`}>
+      <div className={`metric-icon-wrap ${tone}`}>{icon}</div>
+      <div className="metric-text-group">
+        <span className="metric-label">{label}</span>
+        <span className="metric-value">{value}</span>
+      </div>
+    </div>
+  );
+}
+
 export default function HeroGrid() {
-  const [activeChip, setActiveChip] = useState("all");
-  const [activityIndex, setActivityIndex] = useState(0);
+  const [activeChip, setActiveChip] = useState("compute");
+  const [activeService, setActiveService] = useState("ec2");
+  const [missionStep, setMissionStep] = useState(2);
+  const [isDeploying, setIsDeploying] = useState(true);
 
-  const chips = [
-    { id: "compute", name: "Compute (EC2 / Lambda)", icon: "⚡" },
-    { id: "ai", name: "GenAI & Bedrock", icon: "🧠" },
-    { id: "storage", name: "S3 & Databases", icon: "🗄️" },
-  ];
-  const activeChipName = chips.find((chip) => chip.id === activeChip)?.name || "All systems";
-  const liveStreams = {
-    all: [
-      { glyph: "EC2", title: "Compute node scaled", detail: "ap-south-1 / instance healthy", value: "98.4%", progress: 84 },
-      { glyph: "AI", title: "Bedrock inference complete", detail: "community-lab / response ready", value: "42ms", progress: 72 },
-      { glyph: "S3", title: "Learning assets synced", detail: "ditm-workshops / 128 objects", value: "100%", progress: 96 },
-    ],
-    compute: [
-      { glyph: "EC2", title: "EC2 lab environment ready", detail: "sandbox / 2 instances online", value: "2/2", progress: 92 },
-      { glyph: "λ", title: "Lambda function invoked", detail: "event-router / 14ms runtime", value: "14ms", progress: 78 },
-      { glyph: "EC2", title: "Auto Scaling policy checked", detail: "target utilization stable", value: "64%", progress: 64 },
-    ],
-    ai: [
-      { glyph: "AI", title: "Prompt lab is running", detail: "Bedrock / student sandbox", value: "07", progress: 58 },
-      { glyph: "AI", title: "Model response evaluated", detail: "quality gate / passed", value: "PASS", progress: 88 },
-      { glyph: "AI", title: "Knowledge base refreshed", detail: "embeddings / 240 chunks", value: "240", progress: 76 },
-    ],
-    storage: [
-      { glyph: "S3", title: "Workshop assets synced", detail: "S3 / 128 objects checked", value: "100%", progress: 96 },
-      { glyph: "DB", title: "DynamoDB read capacity stable", detail: "community-data / low latency", value: "12ms", progress: 81 },
-      { glyph: "S3", title: "Archive lifecycle completed", detail: "event-media / policy applied", value: "DONE", progress: 100 },
-    ],
-  };
-  const activeStream = liveStreams[activeChip] || liveStreams.all;
-  const currentActivity = activeStream[activityIndex % activeStream.length];
+  const activeChipName = CHIPS.find((chip) => chip.id === activeChip)?.name || "All systems";
 
   useEffect(() => {
-    const id = window.setInterval(() => setActivityIndex((index) => index + 1), 2600);
+    if (!isDeploying) return undefined;
+
+    const id = window.setInterval(() => {
+      setMissionStep((step) => (step >= SERVICES.length ? 1 : step + 1));
+    }, 2200);
+
     return () => window.clearInterval(id);
-  }, [activeChip]);
+  }, [isDeploying]);
 
   useEffect(() => {
-    setActivityIndex(0);
-  }, [activeChip]);
+    const nextService = SERVICES[Math.max(0, missionStep - 1)];
+    if (nextService) setActiveService(nextService.id);
+  }, [missionStep]);
 
   return (
     <div className="hero-visual-wrapper">
       <div className="hero-visual-card">
-        {/* Sleek top console status header */}
         <div className="hero-visual-header">
-          <div className="console-dots">
+          <div className="console-dots" aria-hidden="true">
             <span className="dot red"></span>
             <span className="dot yellow"></span>
             <span className="dot green"></span>
           </div>
           <div className="console-title">
-            <span className="console-icon">☁</span>
+            <span className="console-icon">AWS</span>
             <span>aws-sbg-ditm-hub // ap-south-1</span>
           </div>
           <div className="console-badge">
@@ -66,90 +69,100 @@ export default function HeroGrid() {
           </div>
         </div>
 
-        {/* Hero Architecture Graphic */}
         <div className="hero-image-stage" data-active={activeChip}>
           <img
             src="/assets/aws-hero-architecture.jpg"
-            alt="AWS Cloud Architecture & Student Builder Community"
+            alt="AWS Cloud Architecture and Student Builder Community"
             className="hero-main-image"
           />
           <div className="image-depth-overlay"></div>
 
-          {/* Floating Pill 1: Top Floating Node */}
-          <div className="floating-metric-pill metric-top-right">
-            <div className="metric-icon-wrap amber">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-              </svg>
-            </div>
-            <div className="metric-text-group">
-              <span className="metric-label">Serverless Cloud</span>
-              <span className="metric-value">Active & Scalable</span>
-            </div>
-          </div>
-
-          {/* Floating Pill 2: Bottom Left Node */}
-          <div className="floating-metric-pill metric-bottom-left">
-            <div className="metric-icon-wrap cyan">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
-                <path d="M2 12h20"></path>
-              </svg>
-            </div>
-            <div className="metric-text-group">
-              <span className="metric-label">Community Hub</span>
-              <span className="metric-value">500+ DITM Builders</span>
-            </div>
-          </div>
-
-          {/* Floating Pill 3: Bottom Right Node */}
-          <div className="floating-metric-pill metric-bottom-right">
-            <div className="metric-icon-wrap emerald">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </div>
-            <div className="metric-text-group">
-              <span className="metric-label">AWS Certified</span>
-              <span className="metric-value">Study Groups Ready</span>
-            </div>
-          </div>
+          <FloatingMetric
+            className="metric-top-right"
+            tone="amber"
+            icon="⚡"
+            label="Serverless Cloud"
+            value="Active & Scalable"
+          />
+          <FloatingMetric
+            className="metric-bottom-left"
+            tone="cyan"
+            icon="+"
+            label="Community Hub"
+            value="500+ DITM Builders"
+          />
+          <FloatingMetric
+            className="metric-bottom-right"
+            tone="emerald"
+            icon="✓"
+            label="AWS Certified"
+            value="Study Groups Ready"
+          />
         </div>
 
-        <div className="hero-live-console" aria-live="polite">
-          <div className="hero-live-console-header">
-            <div className="hero-live-console-title">
-              <span className="hero-live-status-dot" aria-hidden="true"></span>
-              <span>Cloud Ops Live</span>
-              <span className="hero-live-running">RUNNING</span>
+        <section className="hero-mission-panel" aria-label="Live cloud mission control">
+          <div className="hero-mission-header">
+            <div>
+              <div className="hero-mission-kicker">
+                <span className="hero-mission-live-dot" aria-hidden="true"></span>
+                <span>Cloud mission control</span>
+                <span className="hero-mission-running">LIVE</span>
+              </div>
+              <strong className="hero-mission-title">Build the stack</strong>
             </div>
-            <span className="hero-live-mission">MISSION 04 / 12</span>
+            <button
+              className="hero-mission-toggle"
+              type="button"
+              onClick={() => setIsDeploying((running) => !running)}
+              aria-label={isDeploying ? "Pause cloud mission" : "Resume cloud mission"}
+              aria-pressed={isDeploying}
+            >
+              <span>{isDeploying ? "||" : "▶"}</span>
+              <small>{isDeploying ? "RUNNING" : "PAUSED"}</small>
+            </button>
           </div>
-          <div className="hero-live-console-body" key={`${activeChip}-${activityIndex}`}>
-            <span className="hero-live-glyph">{currentActivity.glyph}</span>
-            <div className="hero-live-copy">
-              <strong>{currentActivity.title}</strong>
-              <span>{currentActivity.detail}</span>
-            </div>
-            <div className="hero-live-value">
-              <strong>{currentActivity.value}</strong>
-              <span>HEALTH</span>
-            </div>
-          </div>
-          <div className="hero-live-progress" aria-label={`${currentActivity.progress}% complete`}>
-            <span style={{ width: `${currentActivity.progress}%` }}></span>
-          </div>
-          <div className="hero-live-console-footer">
-            <span><i></i> STREAMING EVENTS</span>
-            <span>{activeChipName.toUpperCase()}</span>
-          </div>
-        </div>
 
-        {/* Footer Tech Chips */}
+          <div className="hero-mission-meta">
+            <span><b>DEPLOYMENT RUN</b> 04</span>
+            <span>{missionStep} / {SERVICES.length} ONLINE</span>
+          </div>
+          <div className="hero-mission-progress" aria-label={`${Math.round((missionStep / SERVICES.length) * 100)} percent deployed`}>
+            <span style={{ width: `${(missionStep / SERVICES.length) * 100}%` }}></span>
+          </div>
+
+          <div className="hero-service-grid">
+            {SERVICES.map((service, index) => {
+              const isOnline = index < missionStep;
+              const isActive = service.id === activeService;
+
+              return (
+                <button
+                  className={`hero-service-node ${isActive ? "active" : ""} ${isOnline ? "online" : ""}`}
+                  key={service.id}
+                  type="button"
+                  onClick={() => setActiveService(service.id)}
+                  aria-pressed={isActive}
+                >
+                  <span className={`hero-service-glyph ${service.color}`}>{service.glyph}</span>
+                  <span className="hero-service-copy">
+                    <strong>{service.name}</strong>
+                    <small>{service.detail}</small>
+                  </span>
+                  <span className="hero-service-state">{isOnline ? "READY" : "QUEUED"}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="hero-mission-footer">
+            <span><i></i> handshake complete</span>
+            <strong>{Math.round((missionStep / SERVICES.length) * 100)}%</strong>
+          </div>
+        </section>
+
         <div className="hero-visual-footer">
           <div className="tech-chips-row">
-            {chips.map((chip) => (
+            {CHIPS.map((chip) => (
               <button
                 key={chip.id}
                 type="button"
