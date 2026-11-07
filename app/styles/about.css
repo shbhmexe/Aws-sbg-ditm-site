@@ -1,258 +1,391 @@
 /* ============================================================
-   about.css — ABOUT page (Neon Grid / Cyber)
-   Scoped under .about-page. Page/section backgrounds stay
-   transparent so the global neon-grid shows through.
-   Tokens only (no hardcoded colors) so the light theme holds.
+   about.css — ABOUT page (Doctor Doom Latverian Sovereign Cyber Theme)
+   Scoped under .about-page with ambient side emerald gradients.
    ============================================================ */
 
-/* ---------- PAGE SHELL ---------- */
-.about-page{
-  position:relative;
-  max-width:var(--maxw);
-  margin:0 auto;
-  padding:0 clamp(1rem,3vw,2rem) clamp(3rem,7vw,5.5rem);
-  background:transparent;
+/* ---------- PAGE SHELL WITH AMBIENT SIDE EMERALD GRADIENTS ---------- */
+.about-page {
+  position: relative;
+  max-width: min(1680px, 98vw);
+  margin: 0 auto;
+  padding: 0 clamp(0.5rem, 2vw, 1.5rem) clamp(3rem, 6vh, 5rem);
+  background: transparent;
+  min-height: calc(100vh - var(--nav-h, 72px));
+  box-sizing: border-box;
+}
+
+/* Ambient Sovereign Flank Gradients (Doctor Doom Emerald Glow framing left & right) */
+.about-page::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: clamp(280px, 32vw, 560px);
+  background: radial-gradient(ellipse 100% 75% at 0% 50%, rgba(0, 245, 132, 0.22) 0%, rgba(0, 210, 106, 0.10) 45%, rgba(0, 210, 106, 0.02) 75%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-page::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: clamp(280px, 32vw, 560px);
+  background: radial-gradient(ellipse 100% 75% at 100% 50%, rgba(0, 245, 132, 0.20) 0%, rgba(0, 210, 106, 0.08) 45%, rgba(0, 164, 228, 0.02) 75%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ---------- HERO ---------- */
-.about-page .about-hero{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  gap:1.4rem;
-  padding:clamp(2.5rem,6vw,4.75rem) 0 clamp(2rem,5vw,3.5rem);
-  animation:fade-in .6s ease both;
-}
-/* eyebrow: globally styled pill — only placed (centered via flex) */
-.about-page .about-eyebrow{
-  margin:0 auto;
-}
-.about-page .about-hero__title{
-  font-size:clamp(2.3rem,6vw,4.2rem);
-  font-weight:800;
-  letter-spacing:-.03em;
-  line-height:1.04;
-  color:var(--ink);
-  max-width:18ch;
-}
-.about-page .about-hero__title::after{
-  content:"";
-  display:block;
-  width:64px;
-  height:3px;
-  margin:1.3rem auto 0;
-  border-radius:3px;
-  background:linear-gradient(90deg,transparent,var(--neon),transparent);
-  box-shadow:var(--glow-sm);
-}
-.about-page .about-hero__line1{
-  display:block;
-  color:var(--ink);
-}
-.about-page .about-hero__subtitle{
-  max-width:62ch;
-  margin:0 auto;
-  color:var(--ink-soft);
-  font-size:clamp(1rem,1.6vw,1.2rem);
-  line-height:1.7;
-}
-/* green gradient span is globally styled — only clone box decoration
-   so it renders cleanly when it wraps (no color/core-look change) */
-.about-page .text-green{
-  -webkit-box-decoration-break:clone;
-  box-decoration-break:clone;
+.about-page .about-hero {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.4rem;
+  padding: clamp(2.5rem, 6vw, 4.75rem) 0 clamp(2.5rem, 5vw, 3.75rem);
+  animation: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* ---------- PILLARS (alternating split timeline) ---------- */
-.about-page .about-pillar{
-  display:grid;
-  grid-template-columns:minmax(130px,210px) 1fr;
-  gap:clamp(1.5rem,5vw,4rem);
-  align-items:start;
-  padding:clamp(2.8rem,6vw,4.5rem) 0;
-  border-top:1px solid var(--line-soft);
+/* Eyebrow: Latverian sovereign diadem badge */
+.about-page .about-eyebrow {
+  margin: 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6ch;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #00f584;
+  padding: 0.4em 1.1em;
+  border: 1px solid rgba(0, 245, 132, 0.35);
+  border-radius: var(--r-pill);
+  background: rgba(0, 245, 132, 0.08);
+  box-shadow: 0 0 16px rgba(0, 245, 132, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
-/* default (--right): number left, content right */
-.about-page .about-pillar--right .about-pillar__number{grid-column:1;grid-row:1;text-align:left}
-.about-page .about-pillar--right .about-pillar__content{grid-column:2;grid-row:1}
+
+.about-page .about-hero__title {
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: #ffffff;
+  max-width: 18ch;
+}
+
+.about-page .about-hero__line1 {
+  display: block;
+  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about-page .text-green {
+  background: linear-gradient(135deg, #00f584 0%, #00d26a 50%, #20e3b2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 28px rgba(0, 245, 132, 0.45));
+  display: inline-block;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Antique Gold & Emerald Sovereign Energy Line */
+.about-page .about-hero__title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  margin: 1.4rem auto 0;
+  border-radius: 99px;
+  background: linear-gradient(90deg, transparent, #00f584 35%, #ffd700 50%, #00f584 65%, transparent);
+  box-shadow: 0 0 18px rgba(0, 245, 132, 0.6);
+}
+
+.about-page .about-hero__subtitle {
+  max-width: 64ch;
+  margin: 0 auto;
+  color: #94a3b8;
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  line-height: 1.75;
+}
+
+/* ---------- PILLARS (Sovereign Titanium Monolithic Archive Slabs) ---------- */
+.about-page .about-pillar {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(130px, 210px) 1fr;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: start;
+  padding: clamp(2.4rem, 5vw, 3.75rem);
+  margin-bottom: 2.25rem;
+  background: rgba(9, 16, 26, 0.8);
+  border: 1px solid rgba(0, 245, 132, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Subtle sovereign top hairline highlight on each slab */
+.about-page .about-pillar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 245, 132, 0.6) 40%, rgba(212, 175, 55, 0.7) 50%, rgba(0, 245, 132, 0.6) 60%, transparent);
+}
+
+.about-page .about-pillar:hover {
+  border-color: rgba(0, 245, 132, 0.48);
+  box-shadow: 0 20px 52px rgba(0, 0, 0, 0.6), 0 0 32px rgba(0, 245, 132, 0.22);
+  transform: translateY(-2px);
+}
+
+/* Default (--right): number left, content right */
+.about-page .about-pillar--right .about-pillar__number { grid-column: 1; grid-row: 1; text-align: left; }
+.about-page .about-pillar--right .about-pillar__content { grid-column: 2; grid-row: 1; }
+
 /* (--left): content left, number right */
-.about-page .about-pillar--left{grid-template-columns:1fr minmax(130px,210px)}
-.about-page .about-pillar--left .about-pillar__number{grid-column:2;grid-row:1;text-align:right}
-.about-page .about-pillar--left .about-pillar__content{grid-column:1;grid-row:1}
+.about-page .about-pillar--left { grid-template-columns: 1fr minmax(130px, 210px); }
+.about-page .about-pillar--left .about-pillar__number { grid-column: 2; grid-row: 1; text-align: right; }
+.about-page .about-pillar--left .about-pillar__content { grid-column: 1; grid-row: 1; }
 
-.about-page .about-pillar__number{
-  font-family:var(--mono);
-  font-size:clamp(3.5rem,9vw,7rem);
-  font-weight:800;
-  line-height:.9;
-  letter-spacing:-.03em;
-  color:var(--faint);
-  -webkit-text-stroke:1px var(--line-bright);
-  user-select:none;
-}
-.about-page .about-pillar__content{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:1rem;
-  max-width:64ch;
-  animation:fade-in .5s ease both;
-}
-.about-page .about-pillar__label{
-  display:inline-flex;
-  align-items:center;
-  gap:.7ch;
-  font-family:var(--mono);
-  font-size:.75rem;
-  font-weight:600;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:var(--neon);
-}
-.about-page .about-pillar__label::before{
-  content:"";
-  width:26px;
-  height:1px;
-  background:var(--neon);
-  box-shadow:var(--glow-sm);
-}
-.about-page .about-pillar__heading{
-  font-size:clamp(1.55rem,3.6vw,2.5rem);
-  font-weight:800;
-  letter-spacing:-.02em;
-  line-height:1.14;
-  color:var(--ink);
-}
-.about-page .about-pillar__heading::after{
-  content:"";
-  display:block;
-  width:56px;
-  height:2px;
-  margin-top:.9rem;
-  border-radius:2px;
-  background:linear-gradient(90deg,var(--neon),transparent);
-  box-shadow:var(--glow-sm);
-}
-.about-page .about-pillar__body{
-  color:var(--ink-soft);
-  font-size:clamp(1rem,1.4vw,1.12rem);
-  line-height:1.7;
-  max-width:60ch;
-}
-/* ---------- QUOTE PILL ---------- */
-.about-page .about-pill{
-  display:inline-flex;
-  align-items:center;
-  gap:.6ch;
-  width:fit-content;
-  max-width:100%;
-  margin-top:.4rem;
-  padding:.6em 1.15em;
-  font-family:var(--mono);
-  font-size:.82rem;
-  letter-spacing:.02em;
-  color:var(--neon-2);
-  border:1px solid var(--line-bright);
-  border-radius:var(--r-pill);
-  background:linear-gradient(180deg,var(--panel-3),transparent);
-  box-shadow:var(--glow-sm);
+/* Monolithic Numeral (Doctor Doom Armor Stencil) */
+.about-page .about-pillar__number {
+  font-family: var(--mono);
+  font-size: clamp(3.8rem, 9.5vw, 7.5rem);
+  font-weight: 900;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: rgba(0, 245, 132, 0.08);
+  -webkit-text-stroke: 1.5px rgba(0, 245, 132, 0.45);
+  text-shadow: 0 0 35px rgba(0, 245, 132, 0.2);
+  user-select: none;
 }
 
-/* ---------- VISION TAGS (row of mono neon pills) ---------- */
-.about-page .about-vision-tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:.7rem;
-  margin-top:.5rem;
-}
-/* about-tag is globally styled — only placed/sized within the row */
-.about-page .about-tag{
-  flex:0 0 auto;
+.about-page .about-pillar__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1rem;
+  max-width: 64ch;
+  animation: fade-in 0.5s ease both;
 }
 
-/* ---------- STAT GRID ---------- */
-.about-page .about-stats{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:1rem;
-  width:100%;
-  margin-top:1.4rem;
+.about-page .about-pillar__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7ch;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #00f584;
 }
-.about-page .about-stat{
-  display:flex;
-  flex-direction:column;
-  gap:.55rem;
-  padding:1.35rem;
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:var(--r);
-  box-shadow:var(--shadow);
-  transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease;
+
+.about-page .about-pillar__label::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: linear-gradient(90deg, #ffd700, #00f584);
+  box-shadow: 0 0 8px rgba(0, 245, 132, 0.6);
 }
-.about-page .about-stat:hover{
-  border-color:var(--line-bright);
-  box-shadow:var(--glow-md),var(--shadow);
-  transform:translateY(-3px);
+
+.about-page .about-pillar__heading {
+  font-size: clamp(1.65rem, 3.8vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.16;
+  color: #f8fafc;
 }
-.about-page .about-stat__value{
-  font-family:var(--mono);
-  font-size:clamp(1.9rem,4vw,2.7rem);
-  font-weight:700;
-  line-height:1;
-  color:var(--neon);
-  text-shadow:var(--text-glow);
+
+.about-page .about-pillar__heading::after {
+  content: "";
+  display: block;
+  width: 58px;
+  height: 2px;
+  margin-top: 0.95rem;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #00f584, #ffd700 70%, transparent);
+  box-shadow: 0 0 10px rgba(0, 245, 132, 0.5);
 }
-.about-page .about-stat__label{
-  font-family:var(--mono);
-  font-size:.72rem;
-  font-weight:600;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:var(--ink-soft);
+
+.about-page .about-pillar__body {
+  color: #cbd5e1;
+  font-size: clamp(1.02rem, 1.4vw, 1.15rem);
+  line-height: 1.75;
+  max-width: 60ch;
 }
-.about-page .about-stat__desc{
-  color:var(--muted);
-  font-size:.82rem;
-  line-height:1.6;
+
+/* ---------- QUOTE PILL (Latverian Sovereign Decree Box) ---------- */
+.about-page .about-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6ch;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 0.4rem;
+  padding: 0.75em 1.35em;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  color: #86efac;
+  border: 1px solid rgba(0, 245, 132, 0.32);
+  border-left: 3px solid #00f584;
+  border-radius: 8px;
+  background: rgba(0, 245, 132, 0.06);
+  box-shadow: 0 0 16px rgba(0, 245, 132, 0.12);
+  font-style: italic;
+}
+
+/* ---------- VISION TAGS (Doctor Doom Monospace Cyber Badges) ---------- */
+.about-page .about-vision-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.6rem;
+}
+
+.about-page .about-tag {
+  flex: 0 0 auto;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #00f584;
+  padding: 0.4em 1em;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 245, 132, 0.28);
+  background: rgba(10, 22, 34, 0.75);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+}
+
+.about-page .about-tag:hover {
+  border-color: #00f584;
+  background: rgba(0, 245, 132, 0.12);
+  box-shadow: 0 0 14px rgba(0, 245, 132, 0.35);
+  transform: translateY(-1px);
+}
+
+/* ---------- STAT GRID (Doctor Doom Titanium Armored Cells) ---------- */
+.about-page .about-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.15rem;
+  width: 100%;
+  margin-top: 1.6rem;
+}
+
+.about-page .about-stat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.5rem;
+  background: rgba(11, 20, 32, 0.85);
+  border: 1px solid rgba(0, 245, 132, 0.22);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.about-page .about-stat::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #00f584, #ffd700, transparent);
+}
+
+.about-page .about-stat:hover {
+  border-color: rgba(0, 245, 132, 0.55);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 245, 132, 0.22);
+  transform: translateY(-3px);
+}
+
+.about-page .about-stat__value {
+  font-family: var(--mono);
+  font-size: clamp(2rem, 4vw, 2.85rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #00f584;
+  text-shadow: 0 0 20px rgba(0, 245, 132, 0.45);
+}
+
+.about-page .about-stat__label {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f8fafc;
+}
+
+.about-page .about-stat__desc {
+  color: #94a3b8;
+  font-size: 0.88rem;
+  line-height: 1.65;
 }
 
 /* ---------- RESPONSIVE ---------- */
-@media (max-width:960px){
+@media (max-width: 960px) {
   .about-page .about-pillar,
   .about-page .about-pillar--left,
-  .about-page .about-pillar--right{
-    gap:clamp(1rem,3vw,2rem);
+  .about-page .about-pillar--right {
+    gap: clamp(1rem, 3vw, 2rem);
+    padding: clamp(1.8rem, 4vw, 2.5rem);
   }
-  .about-page .about-pillar{grid-template-columns:minmax(90px,150px) 1fr}
-  .about-page .about-pillar--left{grid-template-columns:1fr minmax(90px,150px)}
-}
-@media (max-width:760px){
-  .about-page .about-pillar,
-  .about-page .about-pillar--left,
-  .about-page .about-pillar--right{
-    grid-template-columns:1fr;
-    gap:.6rem;
-  }
-  .about-page .about-pillar--left .about-pillar__number,
-  .about-page .about-pillar--right .about-pillar__number{
-    grid-column:1;
-    grid-row:auto;
-    text-align:left;
-    font-size:clamp(3rem,13vw,4.5rem);
-  }
-  .about-page .about-pillar--left .about-pillar__content,
-  .about-page .about-pillar--right .about-pillar__content{
-    grid-column:1;
-    grid-row:auto;
-    max-width:100%;
-  }
-}
-@media (max-width:600px){
-  .about-page{padding-left:1rem;padding-right:1rem}
-  .about-page .about-hero{gap:1.1rem}
-  .about-page .about-stats{grid-template-columns:1fr}
-  .about-page .about-pillar__body{max-width:100%}
+  .about-page .about-pillar { grid-template-columns: minmax(90px, 150px) 1fr; }
+  .about-page .about-pillar--left { grid-template-columns: 1fr minmax(90px, 150px); }
 }
 
-/* PLACEHOLDER_ABOUT */
+@media (max-width: 760px) {
+  .about-page .about-pillar,
+  .about-page .about-pillar--left,
+  .about-page .about-pillar--right {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+  .about-page .about-pillar--left .about-pillar__number,
+  .about-page .about-pillar--right .about-pillar__number {
+    grid-column: 1;
+    grid-row: auto;
+    text-align: left;
+    font-size: clamp(3rem, 13vw, 4.5rem);
+  }
+  .about-page .about-pillar--left .about-pillar__content,
+  .about-page .about-pillar--right .about-pillar__content {
+    grid-column: 1;
+    grid-row: auto;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-page { padding-left: 1rem; padding-right: 1rem; }
+  .about-page .about-hero { gap: 1.1rem; }
+  .about-page .about-stats { grid-template-columns: 1fr; }
+  .about-page .about-pillar__body { max-width: 100%; }
+}

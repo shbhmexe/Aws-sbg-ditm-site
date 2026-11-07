@@ -1,7 +1,8 @@
 import Link from "next/link";
-import HeroGrid from "@/components/home/HeroGrid";
-import MilestoneSection from "@/components/home/MilestoneSection";
+import DoomArtifact from "@/components/home/DoomArtifact";
 import ContactConsole from "@/components/home/ContactConsole";
+import TeamTree from "@/components/home/TeamTree";
+import { FEATURED_EVENTS } from "@/lib/featured-events";
 
 const CalendarIcon = () => (
   <svg className="fe-event-icon-calendar" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -56,49 +57,12 @@ const LinkedinIcon = () => (
   </svg>
 );
 
-const FEATURED_EVENTS = [
-  {
-    title: "AWS FROM CLICKS TO CODE",
-    badge: "Workshop",
-    badgeClass: "badge-workshop",
-    date: "24 SEP 2026",
-    desc: "Automating EC2: From Manual Clicks to Automated Infrastructure.",
-    image: "/events/event2-from-clicks-to-code/Event2-poster.png",
-    href: "https://clickstocode.awssbg-mhssce.in/",
-    external: true,
-    cta: "Register Now",
-  },
-  {
-    title: "Cloud Architecture Challenge - Mini Hackathon",
-    badge: "Hackathon",
-    badgeClass: "badge-hackathon",
-    date: "30 SEP 2026",
-    desc: "Architect the Cloud: Design. Build. Scale. Team-based mini hackathon to design scalable, cost-effective cloud architectures for real-world problems.",
-    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=800",
-    href: "/events",
-    external: false,
-    cta: "Learn more",
-    live: { text: "LIVE IN 3 DAYS", cls: "fe-live-tag-urgent" },
-  },
-  {
-    title: "AWS Community Day DITM",
-    badge: "Conference",
-    badgeClass: "badge-conference",
-    date: "14 JAN 2027",
-    desc: "Connect. Learn. Build. A premier student community conference bringing AWS Community Builders, industry experts, and student cloud enthusiasts together.",
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800",
-    href: "/events",
-    external: false,
-    cta: "Learn more",
-  },
-];
-
 const LEADERS = [
-  { name: "Shubham Shukla", role: "Chapter Leader", initials: "SS", img: "/team/core/SHUBHAM_CORE.png", gradient: "linear-gradient(135deg, #FF9900 0%, #00A4E4 100%)", gh: "https://github.com/shbhmexe", li: "https://www.linkedin.com/in/shubham-shukla-62095032a/" },
+  { name: "Shubham Shukla", role: "Chapter Leader", initials: "SS", img: "/team/core/SHUBHAM_CORE.png", gradient: "linear-gradient(135deg, #00d26a 0%, #00A4E4 100%)", gh: "https://github.com/shbhmexe", li: "https://www.linkedin.com/in/shubham-shukla-62095032a/" },
 ];
 
 const CORE = [
-  { name: "Aakash Rana", role: "IT Support and Management", initials: "AR", img: "/team/core/AAKASH_CORE.png", gradient: "linear-gradient(135deg, #FF9900 0%, #ff5e62 100%)", gh: "https://github.com/aakashrana7422-tech", li: "https://www.linkedin.com/in/aakash-rana-98054b342" },
+  { name: "Aakash Rana", role: "IT Support and Management", initials: "AR", img: "/team/core/AAKASH_CORE.png", gradient: "linear-gradient(135deg, #00d26a 0%, #ff5e62 100%)", gh: "https://github.com/aakashrana7422-tech", li: "https://www.linkedin.com/in/aakash-rana-98054b342" },
   { name: "Anjali Kumari", role: "Photography and Graphics Manager", initials: "AK", img: "/team/core/ANJALI_CORE.png", gradient: "linear-gradient(135deg, #ea6297 0%, #a050ff 100%)", gh: "https://github.com/anjalisah4823", li: "https://www.linkedin.com/in/anjali-kumari-71a39b385" },
   { name: "Farman Khan", role: "Student Engagement Manager", initials: "FK", img: "/team/core/FARMAN_CORE.jpeg", gradient: "linear-gradient(135deg, #00f2fe 0%, #4facfe 100%)", gh: "https://github.com/farmanfk0404", li: "https://www.linkedin.com/in/farman-khan-73b63a380" },
   { name: "Vansh Verma", role: "Social Media Manager", initials: "VV", img: "/team/core/VANSH_CORE.png", gradient: "linear-gradient(135deg, #3f51b5 0%, #00bcd4 100%)", gh: "https://github.com/vanshverma20", li: "https://www.linkedin.com/in/vansh-verma-510b3b364/" },
@@ -110,20 +74,6 @@ const ARTICLES = [
   { title: "Auto-Rickshaw Oracle: Building a City-Aware Fair Fare Estimator Using Kiro", badge: "Kiro & Automation", date: "Feb 2025", read: "6 min read", excerpt: "A practical walk-through of building a city-aware fair fare estimation app using Kiro spec-driven development methodology.", href: "https://builder.aws.com/content/37U6TrLjvcE9VGxGJjXXkBwO8yE/auto-rickshaw-oracle-building-a-city-aware-fair-fare-estimator-using-kiro", gradient: "linear-gradient(135deg, rgb(255, 153, 102) 0%, rgb(255, 94, 98) 100%)" },
   { title: "Building a Knowledge-Driven AI Agent Using Amazon Bedrock and Strands Agents on AWS", badge: "AI & Bedrock", date: "Feb 2025", read: "7 min read", excerpt: "Leverage Amazon Bedrock and Strands Agents framework to construct intelligent, knowledge-powered conversational agents.", href: "https://builder.aws.com/content/37FuqPKbTyeDEviALJjHzbmMbQ8/building-a-knowledge-driven-ai-agent-using-amazon-bedrock-and-strands-agents-on-aws", gradient: "linear-gradient(135deg, rgb(160, 80, 255) 0%, rgb(0, 210, 106) 100%)" },
 ];
-
-const LEARNING_PATHS = [
-  { number: "01", label: "Learn", title: "Start with the cloud", description: "Build a clear foundation through guided AWS sessions, peer study groups, and practical explainers.", href: "/articles", accent: "cyan" },
-  { number: "02", label: "Build", title: "Ship something real", description: "Turn concepts into working systems with labs, architecture challenges, and community-led workshops.", href: "/events", accent: "amber" },
-  { number: "03", label: "Lead", title: "Grow with your people", description: "Share your work, support another builder, and find the confidence to take your next technical step.", href: "/team", accent: "emerald" },
-];
-
-const PathIcon = ({ accent }) => (
-  <span className={`path-icon path-icon-${accent}`} aria-hidden="true">
-    {accent === "cyan" && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18M3 12h18" /><circle cx="12" cy="12" r="8" /></svg>}
-    {accent === "amber" && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z" /></svg>}
-    {accent === "emerald" && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20V4M6 10l6-6 6 6M5 20h14" /></svg>}
-  </span>
-);
 
 function MemberCard({ m, variant }) {
   const hasSocials = Boolean(m.gh || m.li);
@@ -164,35 +114,29 @@ function MemberCard({ m, variant }) {
 }
 
 function EventCard({ ev }) {
-  const ImgTag = ev.external
-    ? ({ children }) => <a href={ev.href} target="_blank" rel="noopener noreferrer" className="fe-event-image-link" aria-label={ev.title}>{children}</a>
-    : ({ children }) => <Link href={ev.href} className="fe-event-image-link" aria-label={ev.title}>{children}</Link>;
-  const TitleTag = ev.external
-    ? ({ children }) => <a href={ev.href} target="_blank" rel="noopener noreferrer" className="fe-event-title-link">{children}</a>
-    : ({ children }) => <Link href={ev.href} className="fe-event-title-link">{children}</Link>;
-  const MoreTag = ev.external
-    ? ({ children }) => <a href={ev.href} target="_blank" rel="noopener noreferrer" className="fe-event-learn-more" aria-label={`${ev.cta} about ${ev.title}`}>{children}</a>
-    : ({ children }) => <Link href={ev.href} className="fe-event-learn-more" aria-label={`${ev.cta} about ${ev.title}`}>{children}</Link>;
   return (
     <div className="fe-event-card">
       <div className="fe-event-image-container">
-        <ImgTag><img alt={ev.title} className="fe-event-image" src={ev.image} /></ImgTag>
+        <div className="fe-event-image-link">
+          <img alt={ev.title} className="fe-event-image" src={ev.image} />
+        </div>
         {ev.live && (
           <div className={`fe-live-tag ${ev.live.cls}`}>
             <span className="fe-live-beacon"></span>
             <span>{ev.live.text}</span>
           </div>
         )}
-        <span className={`fe-event-badge ${ev.badgeClass}`}>{ev.badge}</span>
       </div>
       <div className="fe-event-info">
         <div className="fe-event-date-row">
           <CalendarIcon />
           <span className="fe-event-date-text">{ev.date}</span>
         </div>
-        <h3 className="fe-event-title"><TitleTag>{ev.title}</TitleTag></h3>
-        <p className="fe-event-desc">{ev.desc}</p>
-        <MoreTag>{ev.cta}<ArrowIcon className="fe-event-arrow-icon" /></MoreTag>
+        <h3 className="fe-event-title">{ev.title}</h3>
+        {ev.desc && <p className="fe-event-desc">{ev.desc}</p>}
+        <Link href={ev.detailPath} className="fe-event-learn-more" aria-label={`${ev.cta} about ${ev.title}`}>
+          {ev.cta}<ArrowIcon className="fe-event-arrow-icon" />
+        </Link>
       </div>
     </div>
   );
@@ -232,109 +176,48 @@ export default function Home() {
     <>
       <section className="home-page-wrapper">
         <div className="home-page-container">
+          <div className="mobile-bg-glow" aria-hidden="true"></div>
+
           <div className="hero-content">
             <div className="hero-tag" aria-label="Official AWS-affiliated student community at DITM, Sonipat">
-              <span className="hero-tag-status">
-                <span className="hero-tag-status-dot" aria-hidden="true"></span>
-                Official
-              </span>
-              <span className="hero-tag-text">AWS Student Community</span>
-              <span className="hero-tag-location">DITM · Sonipat</span>
+              <svg className="hero-tag-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+              </svg>
+              <span>Official AWS-Affiliated Student Community · DITM, Sonipat</span>
             </div>
             
             <h1 className="hero-title">
               AWS Student<br />
-              <span className="hero-title-highlight">Builder Group</span><br />
-              <span className="hero-title-sub">DITM Chapter</span>
+              <span className="text-green-highlight">Builder Group</span><br />
+              <span className="text-green-highlight">DITM</span>
             </h1>
             
             <div className="hero-description">
               <p>
-                Fostering future cloud leaders through deep hands-on AWS architecture,
-                serverless workshops, hackathons, and generative AI innovation.
+                Fostering future cloud leaders through learning, collaboration, and innovation.
               </p>
             </div>
             
             <div className="hero-cta-group">
-              <a href="https://www.meetup.com/aws-sbgl-at-ditm/" target="_blank" rel="noopener noreferrer" className="hero-cta-primary">
-                <span>Browse Events</span>
-                <img alt="Meetup" src="/assets/meetupicon-C5hscCD3.png" style={{ width: "18px", height: "18px" }} />
+              <a href="https://www.meetup.com/aws-sbgl-at-ditm/" target="_blank" rel="noopener noreferrer" className="hero-cta">
+                <span>Browse events</span>
+                <img alt="Meetup" src="/assets/meetupicon-C5hscCD3.png" className="hero-cta-meetup-icon" />
               </a>
-              <Link href="/events" className="hero-cta-secondary">
-                <span>Explore Workshops</span>
-                <ArrowIcon className="hero-cta-arrow" />
-              </Link>
-            </div>
-
-            <div className="hero-stats-row">
-              <div className="hero-stat-box">
-                <span className="stat-value">500+</span>
-                <span className="stat-desc">Active Builders</span>
-              </div>
-              <div className="stat-separator"></div>
-              <div className="hero-stat-box">
-                <span className="stat-value">15+</span>
-                <span className="stat-desc">Hands-on Labs</span>
-              </div>
-              <div className="stat-separator"></div>
-              <div className="hero-stat-box">
-                <span className="stat-value">100%</span>
-                <span className="stat-desc">Student-Driven</span>
-              </div>
-            </div>
-
-            <div className="hero-proof-row">
-              <div className="hero-proof-avatars" aria-hidden="true">
-                <img src="/team/core/SHUBHAM_CORE.png" alt="" />
-                <img src="/team/core/AAKASH_CORE.png" alt="" />
-                <img src="/team/core/ANJALI_CORE.png" alt="" />
-                <span>+</span>
-              </div>
-              <div className="hero-proof-copy">
-                <strong>Built by students, for students.</strong>
-                <span>Meet the people moving cloud learning forward at DITM.</span>
-              </div>
             </div>
           </div>
 
-          <HeroGrid />
-        </div>
-      </section>
-
-      <section className="home-pathways-section" aria-labelledby="home-pathways-title">
-        <div className="home-pathways-shell">
-          <div className="home-pathways-heading" data-reveal>
-            <div>
-              <span className="home-section-kicker">YOUR NEXT MOVE</span>
-              <h2 id="home-pathways-title">A practical path into cloud.</h2>
-            </div>
-            <p>One community, three ways to keep moving—from your first AWS concept to your next shipped project.</p>
-          </div>
-          <div className="home-pathways-grid" data-reveal style={{ "--reveal-delay": ".08s" }}>
-            {LEARNING_PATHS.map((path) => (
-              <Link href={path.href} className={`home-path-card home-path-card-${path.accent}`} key={path.number}>
-                <div className="home-path-card-top">
-                  <span className="home-path-number">{path.number}</span>
-                  <PathIcon accent={path.accent} />
-                </div>
-                <span className="home-path-label">{path.label}</span>
-                <h3>{path.title}</h3>
-                <p>{path.description}</p>
-                <span className="home-path-link">Explore <ArrowIcon /></span>
-              </Link>
-            ))}
+          <div className="doom-artifact-wrapper">
+            <DoomArtifact />
           </div>
         </div>
       </section>
-
-      <MilestoneSection />
 
       <section className="featured-events-section" id="featured-events">
         <div className="featured-events-container">
           <div className="featured-events-header" data-reveal>
             <div className="header-titles">
               <span className="featured-tag">FEATURED EVENTS</span>
-              <h2 className="featured-title">Upcoming Highlights</h2>
+              <h2 className="featured-title">Events Highlights</h2>
             </div>
             <Link href="/events" className="all-events-link" aria-label="View all events">
               All events<ChevronIcon />
@@ -347,52 +230,29 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="team-section" id="team">
-        <div className="team-container">
-          <div className="team-header" data-reveal>
-            <span className="team-tag">LEADERSHIP</span>
-            <h2 className="team-title">Meet the Builders</h2>
-            <Link href="/team" className="team-view-all">
-              View full team <ChevronIcon />
-            </Link>
-          </div>
-          <div className="team-subsection" data-reveal>
-            <h3 className="subsection-title">Leader</h3>
-            <div className="leaders-grid">
-              {LEADERS.map((m, i) => (
-                <MemberCard key={i} m={m} variant="leader" />
-              ))}
-            </div>
-          </div>
-          <div className="team-subsection" data-reveal>
-            <h3 className="subsection-title">Core Team</h3>
-            <div className="core-grid">
-              {CORE.map((m, i) => (
-                <MemberCard key={i} m={m} variant="core" />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <TeamTree leaders={LEADERS} core={CORE} />
 
-      <section className="featured-articles-section" id="featured-articles">
-        <div className="featured-articles-container">
-          <div className="featured-articles-header" data-reveal>
-            <div className="header-titles">
-              <span className="articles-tag">KNOWLEDGE HUB</span>
-              <h2 className="articles-title">Latest Insights</h2>
+      {/* KNOWLEDGE HUB / Latest Insights section preserved (disabled so it leaves 0px empty space) */}
+      {false && (
+        <section className="featured-articles-section" id="featured-articles">
+          <div className="featured-articles-container">
+            <div className="featured-articles-header">
+              <div className="header-titles">
+                <span className="articles-tag">KNOWLEDGE HUB</span>
+                <h2 className="articles-title">Latest Insights</h2>
+              </div>
+              <Link href="/articles" className="all-articles-link">
+                All articles<ChevronIcon />
+              </Link>
             </div>
-            <Link href="/articles" className="all-articles-link">
-              All articles<ChevronIcon />
-            </Link>
+            <div className="featured-articles-grid">
+              {ARTICLES.map((a, i) => (
+                <ArticleCard key={i} a={a} />
+              ))}
+            </div>
           </div>
-          <div className="featured-articles-grid" data-reveal style={{ "--reveal-delay": ".08s" }}>
-            {ARTICLES.map((a, i) => (
-              <ArticleCard key={i} a={a} />
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <ContactConsole />
     </>

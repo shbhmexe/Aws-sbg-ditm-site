@@ -10,18 +10,53 @@ const initialForm = { name: "", email: "", subject: "", message: "" };
 
 export default function ContactPage() {
   const [form, setForm] = useState(initialForm);
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState({ type: null, message: "" });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    if (submitted) setSubmitted(false);
+    if (status.type) setStatus({ type: null, message: "" });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setForm(initialForm);
-    setSubmitted(true);
+    if (isSubmitting) return;
+
+    if (!form.name.trim() || !form.email.trim() || !form.subject.trim() || !form.message.trim()) {
+      setStatus({ type: "error", message: "Please fill in all required fields." });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setStatus({ type: null, message: "" });
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to send message. Please try again.");
+      }
+
+      setForm(initialForm);
+      setStatus({
+        type: "success",
+        message: data.message || "Thanks for reaching out! We'll get back to you soon.",
+      });
+    } catch (err) {
+      setStatus({
+        type: "error",
+        message: err.message || "Something went wrong. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -58,28 +93,6 @@ export default function ContactPage() {
               <div>
                 <span className="contact-label">Email</span>
                 <p>awssbgl@ditm.ac.in</p>
-              </div>
-            </div>
-            <div className="contact-item">
-              <div className="contact-icon">
-                <svg
-                  className="contact-svg-icon"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  style={{ color: "var(--aws-green)" }}
-                >
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                </svg>
-              </div>
-              <div>
-                <span className="contact-label">Phone</span>
-                <p>+91 98765 43210</p>
               </div>
             </div>
             <div className="contact-item">
@@ -137,8 +150,10 @@ export default function ContactPage() {
                 name="name"
                 placeholder="Enter your name"
                 type="text"
+                required
                 value={form.name}
                 onChange={handleChange}
+                disabled={isSubmitting}
               />
             </label>
             <label>
@@ -147,8 +162,10 @@ export default function ContactPage() {
                 name="email"
                 placeholder="Enter your email"
                 type="email"
+                required
                 value={form.email}
                 onChange={handleChange}
+                disabled={isSubmitting}
               />
             </label>
             <label>
@@ -157,8 +174,10 @@ export default function ContactPage() {
                 name="subject"
                 placeholder="Subject of your message"
                 type="text"
+                required
                 value={form.subject}
                 onChange={handleChange}
+                disabled={isSubmitting}
               />
             </label>
             <label>
@@ -167,21 +186,35 @@ export default function ContactPage() {
                 name="message"
                 rows="6"
                 placeholder="Write your message here..."
+                required
                 value={form.message}
                 onChange={handleChange}
+                disabled={isSubmitting}
               />
             </label>
-            {submitted && (
+
+            {status.type === "success" && (
               <p
                 className="contact-success"
                 role="status"
                 style={{ color: "var(--aws-green)", margin: 0, fontWeight: 600 }}
               >
-                Thanks for reaching out! We&apos;ll get back to you soon.
+                {status.message}
               </p>
             )}
-            <button type="submit" className="contact-submit">
-              Send Message
+
+            {status.type === "error" && (
+              <p
+                className="contact-error"
+                role="alert"
+                style={{ margin: 0, fontWeight: 600 }}
+              >
+                {status.message}
+              </p>
+            )}
+
+            <button type="submit" className="contact-submit" disabled={isSubmitting}>
+              {isSubmitting ? "Sending Message..." : "Send Message"}
             </button>
           </form>
         </div>

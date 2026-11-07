@@ -3,14 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTheme } from "./ThemeProvider";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Team", href: "/team" },
   { label: "Events", href: "/events" },
-  { label: "Articles", href: "/articles" },
+  { label: "Articles", href: "/articles", disabled: true },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -22,7 +21,8 @@ const ArrowIcon = () => (
 
 export default function Navbar() {
   const pathname = usePathname();
-  const { theme, toggleTheme } = useTheme();
+  const hasEventWallpaper = pathname.startsWith("/events/");
+  const isFeaturedEventDetail = pathname === "/events/cloudlaunch" || pathname === "/events/cloudlaunch-2";
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -76,7 +76,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`navbar${scrolled ? " scrolled" : ""}${hidden ? " navbar-hidden" : ""}`}
+        className={`navbar${scrolled ? " scrolled" : ""}${hidden ? " navbar-hidden" : ""}${hasEventWallpaper ? " event-wallpaper-navbar" : ""}`}
         onFocusCapture={() => setHidden(false)}
       >
         <div className="nav-progress" style={{ transform: `scaleX(${progress})` }} aria-hidden="true"></div>
@@ -90,26 +90,27 @@ export default function Navbar() {
           </Link>
           <ul className="navbar-menu">
             {NAV_ITEMS.map((item) => (
-              <li className="navbar-item" key={item.href}>
-                <Link className={`navbar-link ${isActive(item.href) ? "active" : ""}`} href={item.href}>
-                  {item.label}
-                </Link>
+              <li className={`navbar-item ${item.disabled ? "navbar-item-disabled" : ""}`} key={item.href}>
+                {item.disabled ? (
+                  <span
+                    className="navbar-link disabled"
+                    title="Articles Access Restricted"
+                    aria-disabled="true"
+                  >
+                    {item.label}
+                  </span>
+                ) : (
+                  <Link
+                    className={`navbar-link ${isActive(item.href) ? "active" : ""}`}
+                    href={item.href}
+                  >
+                    {item.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
           <div className="navbar-actions">
-            <button className={`theme-toggle ${theme}`} aria-label="Toggle Theme" onClick={toggleTheme} type="button">
-              {theme === "dark" ? (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="5"></circle>
-                  <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
-                </svg>
-              ) : (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-              )}
-            </button>
             <button
               className={`hamburger ${menuOpen ? "open" : ""}`}
               aria-label="Toggle mobile menu"
@@ -138,11 +139,26 @@ export default function Navbar() {
           </div>
           <ul className="mobile-menu">
             {NAV_ITEMS.map((item, i) => (
-              <li className="mobile-menu-item" style={{ animationDelay: `${0.1 + i * 0.06}s` }} key={item.href}>
-                <Link className={`mobile-menu-link ${isActive(item.href) ? "active" : ""}`} href={item.href} onClick={() => setMenuOpen(false)}>
-                  {item.label}
-                  <ArrowIcon />
-                </Link>
+              <li className={`mobile-menu-item ${item.disabled ? "mobile-item-disabled" : ""}`} style={{ animationDelay: `${0.1 + i * 0.06}s` }} key={item.href}>
+                {item.disabled ? (
+                  <span
+                    className="mobile-menu-link disabled"
+                    title="Articles Access Restricted"
+                    aria-disabled="true"
+                  >
+                    <span>{item.label}</span>
+                    <span className="nav-disabled-badge">ARCHIVED</span>
+                  </span>
+                ) : (
+                  <Link
+                    className={`mobile-menu-link ${isActive(item.href) ? "active" : ""}`}
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <span>{item.label}</span>
+                    <ArrowIcon />
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

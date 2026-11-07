@@ -41,7 +41,7 @@ export const viewport = {
   themeColor: "#232f3e",
 };
 
-const noFlashTheme = `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();`;
+const noFlashTheme = `(function(){try{document.documentElement.setAttribute('data-theme','dark');localStorage.setItem('theme','dark');}catch(e){}})();`;
 
 const revealBootstrap = `if('IntersectionObserver' in window){document.documentElement.classList.add('reveal-ready')}`;
 

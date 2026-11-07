@@ -1,0 +1,396 @@
+/* ============================================================
+   DoomArtifact.css — Doctor Doom Sovereign Visage & Arcane Rings
+   With Living Global Eye Tracking, 3D Cursor Parallax & Realistic Protocols:
+   1. Open Mouth (Hydraulic Jaw Drop & Recessed Plasma Core)
+   2. Laser Throw (Anamorphic Glare & Cinematic Optic Blasts)
+   3. Latverian Hegemony (Arcane Mandala, Organic Lightning & Solar Beacon)
+   ============================================================ */
+
+.doom-artifact-container {
+  position: relative;
+  width: min(92vh, 48vw);
+  max-width: 620px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  z-index: 10;
+  margin-right: -1.5vw;
+  cursor: pointer;
+}
+
+/* 3D Perspective Stage — Head turns towards cursor everywhere on screen */
+.doom-3d-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transform: perspective(1200px) rotateX(var(--tilt-rx, 0deg)) rotateY(var(--tilt-ry, 0deg));
+  transition: transform 0.08s cubic-bezier(0.2, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Eyeballs — Smoothly follow cursor in any direction */
+.doom-eyeball-left,
+.doom-eyeball-right {
+  transform: translate(var(--eye-x, 0px), var(--eye-y, 0px));
+  transition: transform 0.06s cubic-bezier(0.2, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Background Arcane Energy Fog */
+.doom-arcane-fog {
+  position: absolute;
+  inset: -12%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(0, 245, 132, 0.25) 0%,
+    rgba(0, 210, 106, 0.08) 40%,
+    transparent 72%
+  );
+  filter: blur(45px);
+  pointer-events: none;
+  z-index: 0;
+  transition: background 0.15s ease;
+}
+
+/* Full-bleed SVG Ring Canvases */
+.doom-svg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Outer Sacred Geometry Ring (Counter-Clockwise Orbit) */
+.doom-ring-outer {
+  z-index: 1;
+  transform: translateZ(15px);
+  animation: doomOrbitCCW 46s linear infinite;
+  will-change: transform;
+}
+
+/* Middle Tech-Calibration Ring (Clockwise Orbit) */
+.doom-ring-middle {
+  z-index: 2;
+  transform: translateZ(32px);
+  animation: doomOrbitCW 32s linear infinite;
+  will-change: transform;
+}
+
+/* Inner Octagram Arcane Ring (Pulsing Resonance) */
+.doom-ring-inner {
+  z-index: 3;
+  transform: translateZ(48px);
+  animation: doomInnerPulse 4s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+/* ============================================================
+   CENTRAL SOVEREIGN MASK OF DOCTOR DOOM
+   ============================================================ */
+.doom-central-mask-stage {
+  position: relative;
+  z-index: 6;
+  width: 66%;
+  height: 72%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateZ(68px);
+  animation: doomMaskFloat 5.5s ease-in-out infinite alternate;
+  will-change: transform;
+  cursor: pointer;
+}
+
+.doom-mask-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 20px 48px rgba(0, 0, 0, 0.96))
+          drop-shadow(0 0 28px rgba(0, 245, 132, 0.3));
+  transition: filter 0.35s ease;
+}
+
+.doom-central-mask-stage:hover .doom-mask-svg {
+  filter: drop-shadow(0 28px 60px rgba(0, 0, 0, 0.98))
+          drop-shadow(0 0 45px rgba(0, 245, 132, 0.55));
+}
+
+/* ============================================================
+   FEATURE 1: REALISTIC OPEN MOUTH (HYDRAULIC JAW DROP & PLASMA VOID)
+   ============================================================ */
+.doom-jaw-assembly {
+  transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-origin: center top;
+}
+
+.doom-artifact-container.action-mouth .doom-jaw-assembly {
+  transform: translateY(30px);
+}
+
+.mouth-plasma-furnace {
+  opacity: 0;
+  transform: scale(0.85);
+  transform-origin: 170px 276px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.doom-artifact-container.action-mouth .mouth-plasma-furnace {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.mouth-core-arc {
+  animation: mouthPulse 0.16s ease-in-out infinite alternate;
+}
+
+.mouth-energy-arc {
+  animation: mouthPulse 0.24s ease-in-out infinite alternate;
+}
+
+@keyframes mouthPulse {
+  0% { opacity: 0.75; transform: scaleY(0.92); }
+  100% { opacity: 1; transform: scaleY(1.12); }
+}
+
+.doom-artifact-container.action-mouth .doom-central-mask-stage {
+  animation: jawTremble 0.08s infinite alternate !important;
+}
+
+@keyframes jawTremble {
+  0% { transform: translateZ(70px) translateY(-1px); }
+  100% { transform: translateZ(70px) translateY(1.5px); }
+}
+
+/* ============================================================
+   FEATURE 2: CINEMATIC OPTIC DEATH LASERS
+   ============================================================ */
+.doom-artifact-container.action-laser .doom-eyeball-left,
+.doom-artifact-container.action-laser .doom-eyeball-right {
+  transform: translate(0px, 0px) scale(1.35) !important;
+  filter: drop-shadow(0 0 18px #ffffff) drop-shadow(0 0 32px #00f584);
+}
+
+.optic-lasers-active {
+  animation: laserBurst 0.12s ease-out;
+}
+
+.anamorphic-streak-wide {
+  animation: anamorphicPulse 0.08s infinite alternate;
+}
+
+.anamorphic-streak-core {
+  animation: anamorphicCoreFlicker 0.06s infinite alternate;
+}
+
+@keyframes anamorphicPulse {
+  0% { opacity: 0.75; stroke-width: 3.5; }
+  100% { opacity: 1; stroke-width: 5.5; }
+}
+
+@keyframes anamorphicCoreFlicker {
+  0% { opacity: 0.85; stroke-width: 1.8; }
+  100% { opacity: 1; stroke-width: 2.5; }
+}
+
+.core-laser-line {
+  animation: laserCoreShimmer 0.07s infinite alternate;
+}
+
+@keyframes laserCoreShimmer {
+  0% { stroke-width: 4; opacity: 0.9; }
+  100% { stroke-width: 5.5; opacity: 1; }
+}
+
+.pupil-star-flare {
+  animation: starFlareSpin 0.35s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes starFlareSpin {
+  0% { transform: rotate(0deg) scale(0.92); }
+  50% { transform: rotate(45deg) scale(1.15); }
+  100% { transform: rotate(90deg) scale(0.92); }
+}
+
+.muzzle-ring {
+  animation: muzzleRingExpand 0.38s ease-out infinite;
+  transform-origin: center;
+}
+
+.muzzle-ring-outer {
+  animation: muzzleRingExpandOuter 0.48s ease-out infinite;
+  transform-origin: center;
+}
+
+@keyframes muzzleRingExpand {
+  0% { r: 8; opacity: 1; }
+  100% { r: 26; opacity: 0; }
+}
+
+@keyframes muzzleRingExpandOuter {
+  0% { r: 14; opacity: 0.85; }
+  100% { r: 42; opacity: 0; }
+}
+
+.doom-artifact-container.action-laser .doom-3d-stage {
+  animation: laserRecoilShake 0.07s infinite alternate !important;
+}
+
+@keyframes laserRecoilShake {
+  0% { transform: perspective(1200px) rotateX(var(--tilt-rx, 0deg)) rotateY(var(--tilt-ry, 0deg)) translateZ(16px); }
+  100% { transform: perspective(1200px) rotateX(var(--tilt-rx, 0deg)) rotateY(var(--tilt-ry, 0deg)) translateZ(-12px); }
+}
+
+/* ============================================================
+   FEATURE 3: REALISTIC LATVERIAN ARCANE HEGEMONY
+   ============================================================ */
+.doom-artifact-container.action-overcharge .doom-ring-outer {
+  animation: doomOrbitCCW 4s linear infinite !important;
+  filter: drop-shadow(0 0 25px #00f584);
+}
+
+.doom-artifact-container.action-overcharge .doom-ring-middle {
+  animation: doomOrbitCW 3s linear infinite !important;
+  filter: drop-shadow(0 0 25px #ffd700);
+}
+
+.doom-artifact-container.action-overcharge .doom-ring-inner {
+  animation: doomInnerPulse 0.4s ease-in-out infinite alternate !important;
+  filter: drop-shadow(0 0 30px #00f584);
+}
+
+/* Arcane Sacred Geometry Mandala */
+.mandala-ring-outer {
+  animation: mandalaRotateCCW 14s linear infinite;
+  transform-origin: 170px 86px;
+}
+
+.mandala-ring-middle {
+  animation: mandalaRotateCW 9s linear infinite;
+  transform-origin: 170px 86px;
+}
+
+@keyframes mandalaRotateCCW {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+@keyframes mandalaRotateCW {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Sovereign Brow Tiara */
+.sovereign-tiara {
+  animation: tiaraGlow 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes tiaraGlow {
+  0% { filter: drop-shadow(0 0 6px #ffd700); }
+  100% { filter: drop-shadow(0 0 18px #ffd700) drop-shadow(0 0 30px #00f584); }
+}
+
+/* Realistic Organic Lightning Arcs */
+.lightning-path-glow {
+  stroke: #00f584;
+  stroke-width: 3.5;
+  fill: none;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 6px #00f584) drop-shadow(0 0 12px #ffffff);
+  animation: lightningOrganicFlicker 0.08s steps(2, start) infinite;
+}
+
+.lightning-path-core {
+  stroke: #ffffff;
+  stroke-width: 1.2;
+  fill: none;
+  opacity: 0.95;
+  animation: lightningOrganicFlicker 0.08s steps(2, start) infinite;
+}
+
+@keyframes lightningOrganicFlicker {
+  0% { opacity: 0.25; }
+  25% { opacity: 1; }
+  50% { opacity: 0.6; }
+  75% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+/* Diadem Solar Beacon */
+.beacon-star {
+  animation: beaconStarPulse 0.25s ease-in-out infinite alternate;
+  transform-origin: 170px 86px;
+}
+
+@keyframes beaconStarPulse {
+  0% { transform: scale(0.85); opacity: 0.8; }
+  100% { transform: scale(1.15); opacity: 1; }
+}
+
+.doom-artifact-container.action-overcharge .doom-3d-stage {
+  animation: overchargeQuake 0.08s infinite alternate !important;
+}
+
+@keyframes overchargeQuake {
+  0% { transform: perspective(1200px) rotateX(var(--tilt-rx, 0deg)) rotateY(var(--tilt-ry, 0deg)) scale(1.03); }
+  100% { transform: perspective(1200px) rotateX(var(--tilt-rx, 0deg)) rotateY(var(--tilt-ry, 0deg)) scale(0.99); }
+}
+
+/* ============================================================
+   KEYFRAME ANIMATIONS
+   ============================================================ */
+@keyframes doomOrbitCCW {
+  0% { transform: translateZ(15px) rotate(0deg); }
+  100% { transform: translateZ(15px) rotate(-360deg); }
+}
+
+@keyframes doomOrbitCW {
+  0% { transform: translateZ(32px) rotate(0deg); }
+  100% { transform: translateZ(32px) rotate(360deg); }
+}
+
+@keyframes doomInnerPulse {
+  0% { transform: translateZ(48px) scale(0.96); opacity: 0.7; }
+  100% { transform: translateZ(48px) scale(1.03); opacity: 1; }
+}
+
+@keyframes doomMaskFloat {
+  0% { transform: translateZ(68px) translateY(0); }
+  50% { transform: translateZ(80px) translateY(-9px); }
+  100% { transform: translateZ(68px) translateY(0); }
+}
+
+/* ============================================================
+   RESPONSIVE SCALING
+   ============================================================ */
+@media (max-width: 1200px) {
+  .doom-artifact-container {
+    width: min(88vh, 46vw);
+    max-width: 540px;
+    margin-right: -1vw;
+  }
+}
+
+@media (max-width: 960px) {
+  .doom-artifact-container {
+    width: min(90vw, 440px);
+    max-width: 440px;
+    margin: 2.5rem auto 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .doom-artifact-container {
+    width: 94vw;
+    max-width: 360px;
+    margin: 2rem auto 0.5rem;
+  }
+}

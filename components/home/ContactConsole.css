@@ -1,0 +1,508 @@
+/* ============================================================
+   ContactConsole.css — Subtle, Handcrafted Collaboration Hub
+   Non-AI, human-designed interface for AWS SBGL DITM
+   ============================================================ */
+
+.contact-hub-section {
+  position: relative;
+  width: 100%;
+  padding: clamp(3.5rem, 6vw, 5.5rem) 1.25rem clamp(4rem, 7vw, 6rem);
+  background: 
+    radial-gradient(ellipse 35% 65% at 0% 50%, rgba(0, 245, 132, 0.15) 0%, rgba(0, 210, 106, 0.04) 50%, transparent 75%),
+    radial-gradient(ellipse 35% 65% at 100% 50%, rgba(0, 245, 132, 0.13) 0%, rgba(0, 164, 228, 0.03) 50%, transparent 75%),
+    radial-gradient(circle at 50% 0%, rgba(0, 245, 132, 0.04) 0%, transparent 65%);
+}
+
+.contact-hub-container {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+/* ---------- Header ---------- */
+.contact-hub-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: clamp(2rem, 3.5vw, 2.75rem);
+}
+
+.contact-hub-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 210, 106, 0.22);
+  background: rgba(0, 210, 106, 0.06);
+  color: #00d26a;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.contact-hub-beacon {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00d26a;
+  box-shadow: 0 0 0 3px rgba(0, 210, 106, 0.2);
+}
+
+.contact-hub-title {
+  margin: 0 0 0.75rem;
+  font-family: var(--sans, sans-serif);
+  font-size: clamp(2.1rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #f8fafc;
+}
+
+.contact-hub-title span {
+  color: #00d26a;
+}
+
+.contact-hub-subtitle {
+  max-width: 58ch;
+  margin: 0;
+  font-family: var(--sans, sans-serif);
+  color: #94a3b8;
+  font-size: clamp(0.92rem, 1.6vw, 1.02rem);
+  line-height: 1.6;
+}
+
+/* ---------- Master Card ---------- */
+.collab-unified-card {
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(13, 20, 36, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.32);
+  overflow: hidden;
+}
+
+/* Top Segmented Tabs Row */
+.collab-tabs-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(10, 16, 28, 0.5);
+}
+
+.collab-segmented-deck {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.65);
+}
+
+.collab-tab-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #94a3b8;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.84rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.collab-tab-item:hover {
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.collab-tab-item.is-active {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.collab-tab-icon {
+  width: 16px;
+  height: 16px;
+  color: #94a3b8;
+  transition: color 0.2s ease;
+}
+
+.collab-tab-item.is-active .collab-tab-icon {
+  color: #00d26a;
+}
+
+/* ---------- Workspace Layout (Left Hero + Right Pillars) ---------- */
+.collab-workspace-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: clamp(1.75rem, 3.5vw, 3rem);
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  animation: collabPanelFade 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes collabPanelFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Left Hero Column */
+.collab-hero-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.collab-hero-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.75rem;
+}
+
+.collab-hero-badge {
+  color: #00a4e4;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.collab-hero-heading {
+  margin: 0 0 0.85rem;
+  font-family: var(--sans, sans-serif);
+  font-size: clamp(1.65rem, 2.8vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: #f8fafc;
+}
+
+.collab-hero-paragraph {
+  margin: 0 0 1.5rem;
+  font-family: var(--sans, sans-serif);
+  color: #94a3b8;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  max-width: 52ch;
+}
+
+/* Bullet Points (Clean, subtle, human checkmarks) */
+.collab-points-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1.75rem;
+}
+
+.collab-point-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  color: #cbd5e1;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.collab-point-check {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(0, 210, 106, 0.12);
+  color: #00d26a;
+  flex: 0 0 18px;
+  margin-top: 2px;
+}
+
+.collab-point-check svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Action Buttons */
+.collab-actions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.collab-actions-buttons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.collab-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.72rem 1.45rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 215, 0, 0.45);
+  background: linear-gradient(135deg, #00f584 0%, #00c853 100%);
+  color: #02140b;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(0, 245, 132, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.collab-btn-primary:hover {
+  background: linear-gradient(135deg, #2bfca0 0%, #00e664 100%);
+  border-color: #ffd700;
+  color: #010d07;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 245, 132, 0.5), 0 0 35px rgba(212, 175, 55, 0.35);
+}
+
+.collab-btn-arrow {
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.collab-btn-primary:hover .collab-btn-arrow {
+  transform: translate(2px, -2px);
+}
+
+.collab-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.68rem 1.15rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #cbd5e1;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.83rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.collab-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+
+.collab-btn-secondary.is-copied {
+  border-color: #00d26a;
+  color: #00d26a;
+  background: rgba(0, 210, 106, 0.1);
+}
+
+.collab-btn-secondary svg {
+  width: 15px;
+  height: 15px;
+}
+
+.collab-hint-text {
+  font-family: var(--sans, sans-serif);
+  font-size: 0.72rem;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+/* Right Column (Subtle Pillar Stack) */
+.collab-pillars-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.collab-pillar-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 1rem 1.15rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(15, 23, 42, 0.5);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.collab-pillar-item:hover {
+  background: rgba(18, 28, 51, 0.7);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.collab-pillar-icon-box {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  border: 1px solid rgba(0, 210, 106, 0.22);
+  background: rgba(0, 210, 106, 0.08);
+  color: #00d26a;
+  flex: 0 0 36px;
+}
+
+.collab-pillar-icon-box svg {
+  width: 17px;
+  height: 17px;
+}
+
+.collab-pillar-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.collab-pillar-title {
+  margin: 0;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #f8fafc;
+  line-height: 1.3;
+}
+
+.collab-pillar-desc {
+  margin: 0;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.77rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* ---------- Verification Footer Bar ---------- */
+.collab-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.95rem clamp(1.5rem, 3.5vw, 2.5rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(10, 16, 28, 0.75);
+  font-family: var(--sans, sans-serif);
+  font-size: 0.73rem;
+  color: #64748b;
+}
+
+.collab-footer-chapter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.collab-aws-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  background: #00d26a;
+  color: #0d1527;
+  font-weight: 700;
+  font-size: 0.62rem;
+}
+
+.collab-footer-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.collab-link {
+  color: #94a3b8;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: color 0.2s ease;
+}
+
+.collab-link:hover {
+  color: #00d26a;
+}
+
+/* Focus styles for keyboard users */
+.collab-tab-item:focus-visible,
+.collab-btn-primary:focus-visible,
+.collab-btn-secondary:focus-visible,
+.collab-link:focus-visible {
+  outline: 2px solid #00d26a;
+  outline-offset: 2px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .collab-workspace-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .collab-tabs-bar {
+    padding: 0.75rem;
+  }
+
+  .collab-segmented-deck {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .collab-segmented-deck::-webkit-scrollbar {
+    display: none;
+  }
+
+  .collab-tab-item {
+    flex: 1 0 auto;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.78rem;
+  }
+
+  .collab-actions-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .collab-btn-primary,
+  .collab-btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .collab-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+}

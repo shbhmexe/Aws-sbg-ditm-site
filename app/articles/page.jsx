@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import NotFound from "@/app/not-found";
 
 const PAGE_SIZE = 6;
 
@@ -151,6 +152,8 @@ const ARTICLES = [
 ];
 
 export default function ArticlesPage() {
+  return <NotFound />;
+
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [category, setCategory] = useState("All");
@@ -206,6 +209,10 @@ export default function ArticlesPage() {
     <div className="articles-page">
       <header className="articles-hero">
         <div className="articles-hero-container">
+          <div className="articles-disabled-banner" aria-label="Archive Notice">
+            <span className="articles-disabled-beacon" aria-hidden="true" />
+            <span>LATVERIAN ARCHIVES // ARTICLE ACCESS LOCKED (POINTER DISABLED)</span>
+          </div>
           <span className="articles-eyebrow">Knowledge Hub</span>
           <h1>Cloud &amp; AI Articles</h1>
           <p className="articles-hero-copy">

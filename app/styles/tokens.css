@@ -16,22 +16,36 @@
 :root,
 :root[data-theme="dark"]{
   --bg: #090e17; 
-  --bg-2: #0f172a; 
-  --bg-3: #060911;
+  --bg-2: #090e17; 
+  --bg-3: #090e17;
   --panel: #0d1527; 
   --panel-2: rgba(15, 23, 42, 0.75); 
   --panel-3: rgba(30, 41, 59, 0.55);
   --grid-line: rgba(255, 255, 255, 0.035); 
   --grid-cell: 40px;
   
-  /* AWS Signature Colors */
-  --neon: #FF9900;           /* AWS Signature Amber / Orange */
-  --neon-2: #FFAC33;         /* AWS Warm Gold */
-  --aws-orange: #FF9900;
+  /* Signature Colors (Doctor Doom Latverian Emerald, Gold & Titanium) */
+  --neon: #00f584;           /* Latverian Sovereign Emerald */
+  --neon-2: #00d26a;         /* Deep Rich Emerald */
+  --aws-orange: #00f584;     /* Accent Green */
   --aws-cyan: #00A4E4;       /* AWS Cloud Blue / Cyan */
-  --aws-blue: #2563EB;
-  --emerald: #10B981;        /* Refined Status Green */
-  --neon-dim: rgba(255, 153, 0, 0.65);
+  --aws-blue: #00f584;       /* Vibrant Electric Emerald */
+  --emerald: #00f584;        /* Direct Sovereign Emerald */
+  --aws-green: #00f584;      /* Direct signature green */
+  --doom-gold: #ffd700;      /* Latverian Sovereign Gold */
+  --doom-gold-dim: rgba(212, 175, 55, 0.4);
+  --neon-dim: rgba(0, 245, 132, 0.65);
+  
+  /* Hero specific tokens */
+  --hero-tag-bg: rgba(0, 245, 132, 0.08);
+  --hero-tag-border: rgba(0, 245, 132, 0.35);
+  --hero-tag-text: #00f584;
+  --grid-active-bg: #00f584;
+  --desktop-grid-min-opacity: 0.18;
+  --desktop-grid-max-opacity: 0.90;
+  --mobile-glow-color-1: #00f584;
+  --mobile-glow-color-2: #00d26a;
+  --mobile-glow-opacity: 0.18;
   
   /* Typography & Ink */
   --ink: #F8FAFC; 
@@ -42,13 +56,13 @@
   /* Borders & Lines */
   --line: rgba(255, 255, 255, 0.08); 
   --line-soft: rgba(255, 255, 255, 0.05); 
-  --line-bright: rgba(255, 153, 0, 0.5);
+  --line-bright: rgba(0, 245, 132, 0.5);
   
   /* Shadows & Ambient Glows */
   --glow-sm: 0 4px 14px rgba(0, 0, 0, 0.4); 
-  --glow-md: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 153, 0, 0.12);
-  --glow-lg: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 164, 228, 0.15); 
-  --text-glow: 0 0 20px rgba(255, 153, 0, 0.25);
+  --glow-md: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 245, 132, 0.2);
+  --glow-lg: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 245, 132, 0.18); 
+  --text-glow: 0 0 20px rgba(0, 245, 132, 0.35);
   --shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.7);
   
   /* Radii */
@@ -62,7 +76,6 @@
   --nav-h: 72px; 
   --maxw: 1220px;
   --scan: rgba(255, 255, 255, 0.015);
-  --aws-green: var(--emerald);
   color-scheme: dark;
 }
 
@@ -75,20 +88,33 @@
   --panel-2: rgba(255, 255, 255, 0.85); 
   --panel-3: rgba(241, 245, 249, 0.8);
   --grid-line: rgba(15, 23, 42, 0.04);
-  --neon: #d97706; 
-  --neon-2: #b45309; 
-  --aws-orange: #d97706;
+  --neon: #00a854; 
+  --neon-2: #059669; 
+  --aws-orange: #00a854;
   --aws-cyan: #0284c7;
-  --aws-blue: #1d4ed8;
-  --emerald: #059669; 
-  --neon-dim: rgba(217, 119, 6, 0.6);
+  --aws-blue: #0284c7;
+  --emerald: #00a854; 
+  --aws-green: #00a854;
+  --neon-dim: rgba(0, 168, 84, 0.6);
+  
+  /* Hero specific tokens (Light) */
+  --hero-tag-bg: rgba(9, 114, 178, 0.08);
+  --hero-tag-border: rgba(9, 114, 178, 0.2);
+  --hero-tag-text: #0972b2;
+  --grid-active-bg: #00a854;
+  --desktop-grid-min-opacity: 0.12;
+  --desktop-grid-max-opacity: 0.75;
+  --mobile-glow-color-1: #10b981;
+  --mobile-glow-color-2: #0ea5e9;
+  --mobile-glow-opacity: 0.09;
+
   --ink: #0f172a; 
   --ink-soft: #334155; 
   --muted: #64748b; 
   --faint: #94a3b8;
   --line: rgba(15, 23, 42, 0.08); 
   --line-soft: rgba(15, 23, 42, 0.05); 
-  --line-bright: rgba(217, 119, 6, 0.5);
+  --line-bright: rgba(0, 168, 84, 0.5);
   --glow-sm: 0 4px 12px rgba(15, 23, 42, 0.06); 
   --glow-md: 0 10px 25px rgba(15, 23, 42, 0.08);
   --glow-lg: 0 20px 40px rgba(15, 23, 42, 0.1); 

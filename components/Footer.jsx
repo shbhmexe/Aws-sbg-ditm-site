@@ -34,7 +34,11 @@ export default function Footer() {
               <li><Link href="/">Home</Link></li>
               <li><Link href="/about">About</Link></li>
               <li><Link href="/events">Events</Link></li>
-              <li><Link href="/articles">Articles</Link></li>
+              <li>
+                <span className="footer-link-disabled" aria-disabled="true">
+                  Articles <span className="footer-disabled-tag">ARCHIVED</span>
+                </span>
+              </li>
             </ul>
           </div>
           <div className="footer-col contact-col">

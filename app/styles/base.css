@@ -14,15 +14,14 @@ body::before{
   background-size:var(--grid-cell) var(--grid-cell);
   -webkit-mask-image:radial-gradient(circle at 50% 35%,#000 60%,transparent 100%);
           mask-image:radial-gradient(circle at 50% 35%,#000 60%,transparent 100%);
-  opacity: 0.65;
+  opacity: 0.25;
 }
 body::after{
   content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
   background:
-    radial-gradient(65vw 50vw at 10% 10%, rgba(255,153,0,0.06), transparent 60%),
-    radial-gradient(55vw 55vw at 90% 18%, rgba(0,164,228,0.07), transparent 60%),
-    radial-gradient(70vw 50vw at 50% 95%, rgba(37,99,235,0.06), transparent 60%),
-    linear-gradient(180deg, var(--bg-3), var(--bg) 25%, var(--bg-2));
+    radial-gradient(ellipse 35% 85% at 0% 50%, rgba(0, 245, 132, 0.14) 0%, rgba(0, 210, 106, 0.05) 45%, transparent 75%),
+    radial-gradient(ellipse 35% 85% at 100% 50%, rgba(0, 245, 132, 0.12) 0%, rgba(0, 164, 228, 0.04) 45%, transparent 75%),
+    var(--bg);
 }
 
 @keyframes breathe{0%,100%{opacity:.65}50%{opacity:.9}}
@@ -49,7 +48,7 @@ section{position:relative}
   letter-spacing:.14em;text-transform:uppercase;
   color:var(--neon);
   padding:.35em .85em;border:1px solid var(--line);border-radius:var(--r-pill);
-  background:rgba(255,153,0,0.06);
+  background:rgba(0, 210, 106,0.06);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   box-shadow:0 2px 8px rgba(0,0,0,0.12);
   width:fit-content;
@@ -61,11 +60,17 @@ section{position:relative}
   font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;letter-spacing:-.02em;color:var(--ink)}
 
 /* ---- AWS signature text gradient ---- */
-.text-green,.text-green-highlight,.milestone-gradient-text{
+.milestone-gradient-text{
   color:var(--neon);
-  background:linear-gradient(135deg, #FF9900 0%, #FFAC33 45%, #00A4E4 100%);
+  background:linear-gradient(135deg, #00d26a 0%, #FFAC33 45%, #00A4E4 100%);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 20px rgba(255,153,0,.15));
+  filter:drop-shadow(0 0 20px rgba(0, 210, 106,.15));
+}
+.text-green,.text-green-highlight{
+  color:var(--aws-green, #00d26a);
+  background:none;
+  -webkit-text-fill-color:initial;
+  filter:drop-shadow(0 0 24px rgba(0,210,106,.25));
 }
 
 /* ---- shared card frame ---- */
@@ -113,6 +118,10 @@ section{position:relative}
 ::-webkit-scrollbar-track{background:var(--bg-3)}
 ::-webkit-scrollbar-thumb{background:linear-gradient(var(--emerald),var(--neon));border-radius:8px;border:2px solid var(--bg-3)}
 ::-webkit-scrollbar-thumb:hover{background:var(--neon)}
+
+/* Keep page scrolling, but remove the visible side slider. */
+html,body{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 
 /* ---- reduced motion ---- */
 @media (prefers-reduced-motion:reduce){

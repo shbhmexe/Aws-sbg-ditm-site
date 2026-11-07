@@ -1,0 +1,435 @@
+/* ============================================================
+   not-found.css — Marvel + Doctor Doom Sovereign 404 Theme
+   Multiverse Reality Breach // Latverian Imperial Archives
+   ============================================================ */
+
+.doom-404-page {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - var(--nav-h, 72px));
+  min-height: calc(100dvh - var(--nav-h, 72px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 5vh, 4rem) clamp(1rem, 3vw, 2.5rem);
+  box-sizing: border-box;
+  overflow: hidden;
+  color: #f8fafc;
+  background: 
+    radial-gradient(ellipse 60% 80% at 0% 50%, rgba(0, 245, 132, 0.22) 0%, rgba(0, 210, 106, 0.05) 50%, transparent 75%),
+    radial-gradient(ellipse 60% 80% at 100% 50%, rgba(0, 245, 132, 0.18) 0%, rgba(0, 164, 228, 0.04) 50%, transparent 75%),
+    radial-gradient(circle at 50% 35%, rgba(0, 245, 132, 0.08) 0%, transparent 65%),
+    #050a12;
+}
+
+/* Ambient Marvel Comic Halftone Dot Texture */
+.doom-404-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0, 245, 132, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  opacity: 0.6;
+  z-index: 0;
+}
+
+/* Lightning Flash Overlay */
+.doom-lightning-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 245, 132, 0.45) 0%, rgba(0, 245, 132, 0.15) 60%, transparent 100%);
+  pointer-events: none;
+  z-index: 10;
+  animation: lightningBurst 0.6s ease-out forwards;
+}
+
+@keyframes lightningBurst {
+  0% { opacity: 0; transform: scale(0.9); }
+  25% { opacity: 1; transform: scale(1.05); }
+  50% { opacity: 0.4; }
+  75% { opacity: 0.9; }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+.doom-404-container {
+  position: relative;
+  z-index: 1;
+  max-width: min(1120px, 94vw);
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ---------- MARVEL + LATVERIA TOP BADGE STRIP ---------- */
+.doom-404-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-bottom: clamp(1rem, 2.5vh, 1.8rem);
+}
+
+.marvel-stamp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 4px;
+  background: #e23636;
+  color: #ffffff;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 0 16px rgba(226, 54, 54, 0.5);
+}
+
+.doom-sector-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.3rem 1.05rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 245, 132, 0.4);
+  background: rgba(0, 245, 132, 0.08);
+  color: #00f584;
+  font-family: var(--mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: 0 0 14px rgba(0, 245, 132, 0.18);
+  backdrop-filter: blur(10px);
+}
+
+.doom-404-beacon {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00f584;
+  box-shadow: 0 0 0 3px rgba(0, 245, 132, 0.35);
+  animation: doom404Pulse 2s ease-in-out infinite;
+}
+
+@keyframes doom404Pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.6; }
+}
+
+/* ---------- 3D DOOM MASK & 404 STENCIL CENTERPIECE ---------- */
+.doom-404-hero-visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: clamp(1rem, 2.5vh, 1.8rem);
+  perspective: 1000px;
+}
+
+/* Massive 404 Monolithic Stencil behind the mask */
+.doom-404-stencil-wrap {
+  position: relative;
+  line-height: 0.85;
+  user-select: none;
+}
+
+.doom-404-stencil-text {
+  font-family: var(--mono, monospace);
+  font-size: clamp(6.5rem, 16vw, 12.5rem);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  color: rgba(0, 245, 132, 0.04);
+  -webkit-text-stroke: 2px rgba(0, 245, 132, 0.45);
+  text-shadow: 0 0 50px rgba(0, 245, 132, 0.25), 0 0 100px rgba(0, 245, 132, 0.1);
+  display: block;
+}
+
+/* Doctor Doom Titanium Mask Overlay */
+.doom-404-mask-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  width: clamp(160px, 18vw, 220px);
+  height: clamp(160px, 18vw, 220px);
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+  cursor: pointer;
+}
+
+.doom-mask-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 25px rgba(0, 245, 132, 0.4)) drop-shadow(0 15px 35px rgba(0, 0, 0, 0.8));
+}
+
+/* Scanning Emerald Eye Animation */
+.doom-eye-glow {
+  animation: eyeBeamSweep 3s ease-in-out infinite alternate;
+}
+
+@keyframes eyeBeamSweep {
+  0% { transform: scale(0.9); opacity: 0.75; filter: drop-shadow(0 0 4px #00f584); }
+  50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 14px #00f584); }
+  100% { transform: scale(0.95); opacity: 0.85; filter: drop-shadow(0 0 6px #00f584); }
+}
+
+/* Arcane Orbital Ring around the mask */
+.doom-mask-orbit {
+  position: absolute;
+  width: 118%;
+  height: 118%;
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 245, 132, 0.35);
+  animation: rotate404Orbit 25s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotate404Orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Comic Book Dialogue Caption Box */
+.doom-comic-caption {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.1rem;
+  border-radius: 6px;
+  background: #0d1e15;
+  border: 1.5px solid #00f584;
+  border-left: 4px solid #ffd700;
+  font-family: var(--mono, monospace);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #86efac;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 245, 132, 0.2);
+}
+
+/* ---------- DOOM'S DECREE & HEADINGS ---------- */
+.doom-404-decree {
+  margin: 0.85rem 0 0.5rem;
+  font-family: var(--sans, sans-serif);
+  font-size: clamp(1.8rem, 3.8vw, 2.85rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #ffffff;
+}
+
+.doom-404-decree span {
+  color: #00f584;
+  text-shadow: 0 0 25px rgba(0, 245, 132, 0.45);
+}
+
+.doom-404-explain {
+  max-width: 62ch;
+  margin: 0 auto 1.4rem;
+  font-family: var(--sans, sans-serif);
+  color: #94a3b8;
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  line-height: 1.6;
+}
+
+/* ---------- TELEMETRY CHIPS GRID ---------- */
+.doom-404-telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto 1.85rem;
+}
+
+.doom-telemetry-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 0.95rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(10, 18, 30, 0.72);
+  backdrop-filter: blur(14px);
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.doom-telemetry-box:hover {
+  border-color: rgba(0, 245, 132, 0.4);
+  background: rgba(14, 25, 42, 0.88);
+  transform: translateY(-2px);
+}
+
+.telemetry-tag {
+  font-family: var(--mono, monospace);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.telemetry-status {
+  font-family: var(--mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #f8fafc;
+  line-height: 1.2;
+}
+
+/* ---------- ACTION BUTTONS ---------- */
+.doom-404-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.doom-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #00f584 0%, #00c853 100%);
+  color: #03140a;
+  border: 1.5px solid #ffd700;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  box-shadow: 0 0 25px rgba(0, 245, 132, 0.4), 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.doom-btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 35px rgba(0, 245, 132, 0.6), 0 12px 30px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, #20e3b2 0%, #00f584 100%);
+}
+
+.doom-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.82rem 1.5rem;
+  border-radius: 999px;
+  background: rgba(13, 24, 40, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #cbd5e1;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  transition: all 0.2s ease;
+}
+
+.doom-btn-secondary:hover {
+  color: #00f584;
+  border-color: rgba(0, 245, 132, 0.5);
+  background: rgba(0, 245, 132, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 245, 132, 0.25);
+}
+
+.doom-recalibrate-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.82rem 1.4rem;
+  border-radius: 999px;
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  color: #ffd700;
+  font-family: var(--mono, monospace);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.doom-recalibrate-btn:hover {
+  background: rgba(255, 215, 0, 0.18);
+  border-color: #ffd700;
+  box-shadow: 0 0 22px rgba(255, 215, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.recalibrate-active {
+  background: #ffd700 !important;
+  color: #0b1420 !important;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.6) !important;
+}
+
+/* Recalibration Terminal Message */
+.doom-recalibrate-alert {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.15rem;
+  border-radius: 8px;
+  border: 1px solid #00f584;
+  background: rgba(0, 245, 132, 0.12);
+  color: #00f584;
+  font-family: var(--mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  animation: alertFadeIn 0.3s ease-out;
+}
+
+@keyframes alertFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Signature footer footnote */
+.doom-404-signature {
+  margin-top: 1.5rem;
+  font-family: var(--mono, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: #475569;
+  text-transform: uppercase;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 860px) {
+  .doom-404-telemetry-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .doom-404-telemetry-grid {
+    grid-template-columns: 1fr;
+  }
+  .doom-404-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .doom-btn-primary,
+  .doom-btn-secondary,
+  .doom-recalibrate-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+

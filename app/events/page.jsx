@@ -1,29 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import RecapModal from "@/components/events/RecapModal";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import PastEventsShowcase from "@/components/events/PastEventsShowcase";
 
 const EVENTS = [
-  {
-    id: 1,
-    featured: true,
-    status: "past",
-    title: "Inauguration & Community Kickoff",
-    category: "Community Launch",
-    day: "03",
-    month: "SEP",
-    year: "2026",
-    description:
-      'Official launch of the AWS Student Builder Group at DITM featuring Chief Guest Ms. Prajakta Kale (Data Engineering Consultant @ AWS) on "Starting Your Cloud Career", chapter roadmap release, and community networking.',
-    time: "11:00 AM - 01:00 PM",
-    venue: "DITM Seminar Hall, Sonipat",
-    seats: "DITM Seminar Hall",
-    tags: ["Community Launch", "Chief Guest Session", "AWS SBGL Team", "Chapter Roadmap"],
-    image: "/events/inauguration/attendees.png",
-    attendees: 100,
-    ctaText: "View Event Recap",
-    rsvpLink: "https://www.linkedin.com/company/aws-sbgl-at-ditm/",
-  },
   {
     id: 2,
     featured: true,
@@ -147,7 +129,15 @@ function getLiveStatus(e) {
 
 export default function EventsPage() {
   const [tab, setTab] = useState("upcoming");
-  const [recapOpen, setRecapOpen] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("tab") === "past" || window.location.hash === "#past") {
+        setTab("past");
+      }
+    }
+  }, []);
 
   const filtered = EVENTS.filter((e) => e.status === tab);
   const featured = filtered.find((e) => e.featured);
@@ -164,119 +154,123 @@ export default function EventsPage() {
         </h1>
         <p>From hands-on labs and certification bootcamps to industry panels and hackathons every SBG event is designed to move you forward.</p>
       </section>
+
       <section className="events-section" data-reveal>
         <div className="events-toggle">
           <div className="toggle-buttons">
             <button className={tab === "upcoming" ? "active" : ""} onClick={() => setTab("upcoming")}>Upcoming</button>
             <button className={tab === "past" ? "active" : ""} onClick={() => setTab("past")}>Past Events</button>
           </div>
-          <span>{filtered.length} Events</span>
+          <span>{tab === "past" ? "2 Events" : `${filtered.length} Events`}</span>
         </div>
-        {featured && (
-          <div className="featured-card">
-            <div className="featured-date">
-              <h1>{featured.day}</h1>
-              <h3>{featured.month}</h3>
-              <p>{featured.year}</p>
-              <span>{featured.category}</span>
-            </div>
-            <div className="featured-content">
-              <div className="event-badge-row">
-                {featuredLive && (
-                  <div className={`event-live-pill event-live-pill-${featuredLive.type}`}>
-                    <span className="event-live-beacon"></span>
-                    <span>{featuredLive.label}</span>
+
+        <AnimatePresence mode="wait">
+          {tab === "past" ? (
+            <motion.div
+              key="past-showcase"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+            >
+              <PastEventsShowcase />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="upcoming-list"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+            >
+              {featured && (
+                <div className="featured-card">
+                  <div className="featured-date">
+                    <h1>{featured.day}</h1>
+                    <h3>{featured.month}</h3>
+                    <p>{featured.year}</p>
+                    <span>{featured.category}</span>
                   </div>
-                )}
-                <div className="event-badge">{featured.status === "past" ? "Completed" : featured.status}</div>
-              </div>
-              <h2>
-                {featured.rsvpLink && featured.rsvpLink !== "#" ? (
-                  <a href={featured.rsvpLink} target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>
-                    {featured.title}
-                  </a>
-                ) : (
-                  featured.title
-                )}
-              </h2>
-              <p>{featured.description}</p>
-              <div className="event-meta">
-                <span>{featured.time}</span>
-                <span>{featured.venue}</span>
-                <span>{featured.seats}</span>
-              </div>
-              <div className="event-tags">
-                {featured.tags.map((t, i) => (
-                  <span key={i}>{t}</span>
-                ))}
-              </div>
-              {featured.status === "past" ? (
-                <button type="button" className="rsvp-btn" onClick={() => setRecapOpen(true)}>
-                  {featured.ctaText || "View Event Recap"}
-                </button>
-              ) : (
-                <a href={featured.rsvpLink} target="_blank" rel="noopener noreferrer" className="rsvp-btn">
-                  {featured.ctaText || "RSVP on Meetup"}
-                </a>
-              )}
-            </div>
-          </div>
-        )}
-        {rest.length > 0 && (
-          <>
-            <h3 className="also-upcoming">{tab === "past" ? "MORE PAST EVENTS" : "ALSO UPCOMING"}</h3>
-            <div className="events-grid">
-              {rest.map((e) => {
-                const live = getLiveStatus(e);
-                return (
-                  <div className="event-card" key={e.id}>
-                    <div className="small-date">
-                      <h2>{e.day}</h2>
-                      <span>{e.month}</span>
-                    </div>
-                    <div className="card-content">
-                      <div className="card-top-badges">
-                        <span className="event-category">{e.category}</span>
-                        {live && (
-                          <span className={`event-mini-live-pill event-mini-${live.type}`}>
-                            <span className="event-live-beacon"></span>
-                            {live.label}
-                          </span>
-                        )}
-                      </div>
-                      <h3>{e.title}</h3>
-                      <p>{e.description}</p>
-                      <div className="card-meta">
-                        <p>{e.time}</p>
-                        <p>{e.venue}</p>
-                        <p>{e.seats}</p>
-                      </div>
-                      {e.status === "past" ? (
-                        <button type="button" className="rsvp-btn-link" onClick={() => setRecapOpen(true)}>
-                          {e.ctaText || "View Event Recap"}
-                        </button>
-                      ) : (
-                        <a href={e.rsvpLink} target="_blank" rel="noopener noreferrer">
-                          {e.ctaText || "RSVP on Meetup"}
-                        </a>
+                  <div className="featured-content">
+                    <div className="event-badge-row">
+                      {featuredLive && (
+                        <div className={`event-live-pill event-live-pill-${featuredLive.type}`}>
+                          <span className="event-live-beacon"></span>
+                          <span>{featuredLive.label}</span>
+                        </div>
                       )}
+                      <div className="event-badge">{featured.status}</div>
                     </div>
+                    <h2>
+                      {featured.rsvpLink && featured.rsvpLink !== "#" ? (
+                        <a href={featured.rsvpLink} target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>
+                          {featured.title}
+                        </a>
+                      ) : (
+                        featured.title
+                      )}
+                    </h2>
+                    <p>{featured.description}</p>
+                    <div className="event-meta">
+                      <span>{featured.time}</span>
+                      <span>{featured.venue}</span>
+                      <span>{featured.seats}</span>
+                    </div>
+                    <div className="event-tags">
+                      {featured.tags.map((t, i) => (
+                        <span key={i}>{t}</span>
+                      ))}
+                    </div>
+                    <a href={featured.rsvpLink} target="_blank" rel="noopener noreferrer" className="rsvp-btn">
+                      {featured.ctaText || "RSVP on Meetup"}
+                    </a>
                   </div>
-                );
-              })}
-            </div>
-          </>
-        )}
-        <div className="meetup-banner">
-          <span className="meetup-arrow">→</span>
-          <p>
-            {tab === "past"
-              ? "All event recaps, keynote decks, and photo highlights are shared on our official LinkedIn & Instagram pages."
-              : "All events are listed on our Meetup page. RSVP there to secure your spot and get reminders."}
-          </p>
-        </div>
+                </div>
+              )}
+
+              {rest.length > 0 && (
+                <>
+                  <h3 className="also-upcoming">ALSO UPCOMING</h3>
+                  <div className="events-grid">
+                    {rest.map((e) => {
+                      const live = getLiveStatus(e);
+                      return (
+                        <div className="event-card" key={e.id}>
+                          <div className="small-date">
+                            <h2>{e.day}</h2>
+                            <span>{e.month}</span>
+                          </div>
+                          <div className="card-content">
+                            <div className="card-top-badges">
+                              <span className="event-category">{e.category}</span>
+                              {live && (
+                                <span className={`event-mini-live-pill event-mini-${live.type}`}>
+                                  <span className="event-live-beacon"></span>
+                                  {live.label}
+                                </span>
+                              )}
+                            </div>
+                            <h3>{e.title}</h3>
+                            <p>{e.description}</p>
+                            <div className="card-meta">
+                              <p>{e.time}</p>
+                              <p>{e.venue}</p>
+                              <p>{e.seats}</p>
+                            </div>
+                            <a href={e.rsvpLink} target="_blank" rel="noopener noreferrer">
+                              {e.ctaText || "RSVP on Meetup"}
+                            </a>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
-      <RecapModal isOpen={recapOpen} onClose={() => setRecapOpen(false)} />
     </div>
   );
 }

@@ -1,14 +1,23 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function ScrollReveal() {
+  const pathname = usePathname();
+
   useEffect(() => {
+    const revealAll = () => {
+      document.querySelectorAll("[data-reveal]").forEach((el) => {
+        el.classList.add("revealed");
+      });
+    };
+
     const targets = Array.from(document.querySelectorAll("[data-reveal]"));
     if (!targets.length) return;
 
-    if (!("IntersectionObserver" in window)) {
-      targets.forEach((t) => t.classList.add("revealed"));
+    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
+      revealAll();
       return;
     }
 
@@ -21,12 +30,27 @@ export default function ScrollReveal() {
           }
         }
       },
-      { threshold: 0.1, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.05, rootMargin: "60px 0px" }
     );
 
-    targets.forEach((t) => observer.observe(t));
-    return () => observer.disconnect();
-  }, []);
+    targets.forEach((t) => {
+      // If already within or above the viewport, reveal immediately
+      const rect = t.getBoundingClientRect();
+      if (rect.top <= window.innerHeight + 100) {
+        t.classList.add("revealed");
+      } else {
+        observer.observe(t);
+      }
+    });
+
+    // Safety fallback: ensure nothing stays hidden if observer or layout misses it
+    const timer = setTimeout(revealAll, 600);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, [pathname]);
 
   return null;
 }

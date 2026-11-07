@@ -134,6 +134,7 @@
 
 /* ---------- submit (base.css styles the button; layout only) ---------- */
 .contact-page .contact-submit{align-self:flex-start;margin-top:.3rem}
+.contact-page .contact-submit:disabled{opacity:.6;cursor:not-allowed;filter:grayscale(.4)}
 
 /* ---------- success confirmation (neon-outlined readout) ---------- */
 /* !important overrides an inline style on the <p> pointing at an
@@ -146,6 +147,17 @@
 }
 .contact-page .contact-success::before{
   content:"[OK]";font-weight:700;color:var(--neon-2);letter-spacing:.08em;
+}
+
+/* ---------- error readout ---------- */
+.contact-page .contact-error{
+  display:flex;align-items:center;gap:.6ch;padding:.85rem 1rem;
+  font-family:var(--mono);font-size:.85rem;letter-spacing:.02em;color:#f87171!important;
+  border:1px solid rgba(239,68,68,.35);border-radius:var(--r-sm);
+  background:rgba(239,68,68,.08);box-shadow:0 0 12px rgba(239,68,68,.15);animation:fade-in .3s ease both;
+}
+.contact-page .contact-error::before{
+  content:"[ERR]";font-weight:700;color:#ef4444;letter-spacing:.08em;
 }
 
 /* ============================================================

@@ -22,7 +22,7 @@ const RECAP_PHOTOS = [
     title: "Event Attendees",
     tag: "Event Attendees",
     caption:
-      "Students and faculty members gathered at the MHSSCE Seminar Hall for the official chapter launch.",
+      "Students and faculty members gathered at the DITM Seminar Hall for the official chapter launch.",
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const RECAP_PHOTOS = [
     title: "AWS SBG Team",
     tag: "AWS SBG Team",
     caption:
-      "The founding leadership and board of directors of the AWS Student Builder Group chapter at MHSSCE.",
+      "The founding leadership and board of directors of the AWS Student Builder Group chapter at DITM.",
   },
   {
     id: 4,
@@ -46,7 +46,7 @@ const RECAP_PHOTOS = [
     title: "Official Inauguration Poster",
     tag: "Launch Poster",
     caption:
-      "Official announcement banner for the AWS SBG MHSSCE Grand Inauguration.",
+      "Official announcement banner for the AWS SBG DITM Grand Inauguration.",
   },
 ];
 
@@ -107,7 +107,7 @@ export default function RecapModal({ isOpen, onClose }) {
           </div>
           <div className="recap-brand-tag">
             <img src={RECAP_LOGO} alt="AWS SBG" className="recap-mini-brand" />
-            <span>AWS SBG • MHSSCE</span>
+            <span>AWS SBG • DITM</span>
           </div>
         </div>
         <div className="recap-content-body">
@@ -116,7 +116,7 @@ export default function RecapModal({ isOpen, onClose }) {
               Grand <span className="recap-green-glow">Inauguration</span>{" '26 Recap"}
             </h2>
             <p className="recap-subtitle">
-              On <strong>September 3, 2026</strong>, the AWS Student Builder Group at MHSSCE celebrated its official launch at the MHSSCE Seminar Hall with an inspiring session by Chief Guest <strong>Ms. Prajakta Kale</strong> (Data Engineering Consultant @ AWS) and the unveiling of our 2026-27 technical roadmap.
+              On <strong>September 3, 2026</strong>, the AWS Student Builder Group at DITM celebrated its official launch at the DITM Seminar Hall with an inspiring session by Chief Guest <strong>Ms. Prajakta Kale</strong> (Data Engineering Consultant @ AWS) and the unveiling of our 2026-27 technical roadmap.
             </p>
           </div>
           <div className="recap-speaker-spotlight">
@@ -133,7 +133,7 @@ export default function RecapModal({ isOpen, onClose }) {
               <p className="recap-speaker-role">Data Engineering Consultant @ AWS</p>
               <div className="recap-session-box">
                 <h4 className="recap-session-title">Starting Your Cloud Career: 3 Things Every Student Should Focus On</h4>
-                <p className="recap-speaker-summary">As part of the inauguration of AWS Student Builder Group – MHSSCE, we had the privilege of hosting an insightful session by Prajakta Kale, Data Engineering Consultant at AWS. Through her talk, she shared practical guidance on building the right skills, exploring opportunities, and taking meaningful steps towards a career in cloud and technology.</p>
+                <p className="recap-speaker-summary">As part of the inauguration of AWS Student Builder Group – DITM, we had the privilege of hosting an insightful session by Prajakta Kale, Data Engineering Consultant at AWS. Through her talk, she shared practical guidance on building the right skills, exploring opportunities, and taking meaningful steps towards a career in cloud and technology.</p>
               </div>
             </div>
           </div>

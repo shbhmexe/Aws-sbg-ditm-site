@@ -1,0 +1,1064 @@
+/* ============================================================
+   DoomCodex.css — Doctor Doom Latverian Sovereign Cyber Terminal
+   Interactive Cloud Holocron, State Matrix & Monolith Pillars
+   ============================================================ */
+
+.doom-codex-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: min(1560px, 95vw);
+  margin: 0 auto;
+  padding: clamp(1rem, 2.5vh, 2.2rem) clamp(1rem, 2.5vw, 2.5rem) clamp(3.5rem, 6vh, 5.5rem);
+  box-sizing: border-box;
+  color: #f8fafc;
+}
+
+/* ---------- 1. HEADER TELEMETRY STRIP ---------- */
+.doom-codex-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: clamp(1.5rem, 3.2vh, 2.8rem);
+}
+
+.doom-codex-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 245, 132, 0.4);
+  background: rgba(0, 245, 132, 0.08);
+  color: #00f584;
+  font-family: var(--mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 0 16px rgba(0, 245, 132, 0.18);
+  backdrop-filter: blur(12px);
+}
+
+.doom-codex-beacon {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00f584;
+  box-shadow: 0 0 0 3px rgba(0, 245, 132, 0.3);
+  animation: codexBeaconPulse 2s ease-in-out infinite;
+}
+
+@keyframes codexBeaconPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.6; }
+}
+
+.doom-codex-badge-sep {
+  opacity: 0.35;
+  color: #cbd5e1;
+}
+
+.doom-codex-badge-gold {
+  color: #ffd700;
+  font-weight: 800;
+}
+
+.doom-codex-title {
+  margin: 0 0 0.5rem;
+  font-family: var(--sans, sans-serif);
+  font-size: clamp(2.2rem, 4.4vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  color: #ffffff;
+}
+
+.doom-codex-title span {
+  color: #00f584;
+  text-shadow: 0 0 25px rgba(0, 245, 132, 0.45);
+}
+
+.doom-codex-subtitle {
+  max-width: 66ch;
+  margin: 0 0 1.35rem;
+  font-family: var(--sans, sans-serif);
+  color: #94a3b8;
+  font-size: clamp(0.95rem, 1.25vw, 1.12rem);
+  line-height: 1.6;
+}
+
+/* Telemetry quick ribbon */
+.doom-telemetry-ribbon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.doom-telemetry-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 18, 30, 0.75);
+  backdrop-filter: blur(10px);
+  font-family: var(--mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.telemetry-lbl {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.telemetry-val {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+.text-emerald {
+  color: #00f584 !important;
+  text-shadow: 0 0 10px rgba(0, 245, 132, 0.4);
+}
+
+.text-gold {
+  color: #ffd700 !important;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+/* ---------- 2. THE MAIN DECK (REACTOR + TERMINAL) ---------- */
+.doom-codex-deck {
+  display: grid;
+  grid-template-columns: minmax(340px, 460px) 1fr;
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+  align-items: stretch;
+  margin-bottom: clamp(3rem, 6vh, 4.5rem);
+}
+
+/* ---------- LEFT: 3D HOLOGRAPHIC REACTOR PANEL ---------- */
+.doom-holocron-panel {
+  position: relative;
+  border-radius: 24px;
+  border: 1px solid rgba(0, 245, 132, 0.35);
+  background: linear-gradient(
+    145deg,
+    rgba(13, 24, 40, 0.88) 0%,
+    rgba(8, 15, 26, 0.95) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55),
+              0 0 35px rgba(0, 245, 132, 0.12),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  padding: 1.85rem 1.4rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  perspective: 1000px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.doom-codex-deck.is-overclocked .doom-holocron-panel {
+  border-color: #00f584;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65),
+              0 0 60px rgba(0, 245, 132, 0.4),
+              inset 0 0 30px rgba(0, 245, 132, 0.15);
+}
+
+.doom-holocron-viewport {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 440px;
+}
+
+/* The Sphere Anchor */
+.doom-reactor-sphere {
+  position: relative;
+  width: clamp(260px, 28vw, 320px);
+  height: clamp(260px, 28vw, 320px);
+  margin: 1rem auto 1.5rem;
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.15s ease-out;
+}
+
+/* Concentric Rings */
+.reactor-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.ring-outer {
+  width: 100%;
+  height: 100%;
+  border: 1.5px dashed rgba(0, 245, 132, 0.35);
+  animation: rotateOuterClockwise 30s linear infinite;
+}
+
+.doom-codex-deck.is-overclocked .ring-outer {
+  animation-duration: 6s;
+  border-color: #00f584;
+}
+
+.ring-tick {
+  position: absolute;
+  font-family: var(--mono, monospace);
+  font-size: 0.62rem;
+  color: rgba(0, 245, 132, 0.6);
+  font-weight: 700;
+}
+.tick-0 { top: -8px; left: 50%; transform: translateX(-50%); }
+.tick-90 { right: -12px; top: 50%; transform: translateY(-50%); }
+.tick-180 { bottom: -8px; left: 50%; transform: translateX(-50%); }
+.tick-270 { left: -14px; top: 50%; transform: translateY(-50%); }
+
+.ring-glyphs {
+  width: 78%;
+  height: 78%;
+  border: 1px solid rgba(0, 245, 132, 0.25);
+  animation: rotateGlyphsCounter 24s linear infinite;
+  display: grid;
+  place-items: center;
+}
+
+.doom-codex-deck.is-overclocked .ring-glyphs {
+  animation-duration: 4s;
+  border-color: rgba(255, 215, 0, 0.6);
+}
+
+.glyph-rune {
+  position: absolute;
+  font-size: 0.95rem;
+  color: #00f584;
+  text-shadow: 0 0 10px rgba(0, 245, 132, 0.6);
+  font-weight: 800;
+}
+.glyph-1 { top: 6px; }
+.glyph-2 { right: 8px; }
+.glyph-3 { bottom: 6px; }
+.glyph-4 { left: 8px; color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.6); }
+
+.ring-inner {
+  width: 54%;
+  height: 54%;
+  border: 2px solid rgba(0, 245, 132, 0.5);
+  box-shadow: 0 0 20px rgba(0, 245, 132, 0.25), inset 0 0 15px rgba(0, 245, 132, 0.2);
+  animation: gyroSpin 16s ease-in-out infinite;
+}
+
+/* Pulsing Quantum Core */
+.reactor-core {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+}
+
+.core-faceted-gem {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  background: radial-gradient(circle at 35% 35%, #86efac 0%, #00f584 50%, #008744 100%);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-shadow: 0 0 35px #00f584;
+  animation: gemFloat 4s ease-in-out infinite;
+}
+
+.core-plasma-pulse {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 245, 132, 0.4) 0%, transparent 70%);
+  animation: plasmaPulse 2s ease-in-out infinite;
+}
+
+.core-photon-center {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 20px #ffffff, 0 0 35px #00f584;
+}
+
+/* Orbital Beacons (4 Pillars) */
+.reactor-orbitals {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+
+.orbital-node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 245, 132, 0.4);
+  background: rgba(13, 25, 42, 0.92);
+  color: #f8fafc;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+.orbital-node:hover {
+  transform: scale(1.15);
+  border-color: #00f584;
+  box-shadow: 0 0 20px rgba(0, 245, 132, 0.5);
+}
+
+.orbital-node.is-active {
+  border-color: #ffd700;
+  background: rgba(0, 245, 132, 0.22);
+  box-shadow: 0 0 24px rgba(255, 215, 0, 0.5), 0 0 10px rgba(0, 245, 132, 0.6);
+  transform: scale(1.18);
+}
+
+.orbital-num {
+  font-family: var(--mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #00f584;
+}
+
+.orbital-label {
+  font-family: var(--sans, sans-serif);
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #cbd5e1;
+}
+
+.orbital-node-1 { top: 12%; left: 8%; }
+.orbital-node-2 { top: 12%; right: 8%; }
+.orbital-node-3 { bottom: 12%; left: 8%; }
+.orbital-node-4 { bottom: 12%; right: 8%; }
+
+/* Overclock Shockwave Ring */
+.reactor-shockwave {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid #00f584;
+  animation: shockwaveExpand 0.7s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+}
+
+@keyframes shockwaveExpand {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(3.5); opacity: 0; }
+}
+
+/* Reactor Overclock Button */
+.reactor-controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.overclock-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.65rem 1.35rem;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 245, 132, 0.45);
+  background: rgba(0, 245, 132, 0.09);
+  color: #00f584;
+  font-family: var(--mono, monospace);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.overclock-btn:hover {
+  background: rgba(0, 245, 132, 0.2);
+  border-color: #00f584;
+  box-shadow: 0 0 25px rgba(0, 245, 132, 0.4);
+  transform: translateY(-2px);
+}
+
+.overclock-btn.btn-active {
+  background: linear-gradient(135deg, #00f584, #00c853);
+  color: #041209;
+  border-color: #ffd700;
+  box-shadow: 0 0 30px rgba(0, 245, 132, 0.6);
+  animation: overclockBtnPulse 0.4s ease infinite alternate;
+}
+
+@keyframes overclockBtnPulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.03); }
+}
+
+.overclock-counter {
+  padding: 0.15rem 0.45rem;
+  border-radius: 6px;
+  background: #ffd700;
+  color: #0b1420;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+/* Reactor HUD Telemetry */
+.reactor-hud {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hud-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.hud-key {
+  font-family: var(--mono, monospace);
+  font-size: 0.62rem;
+  color: #64748b;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.hud-val {
+  font-family: var(--mono, monospace);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+
+.status-online {
+  color: #00f584;
+  text-shadow: 0 0 8px rgba(0, 245, 132, 0.5);
+}
+
+/* Animations */
+@keyframes rotateOuterClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotateGlyphsCounter {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes gyroSpin {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(0.96); }
+}
+
+@keyframes gemFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(4deg); }
+}
+
+@keyframes plasmaPulse {
+  0%, 100% { transform: scale(0.9); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 0.9; }
+}
+
+/* ---------- RIGHT: SOVEREIGN COMMAND TERMINAL ---------- */
+.doom-terminal-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+/* Tabs Bar */
+.terminal-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.65rem;
+}
+
+.terminal-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(13, 24, 40, 0.72);
+  backdrop-filter: blur(14px);
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--sans, sans-serif);
+}
+
+.terminal-tab:hover {
+  color: #ffffff;
+  border-color: rgba(0, 245, 132, 0.4);
+  background: rgba(18, 28, 51, 0.88);
+  transform: translateY(-2px);
+}
+
+.terminal-tab.is-active {
+  color: #00f584;
+  border-color: rgba(0, 245, 132, 0.65);
+  background: rgba(0, 245, 132, 0.12);
+  box-shadow: 0 4px 20px rgba(0, 245, 132, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.tab-idx {
+  font-family: var(--mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 800;
+  opacity: 0.75;
+}
+
+.tab-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* Terminal Active Directive Card */
+.terminal-card {
+  position: relative;
+  border-radius: 24px;
+  border: 1px solid rgba(0, 245, 132, 0.35);
+  background: linear-gradient(
+    145deg,
+    rgba(14, 25, 42, 0.92) 0%,
+    rgba(8, 15, 26, 0.96) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55),
+              0 0 35px rgba(0, 245, 132, 0.12),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  padding: clamp(1.6rem, 3.2vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: terminalCardFade 0.25s ease-out;
+}
+
+@keyframes terminalCardFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.terminal-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.terminal-codename {
+  font-family: var(--mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #00f584;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.terminal-protocol-tag {
+  font-family: var(--mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #ffd700;
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  letter-spacing: 0.08em;
+}
+
+.terminal-card-title {
+  margin: 0;
+  font-family: var(--sans, sans-serif);
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.terminal-card-tagline {
+  margin: 0;
+  font-family: var(--sans, sans-serif);
+  font-size: clamp(0.92rem, 1.1vw, 1.05rem);
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* Metric Badges Row */
+.terminal-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.metric-badge {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.95rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 18, 30, 0.7);
+  transition: all 0.2s ease;
+}
+
+.metric-badge:hover {
+  border-color: rgba(0, 245, 132, 0.4);
+  background: rgba(14, 25, 42, 0.88);
+  transform: translateY(-2px);
+}
+
+.metric-badge-val {
+  font-family: var(--mono, monospace);
+  font-size: clamp(1.3rem, 2.2vw, 1.85rem);
+  font-weight: 800;
+  color: #00f584;
+  line-height: 1.05;
+  text-shadow: 0 0 16px rgba(0, 245, 132, 0.35);
+}
+
+.metric-badge-lbl {
+  font-family: var(--sans, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.metric-badge-status {
+  font-family: var(--mono, monospace);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #ffd700;
+  letter-spacing: 0.08em;
+}
+
+/* Capability Grid */
+.terminal-capabilities-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.capability-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.95rem 1.15rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(12, 21, 35, 0.65);
+  transition: all 0.2s ease;
+}
+
+.capability-card:hover {
+  border-color: rgba(0, 245, 132, 0.45);
+  background: rgba(16, 28, 48, 0.85);
+  transform: translateX(4px);
+}
+
+.capability-icon {
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(0, 245, 132, 0.08);
+  border: 1px solid rgba(0, 245, 132, 0.25);
+  flex-shrink: 0;
+}
+
+.capability-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.capability-name {
+  margin: 0;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.capability-desc {
+  margin: 0;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.84rem;
+  color: #94a3b8;
+  line-height: 1.45;
+}
+
+/* Action Strip */
+.terminal-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.terminal-diag-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 245, 132, 0.4);
+  background: rgba(0, 245, 132, 0.08);
+  color: #00f584;
+  font-family: var(--mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.terminal-diag-btn:hover {
+  background: rgba(0, 245, 132, 0.16);
+  border-color: #00f584;
+  box-shadow: 0 0 18px rgba(0, 245, 132, 0.35);
+  transform: translateY(-2px);
+}
+
+.diag-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00f584;
+  box-shadow: 0 0 0 3px rgba(0, 245, 132, 0.3);
+  animation: codexBeaconPulse 1.5s infinite;
+}
+
+.terminal-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 1.15rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #cbd5e1;
+  font-family: var(--mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.terminal-social-link:hover {
+  color: #00f584;
+  border-color: rgba(0, 245, 132, 0.5);
+  background: rgba(0, 245, 132, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 0 16px rgba(0, 245, 132, 0.25);
+}
+
+.social-icon {
+  display: grid;
+  place-items: center;
+}
+
+/* Diagnostics Console Window */
+.terminal-console-window {
+  margin-top: 0.5rem;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 245, 132, 0.3);
+  background: #040910;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 8px 24px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  font-family: var(--mono, monospace);
+}
+
+.console-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.console-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+.dot-red { background: #ef4444; }
+.dot-yellow { background: #f59e0b; }
+.dot-green { background: #10b981; }
+
+.console-caption {
+  font-size: 0.65rem;
+  color: #64748b;
+  letter-spacing: 0.1em;
+  margin-left: 0.35rem;
+}
+
+.console-body {
+  padding: 0.85rem 1rem;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.console-line {
+  display: flex;
+  gap: 0.55rem;
+  color: #a7f3d0;
+}
+
+.console-prompt {
+  color: #00f584;
+  font-weight: 800;
+}
+
+.console-text {
+  word-break: break-all;
+}
+
+.console-blinker {
+  color: #00f584;
+  animation: blinkCursor 0.8s infinite;
+  font-weight: 800;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ---------- 3. MONOLITHS SECTION (4 PILLARS OF DOMINION) ---------- */
+.doom-monoliths-section {
+  position: relative;
+  width: 100%;
+}
+
+.monoliths-header {
+  text-align: center;
+  margin-bottom: clamp(1.5rem, 3.5vh, 2.5rem);
+}
+
+.monoliths-tag {
+  display: inline-block;
+  font-family: var(--mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #00f584;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.monoliths-title {
+  margin: 0;
+  font-family: var(--sans, sans-serif);
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+.monoliths-title span {
+  color: #00f584;
+  text-shadow: 0 0 20px rgba(0, 245, 132, 0.45);
+}
+
+.monoliths-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 1.8vw, 1.6rem);
+  width: 100%;
+}
+
+.monolith-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.85rem 1.35rem 1.65rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(12, 21, 35, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+/* Gold & Emerald hairline highlight */
+.monolith-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 245, 132, 0.6) 35%, rgba(255, 215, 0, 0.7) 50%, rgba(0, 245, 132, 0.6) 65%, transparent);
+}
+
+.monolith-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 245, 132, 0.55);
+  background: rgba(16, 28, 48, 0.94);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6),
+              0 0 32px rgba(0, 245, 132, 0.22);
+}
+
+.monolith-corner {
+  position: absolute;
+  top: 1rem;
+  right: 1.15rem;
+  font-family: var(--mono, monospace);
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: rgba(0, 245, 132, 0.14);
+  user-select: none;
+  line-height: 1;
+}
+
+.monolith-icon-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.monolith-glyph {
+  font-size: 1.6rem;
+}
+
+.monolith-badge {
+  font-family: var(--mono, monospace);
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: #00f584;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(0, 245, 132, 0.08);
+  border: 1px solid rgba(0, 245, 132, 0.22);
+}
+
+.monolith-name {
+  margin: 0 0 0.5rem;
+  font-family: var(--sans, sans-serif);
+  font-size: 1.22rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+}
+
+.monolith-tagline {
+  margin: 0 0 1.25rem;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.86rem;
+  color: #94a3b8;
+  line-height: 1.55;
+  flex-grow: 1;
+}
+
+.monolith-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding-top: 0.95rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.monolith-tags span {
+  font-family: var(--mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+}
+
+/* ---------- RESPONSIVE BREAKPOINTS ---------- */
+@media (max-width: 1180px) {
+  .doom-codex-deck {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .doom-holocron-panel {
+    min-height: auto;
+  }
+
+  .monoliths-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .terminal-tabs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .terminal-metrics-row {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .monoliths-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .doom-reactor-sphere {
+    width: 240px;
+    height: 240px;
+  }
+}
+

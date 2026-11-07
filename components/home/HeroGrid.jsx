@@ -1,185 +1,256 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRef, useCallback, useEffect } from "react";
 
-const CHIPS = [
-  { id: "compute", name: "Compute (EC2 / Lambda)", icon: "EC2" },
-  { id: "ai", name: "GenAI & Bedrock", icon: "AI" },
-  { id: "storage", name: "S3 & Databases", icon: "S3" },
+// Unique DITM Cloud Architecture Matrix Pattern (Custom designed, distinct from any other site)
+const MATRIX = [
+  // Row 0: Cloud Edge Gateway Layer
+  [0, 0, 0.42, 0.48, 0.52, 0, 0.44, 0.5],
+  // Row 1: Distributed VPC Subnet Layer
+  [0, 0.38, 0.46, 0, 0.5, 0.48, 0.44, 0],
+  // Row 2: Microservices Compute Lattice
+  [0.36, 0.44, 0, 0.48, 0.52, 0, 0.46, 0.5],
+  // Row 3: Serverless Event Mesh
+  [0, 0.42, 0.48, 0.44, 0, 0.5, 0.46, 0],
+  // Row 4: Intelligent Data Fabric
+  [0.4, 0, 0.46, 0.5, 0.48, 0.44, 0, 0.46],
+  // Row 5: Global Mesh Connectivity
+  [0.38, 0.46, 0, 0.48, 0, 0.46, 0.5, 0.44],
+  // Row 6: Core Infrastructure Hub (Cols 4..7: DITM Chapter Brandmark Banner)
+  [0, 0.4, 0.48, 0.52, 0, 0, 0, 0],
+  // Row 7: Deep Storage Anchor Foundation
+  [0, 0, 0.42, 0, 0.48, 0, 0, 0.44],
 ];
 
-const SERVICES = [
-  { id: "ec2", glyph: "EC2", name: "Compute", detail: "2 nodes online", color: "amber" },
-  { id: "lambda", glyph: "λ", name: "Serverless", detail: "14ms runtime", color: "cyan" },
-  { id: "bedrock", glyph: "AI", name: "Bedrock", detail: "Model ready", color: "violet" },
-  { id: "s3", glyph: "S3", name: "Storage", detail: "128 objects", color: "emerald" },
-];
-
-function FloatingMetric({ className, tone, icon, label, value }) {
-  return (
-    <div className={`floating-metric-pill ${className}`}>
-      <div className={`metric-icon-wrap ${tone}`}>{icon}</div>
-      <div className="metric-text-group">
-        <span className="metric-label">{label}</span>
-        <span className="metric-value">{value}</span>
-      </div>
-    </div>
-  );
-}
+// Flat list of 64 cells
+const CELLS = [];
+MATRIX.forEach((row, r) => {
+  row.forEach((outlineAlpha, c) => {
+    CELLS.push({
+      id: `${r}-${c}`,
+      r,
+      c,
+      outlineAlpha,
+      isPattern: outlineAlpha > 0,
+    });
+  });
+});
 
 export default function HeroGrid() {
-  const [activeChip, setActiveChip] = useState("compute");
-  const [activeService, setActiveService] = useState("ec2");
-  const [missionStep, setMissionStep] = useState(2);
-  const [isDeploying, setIsDeploying] = useState(true);
+  const gridRef = useRef(null);
+  const cellRefs = useRef({});
+  const brandmarkRef = useRef(null);
+  const lastRowRef = useRef(-1);
+  const lastColRef = useRef(-1);
+  const pointerFrameRef = useRef(null);
+  const latestPointerRef = useRef(null);
 
-  const activeChipName = CHIPS.find((chip) => chip.id === activeChip)?.name || "All systems";
+  // Clear all filled states back to resting outline
+  const clearAll = useCallback(() => {
+    if (lastRowRef.current === -1 && lastColRef.current === -1) return;
+    lastRowRef.current = -1;
+    lastColRef.current = -1;
+
+    for (let r = 0; r < 8; r++) {
+      for (let c = 0; c < 8; c++) {
+        if (r === 6 && c >= 4) continue;
+        const el = cellRefs.current[`${r}-${c}`];
+        if (el) {
+          el.classList.remove("is-filled", "is-leading");
+        }
+      }
+    }
+
+    if (brandmarkRef.current) {
+      brandmarkRef.current.classList.remove("is-filled", "is-leading");
+    }
+  }, []);
+
+  // Fills ONLY the horizontal line (row) where cursor is, nothing extra below or above
+  const handlePointer = useCallback(
+    (clientX, clientY) => {
+      if (!gridRef.current) return;
+      const rect = gridRef.current.getBoundingClientRect();
+
+      // Outside grid boundaries -> clear all
+      if (
+        clientX < rect.left ||
+        clientX > rect.right ||
+        clientY < rect.top ||
+        clientY > rect.bottom
+      ) {
+        clearAll();
+        return;
+      }
+
+      // Relative coordinates [0.0, 1.0]
+      const relX = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+      const relY = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
+
+      const cursorCol = Math.min(7, Math.floor(relX * 8));
+      const cursorRow = Math.min(7, Math.floor(relY * 8));
+
+      // Skip redundant DOM mutations if cursor is on the exact same cell
+      if (
+        cursorRow === lastRowRef.current &&
+        cursorCol === lastColRef.current
+      ) {
+        return;
+      }
+
+      const prevRow = lastRowRef.current;
+      lastRowRef.current = cursorRow;
+      lastColRef.current = cursorCol;
+
+      // Clear the previous row if cursor moved vertically to a new line
+      if (prevRow !== -1 && prevRow !== cursorRow) {
+        for (let c = 0; c < 8; c++) {
+          if (prevRow === 6 && c >= 4) continue;
+          const prevEl = cellRefs.current[`${prevRow}-${c}`];
+          if (prevEl) {
+            prevEl.classList.remove("is-filled", "is-leading");
+          }
+        }
+        if (prevRow === 6 && brandmarkRef.current) {
+          brandmarkRef.current.classList.remove("is-filled", "is-leading");
+        }
+      }
+
+      // Ensure all other rows (above & below) are strictly empty
+      for (let r = 0; r < 8; r++) {
+        if (r === cursorRow) continue;
+        for (let c = 0; c < 8; c++) {
+          if (r === 6 && c >= 4) continue;
+          const el = cellRefs.current[`${r}-${c}`];
+          if (el) {
+            el.classList.remove("is-filled", "is-leading");
+          }
+        }
+      }
+
+      // Update ONLY the active horizontal line (cursorRow)
+      for (let c = 0; c < 8; c++) {
+        if (cursorRow === 6 && c >= 4) continue; // Brandmark handled separately
+        if (MATRIX[cursorRow][c] === 0) continue; // Empty slot
+
+        const el = cellRefs.current[`${cursorRow}-${c}`];
+        if (!el) continue;
+
+        if (c < cursorCol) {
+          el.classList.add("is-filled");
+          el.classList.remove("is-leading");
+        } else if (c === cursorCol) {
+          el.classList.add("is-filled", "is-leading");
+        } else {
+          // c > cursorCol: empties as cursor moves backward horizontally
+          el.classList.remove("is-filled", "is-leading");
+        }
+      }
+
+      // Brandmark banner update (only active when cursor is on row 6)
+      if (brandmarkRef.current) {
+        if (cursorRow === 6 && cursorCol >= 4) {
+          if (cursorCol >= 6) {
+            brandmarkRef.current.classList.add("is-filled", "is-leading");
+          } else {
+            brandmarkRef.current.classList.add("is-filled");
+            brandmarkRef.current.classList.remove("is-leading");
+          }
+        } else {
+          brandmarkRef.current.classList.remove("is-filled", "is-leading");
+        }
+      }
+    },
+    [clearAll]
+  );
+
+  // Process only the latest pointer position once per animation frame.
+  // This keeps the fill animation fluid even when the pointer emits many events.
+  const schedulePointer = useCallback(
+    (clientX, clientY) => {
+      latestPointerRef.current = { clientX, clientY };
+
+      if (pointerFrameRef.current !== null) return;
+
+      pointerFrameRef.current = window.requestAnimationFrame(() => {
+        pointerFrameRef.current = null;
+        const pointer = latestPointerRef.current;
+        if (pointer) handlePointer(pointer.clientX, pointer.clientY);
+      });
+    },
+    [handlePointer]
+  );
+
+  const cancelScheduledPointer = useCallback(() => {
+    if (pointerFrameRef.current !== null) {
+      window.cancelAnimationFrame(pointerFrameRef.current);
+      pointerFrameRef.current = null;
+    }
+    latestPointerRef.current = null;
+    clearAll();
+  }, [clearAll]);
 
   useEffect(() => {
-    if (!isDeploying) return undefined;
-
-    const id = window.setInterval(() => {
-      setMissionStep((step) => (step >= SERVICES.length ? 1 : step + 1));
-    }, 2200);
-
-    return () => window.clearInterval(id);
-  }, [isDeploying]);
-
-  useEffect(() => {
-    const nextService = SERVICES[Math.max(0, missionStep - 1)];
-    if (nextService) setActiveService(nextService.id);
-  }, [missionStep]);
+    return () => {
+      if (pointerFrameRef.current !== null) {
+        window.cancelAnimationFrame(pointerFrameRef.current);
+      }
+      lastRowRef.current = -1;
+      lastColRef.current = -1;
+    };
+  }, []);
 
   return (
-    <div className="hero-visual-wrapper">
-      <div className="hero-visual-card">
-        <div className="hero-visual-header">
-          <div className="console-dots" aria-hidden="true">
-            <span className="dot red"></span>
-            <span className="dot yellow"></span>
-            <span className="dot green"></span>
-          </div>
-          <div className="console-title">
-            <span className="console-icon">AWS</span>
-            <span>aws-sbg-ditm-hub // ap-south-1</span>
-          </div>
-          <div className="console-badge">
-            <span className="live-pulse"></span>
-            <span>LIVE 99.99%</span>
-          </div>
-        </div>
+    <div
+      className="hero-grid-wrapper"
+      aria-hidden="true"
+      onPointerMove={(e) => schedulePointer(e.clientX, e.clientY)}
+      onPointerLeave={cancelScheduledPointer}
+      onTouchMove={(e) => {
+        if (e.touches && e.touches[0]) {
+          schedulePointer(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }}
+      onTouchEnd={cancelScheduledPointer}
+    >
+      {/* Subtle ambient backdrop */}
+      <div className="hero-grid-aurora">
+        <div className="aurora-orb aurora-orb-emerald"></div>
+        <div className="aurora-orb aurora-orb-cyan"></div>
+      </div>
 
-        <div className="hero-image-stage" data-active={activeChip}>
-          <img
-            src="/assets/aws-hero-architecture.jpg"
-            alt="AWS Cloud Architecture and Student Builder Community"
-            className="hero-main-image"
-          />
-          <div className="image-depth-overlay"></div>
+      <div className="hero-grid" ref={gridRef}>
+        {CELLS.map((cell) => {
+          if (cell.r === 6 && cell.c >= 4) return null;
 
-          <FloatingMetric
-            className="metric-top-right"
-            tone="amber"
-            icon="⚡"
-            label="Serverless Cloud"
-            value="Active & Scalable"
-          />
-          <FloatingMetric
-            className="metric-bottom-left"
-            tone="cyan"
-            icon="+"
-            label="Community Hub"
-            value="500+ DITM Builders"
-          />
-          <FloatingMetric
-            className="metric-bottom-right"
-            tone="emerald"
-            icon="✓"
-            label="AWS Certified"
-            value="Study Groups Ready"
-          />
-        </div>
+          const isPattern = cell.isPattern;
 
-        <section className="hero-mission-panel" aria-label="Live cloud mission control">
-          <div className="hero-mission-header">
-            <div>
-              <div className="hero-mission-kicker">
-                <span className="hero-mission-live-dot" aria-hidden="true"></span>
-                <span>Cloud mission control</span>
-                <span className="hero-mission-running">LIVE</span>
-              </div>
-              <strong className="hero-mission-title">Build the stack</strong>
-            </div>
-            <button
-              className="hero-mission-toggle"
-              type="button"
-              onClick={() => setIsDeploying((running) => !running)}
-              aria-label={isDeploying ? "Pause cloud mission" : "Resume cloud mission"}
-              aria-pressed={isDeploying}
+          return (
+            <div
+              key={cell.id}
+              ref={(el) => {
+                if (el) cellRefs.current[cell.id] = el;
+              }}
+              className={`grid-cell ${isPattern ? "type-dark-green" : "type-empty"}`}
+              style={{
+                borderColor: isPattern ? `rgba(0, 210, 106, ${cell.outlineAlpha})` : undefined,
+              }}
             >
-              <span>{isDeploying ? "||" : "▶"}</span>
-              <small>{isDeploying ? "RUNNING" : "PAUSED"}</small>
-            </button>
-          </div>
+              {isPattern && <span className="cell-node-dot" aria-hidden="true" />}
+            </div>
+          );
+        })}
 
-          <div className="hero-mission-meta">
-            <span><b>DEPLOYMENT RUN</b> 04</span>
-            <span>{missionStep} / {SERVICES.length} ONLINE</span>
-          </div>
-          <div className="hero-mission-progress" aria-label={`${Math.round((missionStep / SERVICES.length) * 100)} percent deployed`}>
-            <span style={{ width: `${(missionStep / SERVICES.length) * 100}%` }}></span>
-          </div>
-
-          <div className="hero-service-grid">
-            {SERVICES.map((service, index) => {
-              const isOnline = index < missionStep;
-              const isActive = service.id === activeService;
-
-              return (
-                <button
-                  className={`hero-service-node ${isActive ? "active" : ""} ${isOnline ? "online" : ""}`}
-                  key={service.id}
-                  type="button"
-                  onClick={() => setActiveService(service.id)}
-                  aria-pressed={isActive}
-                >
-                  <span className={`hero-service-glyph ${service.color}`}>{service.glyph}</span>
-                  <span className="hero-service-copy">
-                    <strong>{service.name}</strong>
-                    <small>{service.detail}</small>
-                  </span>
-                  <span className="hero-service-state">{isOnline ? "READY" : "QUEUED"}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="hero-mission-footer">
-            <span><i></i> handshake complete</span>
-            <strong>{Math.round((missionStep / SERVICES.length) * 100)}%</strong>
-          </div>
-        </section>
-
-        <div className="hero-visual-footer">
-          <div className="tech-chips-row">
-            {CHIPS.map((chip) => (
-              <button
-                key={chip.id}
-                type="button"
-                className={`tech-chip ${activeChip === chip.id ? "active" : ""}`}
-                aria-pressed={activeChip === chip.id}
-                onClick={() => setActiveChip(chip.id)}
-              >
-                <span className="tech-chip-icon">{chip.icon}</span>
-                <span>{chip.name}</span>
-              </button>
-            ))}
-          </div>
-          <div className="hero-visual-footer-meta">
-            <span>Focus area</span>
-            <strong>{activeChipName}</strong>
-            <span className="hero-footer-status"><span className="live-pulse"></span> Learning live</span>
-          </div>
+        {/* AWS Student Builder Group Brandmark Tile at row 7, cols 5-8 */}
+        <div
+          ref={brandmarkRef}
+          className="hero-brandmark-container"
+        >
+          <img
+            src="/assets/brandmark-3iW-38h-.png"
+            alt="AWS Student Builder Group"
+            className="hero-brandmark-img"
+          />
         </div>
       </div>
     </div>
