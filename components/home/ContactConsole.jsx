@@ -14,7 +14,7 @@ const PATHWAYS = [
       'Join an active community of students at DITM exploring cloud architecture and practical deployments together. From foundational cloud basics to serverless backends and certification cohorts, learn with peers who share your drive.',
     primaryAction: {
       label: 'Join Chapter on Meetup',
-      href: 'https://www.meetup.com/aws-sbgl-at-ditm/',
+      href: 'https://www.meetup.com/aws-sbg-at-delhi-institute-of-technology-and-management/',
       external: true,
       hint: 'Free RSVP for upcoming hands-on workshops & community meetups.',
     },
@@ -54,9 +54,9 @@ const PATHWAYS = [
       'Inspire the next generation of engineers. Share practical architecture lessons, production outage stories, and industry workflows with 200+ driven student developers at DITM eager to learn what comes next.',
     primaryAction: {
       label: 'Propose a Tech Session',
-      href: 'mailto:awssbgl@ditm.ac.in?subject=Speaker%20Collaboration%20Proposal%20-%20AWS%20SBGL%20DITM',
+      href: 'mailto:awssbgditm@gmail.com?subject=Speaker%20Collaboration%20Proposal%20-%20AWS%20SBGL%20DITM',
       external: false,
-      hint: 'Email our team at awssbgl@ditm.ac.in with your talk topic or workshop proposal.',
+      hint: 'Email our team at awssbgditm@gmail.com with your talk topic or workshop proposal.',
     },
     keyPoints: [
       'Interactive keynotes and production architecture teardowns',
@@ -94,9 +94,9 @@ const PATHWAYS = [
       'Connect directly with ambitious technical talent at DITM. Sponsor student hackathons, launch API developer tracks, or co-host company-led workshops with the AWS Student Builder Group.',
     primaryAction: {
       label: 'Send Partnership Proposal',
-      href: 'mailto:awssbgl@ditm.ac.in?subject=Partnership%20Proposal%20-%20AWS%20SBGL%20DITM',
+      href: 'mailto:awssbgditm@gmail.com?subject=Partnership%20Proposal%20-%20AWS%20SBGL%20DITM',
       external: false,
-      hint: 'Email awssbgl@ditm.ac.in to discuss customized collaboration and student reach.',
+      hint: 'Email awssbgditm@gmail.com to discuss customized collaboration and student reach.',
     },
     keyPoints: [
       'Launch sponsored hackathon tracks with your developer tools',
@@ -199,7 +199,7 @@ export default function ContactConsole() {
 
   const handleCopyEmail = async () => {
     try {
-      await navigator.clipboard.writeText('awssbgl@ditm.ac.in');
+      await navigator.clipboard.writeText('awssbgditm@gmail.com');
       setCopied(true);
       setTimeout(() => setCopied(false), 2200);
     } catch {
@@ -349,7 +349,7 @@ export default function ContactConsole() {
                           <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
                           <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
                         </svg>
-                        <span>awssbgl@ditm.ac.in</span>
+                        <span>awssbgditm@gmail.com</span>
                       </>
                     )}
                   </button>
@@ -384,7 +384,7 @@ export default function ContactConsole() {
             <div className="collab-footer-links">
               <a
                 className="collab-link"
-                href="https://www.meetup.com/aws-sbgl-at-ditm/"
+                href="https://www.meetup.com/aws-sbg-at-delhi-institute-of-technology-and-management/"
                 target="_blank"
                 rel="noopener noreferrer"
               >

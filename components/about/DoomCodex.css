@@ -876,46 +876,61 @@
   50% { opacity: 0; }
 }
 
-/* ---------- 3. MONOLITHS SECTION (4 PILLARS OF DOMINION) ---------- */
+/* ---------- 3. ARCHITECTURE PILLARS SECTION (Clean, Non-AI Engineering) ---------- */
 .doom-monoliths-section {
   position: relative;
   width: 100%;
+  margin-top: 1rem;
 }
 
 .monoliths-header {
   text-align: center;
-  margin-bottom: clamp(1.5rem, 3.5vh, 2.5rem);
+  margin-bottom: clamp(1.8rem, 3.8vh, 2.75rem);
 }
 
 .monoliths-tag {
   display: inline-block;
   font-family: var(--mono, monospace);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   color: #00f584;
   text-transform: uppercase;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(0, 245, 132, 0.08);
+  border: 1px solid rgba(0, 245, 132, 0.22);
 }
 
 .monoliths-title {
-  margin: 0;
+  margin: 0 0 0.6rem;
   font-family: var(--sans, sans-serif);
-  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-size: clamp(1.85rem, 3.2vw, 2.65rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   color: #ffffff;
+  line-height: 1.15;
 }
 
 .monoliths-title span {
   color: #00f584;
-  text-shadow: 0 0 20px rgba(0, 245, 132, 0.45);
+  text-shadow: 0 0 24px rgba(0, 245, 132, 0.35);
+}
+
+.monoliths-subtext {
+  margin: 0 auto;
+  max-width: 620px;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.95rem;
+  color: #94a3b8;
+  line-height: 1.6;
 }
 
 .monoliths-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: clamp(1rem, 1.8vw, 1.6rem);
+  gap: clamp(1rem, 1.6vw, 1.5rem);
   width: 100%;
 }
 
@@ -923,19 +938,19 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 1.85rem 1.35rem 1.65rem;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(12, 21, 35, 0.8);
+  padding: 1.75rem 1.4rem 1.5rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(9, 14, 26, 0.92) 100%);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
-  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
   overflow: hidden;
 }
 
-/* Gold & Emerald hairline highlight */
 .monolith-card::before {
   content: "";
   position: absolute;
@@ -943,65 +958,158 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(0, 245, 132, 0.6) 35%, rgba(255, 215, 0, 0.7) 50%, rgba(0, 245, 132, 0.6) 65%, transparent);
+  transition: opacity 0.25s ease;
+  opacity: 0.7;
+}
+
+.pillar-amplify::before {
+  background: linear-gradient(90deg, transparent, #00f584, #38bdf8, transparent);
+}
+.pillar-lambda::before {
+  background: linear-gradient(90deg, transparent, #ff9900, #ffd700, transparent);
+}
+.pillar-bedrock::before {
+  background: linear-gradient(90deg, transparent, #a855f7, #00f584, transparent);
+}
+.pillar-builder::before {
+  background: linear-gradient(90deg, transparent, #00f2fe, #ffd700, transparent);
 }
 
 .monolith-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(0, 245, 132, 0.55);
-  background: rgba(16, 28, 48, 0.94);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6),
-              0 0 32px rgba(0, 245, 132, 0.22);
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
 }
 
-.monolith-corner {
-  position: absolute;
-  top: 1rem;
-  right: 1.15rem;
-  font-family: var(--mono, monospace);
-  font-size: 1.85rem;
-  font-weight: 900;
-  color: rgba(0, 245, 132, 0.14);
-  user-select: none;
-  line-height: 1;
+.pillar-amplify:hover {
+  border-color: rgba(0, 245, 132, 0.45);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 0 28px rgba(0, 245, 132, 0.15);
 }
 
-.monolith-icon-wrap {
+.pillar-lambda:hover {
+  border-color: rgba(255, 153, 0, 0.45);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 0 28px rgba(255, 153, 0, 0.15);
+}
+
+.pillar-bedrock:hover {
+  border-color: rgba(168, 85, 247, 0.45);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 0 28px rgba(168, 85, 247, 0.15);
+}
+
+.pillar-builder:hover {
+  border-color: rgba(0, 242, 254, 0.45);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 0 28px rgba(0, 242, 254, 0.15);
+}
+
+.monolith-top-bar {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  margin-bottom: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
 }
 
-.monolith-glyph {
-  font-size: 1.6rem;
+.monolith-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.pillar-amplify .monolith-icon-box {
+  color: #00f584;
+  border-color: rgba(0, 245, 132, 0.25);
+  background: rgba(0, 245, 132, 0.08);
+}
+
+.pillar-lambda .monolith-icon-box {
+  color: #ff9900;
+  border-color: rgba(255, 153, 0, 0.25);
+  background: rgba(255, 153, 0, 0.08);
+}
+
+.pillar-bedrock .monolith-icon-box {
+  color: #c084fc;
+  border-color: rgba(192, 132, 252, 0.25);
+  background: rgba(192, 132, 252, 0.08);
+}
+
+.pillar-builder .monolith-icon-box {
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.25);
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.monolith-card:hover .monolith-icon-box {
+  transform: scale(1.08);
+}
+
+.monolith-index {
+  font-family: var(--mono, monospace);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #475569;
+  letter-spacing: 0.05em;
+}
+
+.monolith-badge-row {
+  margin-bottom: 0.65rem;
 }
 
 .monolith-badge {
+  display: inline-block;
   font-family: var(--mono, monospace);
   font-size: 0.64rem;
   font-weight: 700;
-  color: #00f584;
-  letter-spacing: 0.08em;
-  padding: 0.2rem 0.5rem;
+  letter-spacing: 0.1em;
+  padding: 0.22rem 0.55rem;
   border-radius: 6px;
-  background: rgba(0, 245, 132, 0.08);
-  border: 1px solid rgba(0, 245, 132, 0.22);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+}
+
+.pillar-amplify .monolith-badge {
+  color: #00f584;
+  border-color: rgba(0, 245, 132, 0.25);
+  background: rgba(0, 245, 132, 0.06);
+}
+
+.pillar-lambda .monolith-badge {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.25);
+  background: rgba(251, 191, 36, 0.06);
+}
+
+.pillar-bedrock .monolith-badge {
+  color: #d8b4fe;
+  border-color: rgba(216, 180, 254, 0.25);
+  background: rgba(216, 180, 254, 0.06);
+}
+
+.pillar-builder .monolith-badge {
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.25);
+  background: rgba(56, 189, 248, 0.06);
 }
 
 .monolith-name {
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.65rem;
   font-family: var(--sans, sans-serif);
-  font-size: 1.22rem;
+  font-size: 1.25rem;
   font-weight: 800;
-  color: #ffffff;
-  letter-spacing: -0.015em;
+  color: #f8fafc;
+  letter-spacing: -0.02em;
 }
 
 .monolith-tagline {
   margin: 0 0 1.25rem;
   font-family: var(--sans, sans-serif);
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   color: #94a3b8;
   line-height: 1.55;
   flex-grow: 1;
@@ -1010,20 +1118,26 @@
 .monolith-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
-  padding-top: 0.95rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 0.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .monolith-tags span {
   font-family: var(--mono, monospace);
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   font-weight: 600;
   color: #cbd5e1;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0.2rem 0.55rem;
+  padding: 0.22rem 0.55rem;
   border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.monolith-card:hover .monolith-tags span {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 /* ---------- RESPONSIVE BREAKPOINTS ---------- */

@@ -20,7 +20,7 @@ export default function Footer() {
               <a href="https://www.linkedin.com/company/aws-sbgl-at-ditm/" target="_blank" rel="noopener noreferrer" className="social-link-btn" aria-label="LinkedIn">
                 <img alt="LinkedIn" className="social-favicon" src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=40" />
               </a>
-              <a href="https://www.meetup.com/aws-sbgl-at-ditm/" target="_blank" rel="noopener noreferrer" className="social-link-btn" aria-label="Meetup">
+              <a href="https://www.meetup.com/aws-sbg-at-delhi-institute-of-technology-and-management/" target="_blank" rel="noopener noreferrer" className="social-link-btn" aria-label="Meetup">
                 <img alt="Meetup" className="social-favicon" src="https://www.google.com/s2/favicons?domain=meetup.com&sz=40" />
               </a>
               <a href="https://www.instagram.com/awssbg.ditm?mdxt=dGVubWNxd3Y2OHE3" target="_blank" rel="noopener noreferrer" className="social-link-btn" aria-label="Instagram">
@@ -56,7 +56,7 @@ export default function Footer() {
                   <rect width="20" height="16" x="2" y="4" rx="2"></rect>
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                 </svg>
-                <a href="mailto:awssbgl@ditm.ac.in" className="contact-text contact-link">awssbgl@ditm.ac.in</a>
+                <a href="mailto:awssbgditm@gmail.com" className="contact-text contact-link">awssbgditm@gmail.com</a>
               </li>
             </ul>
           </div>

@@ -4,8 +4,40 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import PastEventsShowcase from "@/components/events/PastEventsShowcase";
+import UpcomingEventShowcase from "@/components/events/UpcomingEventShowcase";
 
 const EVENTS = [
+  {
+    id: "agentforge-2026",
+    featured: true,
+    status: "upcoming",
+    title: "AgentForge – Build Beyond Bots | Inter-College Agentic AI Build Day",
+    category: "Inter-College Build Day",
+    day: "23",
+    month: "NOV",
+    year: "2026",
+    dateLong: "Monday, November 23, 2026",
+    description:
+      "An offline inter-college build day by AWS Student Builder Groups at DITM × IITM College of Engineering. Explore how agentic systems reason and make decisions, build your first AI agent, and see a live student verification demo through AWS Builder Center (SheerID).",
+    time: "10:30 AM – 1:30 PM IST",
+    duration: "3 Hours Intensive",
+    venue: "D51 Building, IITM Campus",
+    venueAddress: "IITM Btech Branch, Pocket D 1A, Janakpuri, New Delhi 110058",
+    seats: "Limited seats",
+    hosts: "Nandini Shukla (IITM College of Engineering) and Shubham Shukla (DITM)",
+    highlights: "Swags, certificates, and refreshments; three winners from each session receive exclusive swags.",
+    registrationNote:
+      "Registration is first-come, first-served. A registration does not guarantee a seat; attendance depends on confirmation and availability.",
+    tags: ["Offline Event", "Agentic AI", "Multi-agent Workflows", "AWS Builder Center"],
+    image: "/events/agentforge/agentforge-poster.png",
+    ctaText: "RSVP on Meetup",
+    rsvpLink:
+      "https://www.meetup.com/aws-sbg-at-delhi-institute-of-technology-and-management/events/317369758/?eventOrigin=group_upcoming_events",
+  },
+];
+
+/* Previous upcoming event cards, kept commented out until those events are confirmed again.
+const PREVIOUS_UPCOMING_EVENTS = [
   {
     id: 2,
     featured: true,
@@ -106,6 +138,7 @@ const EVENTS = [
     rsvpLink: "#",
   },
 ];
+*/
 
 const MONTHS = {
   JAN: 0, FEB: 1, MAR: 2, APR: 3, MAY: 4, JUN: 5,
@@ -183,89 +216,63 @@ export default function EventsPage() {
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.35, ease: "easeOut" }}
             >
-              {featured && (
-                <div className="featured-card">
-                  <div className="featured-date">
-                    <h1>{featured.day}</h1>
-                    <h3>{featured.month}</h3>
-                    <p>{featured.year}</p>
-                    <span>{featured.category}</span>
-                  </div>
-                  <div className="featured-content">
-                    <div className="event-badge-row">
-                      {featuredLive && (
-                        <div className={`event-live-pill event-live-pill-${featuredLive.type}`}>
-                          <span className="event-live-beacon"></span>
-                          <span>{featuredLive.label}</span>
-                        </div>
-                      )}
-                      <div className="event-badge">{featured.status}</div>
-                    </div>
-                    <h2>
-                      {featured.rsvpLink && featured.rsvpLink !== "#" ? (
-                        <a href={featured.rsvpLink} target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>
-                          {featured.title}
-                        </a>
-                      ) : (
-                        featured.title
-                      )}
-                    </h2>
-                    <p>{featured.description}</p>
-                    <div className="event-meta">
-                      <span>{featured.time}</span>
-                      <span>{featured.venue}</span>
-                      <span>{featured.seats}</span>
-                    </div>
-                    <div className="event-tags">
-                      {featured.tags.map((t, i) => (
-                        <span key={i}>{t}</span>
-                      ))}
-                    </div>
-                    <a href={featured.rsvpLink} target="_blank" rel="noopener noreferrer" className="rsvp-btn">
-                      {featured.ctaText || "RSVP on Meetup"}
-                    </a>
-                  </div>
-                </div>
-              )}
-
-              {rest.length > 0 && (
+              {filtered.length > 0 ? (
                 <>
-                  <h3 className="also-upcoming">ALSO UPCOMING</h3>
-                  <div className="events-grid">
-                    {rest.map((e) => {
-                      const live = getLiveStatus(e);
-                      return (
-                        <div className="event-card" key={e.id}>
-                          <div className="small-date">
-                            <h2>{e.day}</h2>
-                            <span>{e.month}</span>
-                          </div>
-                          <div className="card-content">
-                            <div className="card-top-badges">
-                              <span className="event-category">{e.category}</span>
-                              {live && (
-                                <span className={`event-mini-live-pill event-mini-${live.type}`}>
-                                  <span className="event-live-beacon"></span>
-                                  {live.label}
-                                </span>
-                              )}
+                  <UpcomingEventShowcase event={featured || filtered[0]} />
+
+                  {((featured ? rest : filtered.slice(1)) || []).length > 0 && (
+                    <div className="additional-upcoming-section">
+                      <h3 className="also-upcoming">ADDITIONAL UPCOMING SESSIONS</h3>
+                      <div className="events-grid">
+                        {(featured ? rest : filtered.slice(1)).map((e) => {
+                          const live = getLiveStatus(e);
+                          return (
+                            <div className="event-card" key={e.id}>
+                              <a
+                                className="event-thumbnail-link"
+                                href={e.rsvpLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`Open ${e.title} on Meetup`}
+                              >
+                                <img src={e.image} alt={`${e.title} event poster`} />
+                              </a>
+                              <div className="small-date">
+                                <h2>{e.day}</h2>
+                                <span>{e.month}</span>
+                              </div>
+                              <div className="card-content">
+                                <div className="card-top-badges">
+                                  <span className="event-category">{e.category}</span>
+                                  {live && (
+                                    <span className={`event-mini-live-pill event-mini-${live.type}`}>
+                                      <span className="event-live-beacon"></span>
+                                      {live.label}
+                                    </span>
+                                  )}
+                                </div>
+                                <h3>{e.title}</h3>
+                                <p>{e.description}</p>
+                                <div className="card-meta">
+                                  <p>{e.time}</p>
+                                  <p>{e.venue}</p>
+                                  <p>{e.seats}</p>
+                                </div>
+                                <a href={e.rsvpLink} target="_blank" rel="noopener noreferrer">
+                                  {e.ctaText || "RSVP on Meetup"}
+                                </a>
+                              </div>
                             </div>
-                            <h3>{e.title}</h3>
-                            <p>{e.description}</p>
-                            <div className="card-meta">
-                              <p>{e.time}</p>
-                              <p>{e.venue}</p>
-                              <p>{e.seats}</p>
-                            </div>
-                            <a href={e.rsvpLink} target="_blank" rel="noopener noreferrer">
-                              {e.ctaText || "RSVP on Meetup"}
-                            </a>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </>
+              ) : (
+                <div className="no-events-placeholder">
+                  <p>No upcoming events currently scheduled. Check back soon or explore past workshops!</p>
+                </div>
               )}
             </motion.div>
           )}

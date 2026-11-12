@@ -6,6 +6,8 @@
 
 ### Build. Learn. Connect.
 
+**Live site:** [awssbg-ditm.vercel.app](https://awssbg-ditm.vercel.app/)
+
 An immersive, dark-mode community website for the AWS Student Builder Group at Delhi Institute of Technology and Management (DITM), Sonipat.
 
 <p>

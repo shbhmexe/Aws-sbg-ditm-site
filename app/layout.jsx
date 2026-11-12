@@ -5,8 +5,10 @@ import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import ScrollReveal from "@/components/ScrollReveal";
 
+const SITE_URL = "https://awssbg-ditm.vercel.app";
+
 export const metadata = {
-  metadataBase: new URL("https://awssbgl-ditm.in"),
+  metadataBase: new URL(SITE_URL),
   title: "AWS SBGL DITM",
   description:
     "Official website of AWS Student Builder Group (AWS SBGL) at Delhi Institute of Technology and Management (DITM), Sonipat, Haryana. Fostering cloud computing, AWS architectural skills, technical workshops, and community innovation.",
@@ -16,7 +18,7 @@ export const metadata = {
   ],
   authors: [{ name: "AWS SBGL DITM" }],
   robots: "index, follow",
-  alternates: { canonical: "https://awssbgl-ditm.in/" },
+  alternates: { canonical: SITE_URL },
   icons: { icon: "/assets/program-icon-BAvjs2YY.png" },
   openGraph: {
     type: "website",
@@ -24,7 +26,7 @@ export const metadata = {
     title: "AWS Student Builder Group - DITM",
     description:
       "Official student community for Amazon Web Services at Delhi Institute of Technology and Management. Hands-on cloud workshops, hackathons, and certifications.",
-    url: "https://awssbgl-ditm.in/",
+    url: SITE_URL,
     images: ["/og-image.png"],
     locale: "en_US",
   },

@@ -199,7 +199,7 @@ export default function Home() {
             </div>
             
             <div className="hero-cta-group">
-              <a href="https://www.meetup.com/aws-sbgl-at-ditm/" target="_blank" rel="noopener noreferrer" className="hero-cta">
+              <a href="https://www.meetup.com/aws-sbg-at-delhi-institute-of-technology-and-management/" target="_blank" rel="noopener noreferrer" className="hero-cta">
                 <span>Browse events</span>
                 <img alt="Meetup" src="/assets/meetupicon-C5hscCD3.png" className="hero-cta-meetup-icon" />
               </a>

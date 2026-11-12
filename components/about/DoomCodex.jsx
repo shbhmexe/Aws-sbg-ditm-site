@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { Cloud, Cpu, Sparkles, GraduationCap } from 'lucide-react';
 import './DoomCodex.css';
 
 const INSTAGRAM_URL = 'https://www.instagram.com/awssbg.ditm?mdxt=dGVubWNxd3Y2OHE3';
@@ -199,26 +200,6 @@ export default function DoomCodex() {
           Democratizing Amazon Web Services for 220+ student builders at Delhi Institute of Technology &amp; Management.
           Zero barriers, production-grade builds, and peer-driven tech-sorcery.
         </p>
-
-        {/* Global Quick Telemetry Meter */}
-        <div className="doom-telemetry-ribbon">
-          <div className="doom-telemetry-chip">
-            <span className="telemetry-lbl">CHAPTER</span>
-            <span className="telemetry-val">AWS SBGL DITM</span>
-          </div>
-          <div className="doom-telemetry-chip">
-            <span className="telemetry-lbl">DIRECTIVE</span>
-            <span className="telemetry-val text-emerald">BUILDER FIRST</span>
-          </div>
-          <div className="doom-telemetry-chip">
-            <span className="telemetry-lbl">ENGINE</span>
-            <span className="telemetry-val text-gold">SERVERLESS &amp; AI</span>
-          </div>
-          <div className="doom-telemetry-chip">
-            <span className="telemetry-lbl">STATUS</span>
-            <span className="telemetry-val text-emerald">IMPENETRABLE</span>
-          </div>
-        </div>
       </header>
 
       {/* ---------- THE INTERACTIVE LATVERIAN CORE INSTRUMENT ---------- */}
@@ -406,81 +387,120 @@ export default function DoomCodex() {
         </div>
       </div>
 
-      {/* ---------- 4 PILLARS OF DOMINION (Interactive Slabs, Zero Essay Text) ---------- */}
+      {/* ---------- AWS ARCHITECTURE PILLARS (Clean, Non-AI Professional Developer Showcase) ---------- */}
       <section className="doom-monoliths-section" aria-labelledby="monoliths-title">
         <div className="monoliths-header">
           <span className="monoliths-tag">AWS ARCHITECTURE PILLARS</span>
           <h2 id="monoliths-title" className="monoliths-title">
-            Engineered for <span>Sovereign Mastery.</span>
+            Engineered for <span>Modern Cloud Production.</span>
           </h2>
+          <p className="monoliths-subtext">
+            Production-grade services, scalable cloud patterns, and practical hands-on labs explored across our campus cohorts.
+          </p>
         </div>
 
         <div className="monoliths-grid">
-          <div className="monolith-card" data-service="amplify">
-            <div className="monolith-corner">01</div>
-            <div className="monolith-icon-wrap">
-              <span className="monolith-glyph">☁️</span>
+          {/* Pillar 01: AWS Amplify */}
+          <div className="monolith-card pillar-amplify">
+            <div className="monolith-top-bar">
+              <div className="monolith-icon-box">
+                <Cloud size={20} className="pillar-icon" />
+              </div>
+              <span className="monolith-index">01</span>
+            </div>
+            
+            <div className="monolith-badge-row">
               <span className="monolith-badge">FRONTEND &amp; CI/CD</span>
             </div>
-            <h3 className="monolith-name">AWS Amplify Forge</h3>
+
+            <h3 className="monolith-name">AWS Amplify</h3>
             <p className="monolith-tagline">
-              Instant full-stack hosting, Git-connected pipelines, serverless authentication, and managed API integration.
+              Instant full-stack hosting, Git-connected pipelines, serverless authentication, and managed API integration for production web applications.
             </p>
+
             <div className="monolith-tags">
               <span>Next.js 15</span>
               <span>Cognito Auth</span>
               <span>GraphQL / REST</span>
+              <span>Git CI/CD</span>
             </div>
           </div>
 
-          <div className="monolith-card" data-service="lambda">
-            <div className="monolith-corner">02</div>
-            <div className="monolith-icon-wrap">
-              <span className="monolith-glyph">λ</span>
+          {/* Pillar 02: AWS Lambda */}
+          <div className="monolith-card pillar-lambda">
+            <div className="monolith-top-bar">
+              <div className="monolith-icon-box">
+                <Cpu size={20} className="pillar-icon" />
+              </div>
+              <span className="monolith-index">02</span>
+            </div>
+            
+            <div className="monolith-badge-row">
               <span className="monolith-badge">SERVERLESS COMPUTE</span>
             </div>
-            <h3 className="monolith-name">Lambda Arcana</h3>
+
+            <h3 className="monolith-name">AWS Lambda</h3>
             <p className="monolith-tagline">
-              Zero idle infrastructure. Event-driven code execution scaling from zero to thousands of concurrent requests.
+              Event-driven compute running code with zero provisioned infrastructure. Sub-second auto-scaling from zero to thousands of concurrent requests.
             </p>
+
             <div className="monolith-tags">
-              <span>Zero Cold Starts</span>
               <span>Node / Python</span>
               <span>API Gateway</span>
+              <span>EventBridge</span>
+              <span>Zero Idle Cost</span>
             </div>
           </div>
 
-          <div className="monolith-card" data-service="bedrock">
-            <div className="monolith-corner">03</div>
-            <div className="monolith-icon-wrap">
-              <span className="monolith-glyph">🧠</span>
+          {/* Pillar 03: Amazon Bedrock */}
+          <div className="monolith-card pillar-bedrock">
+            <div className="monolith-top-bar">
+              <div className="monolith-icon-box">
+                <Sparkles size={20} className="pillar-icon" />
+              </div>
+              <span className="monolith-index">03</span>
+            </div>
+            
+            <div className="monolith-badge-row">
               <span className="monolith-badge">GENERATIVE AI</span>
             </div>
-            <h3 className="monolith-name">Amazon Bedrock Core</h3>
+
+            <h3 className="monolith-name">Amazon Bedrock</h3>
             <p className="monolith-tagline">
-              High-performance foundation models (Claude, Titan) orchestrating intelligent RAG agents and student AI workflows.
+              High-performance foundation models (Anthropic Claude, Amazon Titan) orchestrating intelligent RAG agents and student AI workflows.
             </p>
+
             <div className="monolith-tags">
               <span>Knowledge Bases</span>
               <span>Vector Embeddings</span>
               <span>Agentic Workflows</span>
+              <span>Claude &amp; Titan</span>
             </div>
           </div>
 
-          <div className="monolith-card" data-service="builder">
-            <div className="monolith-corner">04</div>
-            <div className="monolith-icon-wrap">
-              <span className="monolith-glyph">📜</span>
+          {/* Pillar 04: AWS Skill Builder */}
+          <div className="monolith-card pillar-builder">
+            <div className="monolith-top-bar">
+              <div className="monolith-icon-box">
+                <GraduationCap size={20} className="pillar-icon" />
+              </div>
+              <span className="monolith-index">04</span>
+            </div>
+            
+            <div className="monolith-badge-row">
               <span className="monolith-badge">OFFICIAL PATHWAYS</span>
             </div>
-            <h3 className="monolith-name">Skill Builder Citadel</h3>
+
+            <h3 className="monolith-name">AWS Skill Builder</h3>
             <p className="monolith-tagline">
-              Guided self-paced courses, Cloud Practitioner preparation circles, and builder badges recognized worldwide.
+              Guided self-paced courses, Cloud Practitioner preparation circles, hands-on labs, and builder badges recognized worldwide.
             </p>
+
             <div className="monolith-tags">
               <span>builder.aws.com</span>
               <span>Study Groups</span>
               <span>Official Badges</span>
+              <span>Cloud Certs</span>
             </div>
           </div>
         </div>

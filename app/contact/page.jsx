@@ -92,7 +92,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <span className="contact-label">Email</span>
-                <p>awssbgl@ditm.ac.in</p>
+                <p>awssbgditm@gmail.com</p>
               </div>
             </div>
             <div className="contact-item">
@@ -125,7 +125,7 @@ export default function ContactPage() {
             <h3>Follow Us</h3>
             <div className="social-links">
               <a href="https://www.linkedin.com/company/aws-sbgl-at-ditm/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <a href="https://www.meetup.com/aws-sbgl-at-ditm/" target="_blank" rel="noopener noreferrer">Meetup</a>
+              <a href="https://www.meetup.com/aws-sbg-at-delhi-institute-of-technology-and-management/" target="_blank" rel="noopener noreferrer">Meetup</a>
               <a href="https://www.instagram.com/awssbg.ditm?mdxt=dGVubWNxd3Y2OHE3" target="_blank" rel="noopener noreferrer">Instagram</a>
             </div>
           </div>
